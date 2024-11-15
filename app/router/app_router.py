@@ -1,6 +1,6 @@
 from app.utils.routes_utils import generate_page_route
-from app.routes.app_routes import AppRoutesRoutesEnum
-from app.routes.hello_routes import HelloRoutesRoutesEnum
+from app.routes.app_routes import AppRoutesEnum
+from app.routes.hello_routes import HelloRoutesEnum
 
 class AppRouter:
     def __init__(self):
@@ -13,5 +13,5 @@ class AppRouter:
         return generate_page_route(self.routes.get(route, None))
     
     def create_routes(self):
-        self.add_route(AppRoutesRoutesEnum.HOME.value, 'home.html')
-        self.add_route(HelloRoutesRoutesEnum.HELLO.value, 'hello.html')
+        self.add_route(AppRoutesEnum.HOME.value, 'home.html')
+        self.add_route(HelloRoutesEnum.HELLO.value, 'hello.html')

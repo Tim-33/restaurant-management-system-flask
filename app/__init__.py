@@ -1,7 +1,7 @@
 from flask import Flask
 from app.config.app_config import AppConfig
 from app.database import Database
-from app.app_router import AppRouter
+from app.router.app_router import AppRouter
 
 def create_app():
     app = Flask(__name__)
@@ -30,7 +30,9 @@ def create_app():
 
 def register_blueprints(app):
     from app.modules.hello.hello_module import HelloModule
-    HelloModule(app).register_blueprints()
+    
+    HelloModule(app).controller.apply_decorators()
+    HelloModule(app).controller.register_routes()
 
 def register_routes(app):
     from app.routes.app_routes import AppRoutes
