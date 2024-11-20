@@ -1,10 +1,13 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from app.config.app_config import AppConfig
 from app.database import Database
 from app.router.app_router import AppRouter
 
 def create_app():
     app = Flask(__name__)
+    Bootstrap(app)
+    
     config = AppConfig()
     
     app.config['API_PORT'] = config.API_PORT

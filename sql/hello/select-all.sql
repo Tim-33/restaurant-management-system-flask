@@ -1,1 +1,1 @@
-SELECT * FROM hello;
+SELECT * FROM hello WHERE id = %s;

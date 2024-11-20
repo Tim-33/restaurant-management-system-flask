@@ -8,6 +8,6 @@ class HelloService:
     
     def get_hello_message(self):
         sql_script = get_sql_script_from_file(HelloSqlRoutesEnum.SELECT_ALL.value)
-        self.cursor.execute(sql_script)
+        self.cursor.execute(sql_script, 1)
         data = self.cursor.fetchall()
         return data
