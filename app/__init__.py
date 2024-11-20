@@ -10,12 +10,13 @@ def create_app():
     app.config['API_PORT'] = config.API_PORT
     app.config['API_BASE_URL'] = config.API_BASE_URL
     
-    app.config['MYSQL_HOST'] = config.MYSQL_HOST
-    app.config['MYSQL_PORT'] = config.MYSQL_PORT
-    app.config['MYSQL_USER'] = config.MYSQL_USER
-    app.config['MYSQL_PASSWORD'] = config.MYSQL_PASSWORD
+    app.config['MYSQL_DATABASE_HOST'] = config.MYSQL_HOST
+    app.config['MYSQL_DATABASE_PORT'] = config.MYSQL_PORT
+    app.config['MYSQL_DATABASE_USER'] = config.MYSQL_USER
+    app.config['MYSQL_DATABASE_PASSWORD'] = config.MYSQL_PASSWORD
     app.config["MYSQL_CUSTOM_OPTIONS"] = config.MYSQL_CUSTOM_OPTIONS
-    app.config['MYSQL_DB'] = config.MYSQL_DB
+    app.config['MYSQL_DATABASE_DB'] = config.MYSQL_DB
+    app.config['LOGGING_CONFIG'] = config.LOGGING_CONFIG
     
     app.router = AppRouter()
     app.db = Database(app)
@@ -31,8 +32,7 @@ def create_app():
 def register_blueprints(app):
     from app.modules.hello.hello_module import HelloModule
     
-    HelloModule(app).controller.apply_decorators()
-    HelloModule(app).controller.register_routes()
+    HelloModule(app).register_blueprints()
 
 def register_routes(app):
     from app.routes.app_routes import AppRoutes

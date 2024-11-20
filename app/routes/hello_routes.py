@@ -1,9 +1,9 @@
-import requests
 from flask import Blueprint, render_template, Flask
 from app.interfaces.iroutes import IRoutes
 from app.utils.api_utils import build_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.router.routes import HelloRoutesEnum
+from app.utils.api_utils import make_api_request
     
 class HelloRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -19,9 +19,6 @@ class HelloRoutes(IRoutes):
     def get_hello(self):
         url = build_api_route(self.base_url, self.port, HelloApiRoutesEnum.HELLO.value)
         headers = {"Content-type": "application/json"}
-        self.app.logger.info(f"Sending request to {url} with headers {headers}")
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        data = response.json() 
+        data = make_api_request(url, headers, self.app)
         return render_template(self.app.router.get_template(HelloRoutesEnum.HELLO.value), data=data)
     

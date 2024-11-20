@@ -4,12 +4,10 @@ from app.database import Database
 
 class HelloService:
     def __init__(self, db: Database):
-        self.connection = db.db_config.connection
+        self.cursor = db.cursor
     
     def get_hello_message(self):
-        sql = get_sql_script_from_file(HelloSqlRoutesEnum.SELECT_ALL.value)
-        cur = self.connection.cursor()
-        cur.execute(sql)
-        rv = cur.fetchall()
-        cur.close()
-        return rv
+        sql_script = get_sql_script_from_file(HelloSqlRoutesEnum.SELECT_ALL.value)
+        self.cursor.execute(sql_script)
+        data = self.cursor.fetchall()
+        return data

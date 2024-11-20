@@ -1,6 +1,5 @@
 from app.utils.routes_utils import generate_page_route
-from app.routes.app_routes import AppRoutesEnum
-from app.routes.hello_routes import HelloRoutesEnum
+from app.router.routes import *
 
 class AppRouter:
     def __init__(self):

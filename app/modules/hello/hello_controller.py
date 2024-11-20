@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, Flask
 from app.modules.hello.hello_service import HelloService
-from app.utils.decorators import log_request
+from app.modules.hello.hello_model import HelloModel
+from app.utils.decorators import log_request, require_json
 from app.utils.api_utils import generate_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.interfaces.icontroller import IController
@@ -17,7 +18,7 @@ class HelloController(IController):
         self.app.register_blueprint(self.hello_bp)
     
     def apply_decorators(self):
-        self.get_hello = log_request(self.app)(self.get_hello)
+        pass
     
     def get_hello(self):
         message = self.hello_service.get_hello_message()

@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
 
 class IModule(ABC):
-    pass
+    @abstractmethod
+    def register_blueprints(self):
+        pass
+    
