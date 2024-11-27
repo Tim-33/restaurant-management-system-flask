@@ -1,0 +1,1 @@
+INSERT INTO TABLE hello (message) VALUES (%s);

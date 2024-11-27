@@ -13,4 +13,5 @@ class AppRouter:
     
     def create_routes(self):
         self.add_route(AppRoutesEnum.HOME.value, 'home.html')
-        self.add_route(HelloRoutesEnum.HELLO.value, 'hello.html')
+        self.add_route(HelloRoutesEnum.HELLO.value, 'hellos.html')
+        self.add_route(HelloRoutesEnum.HELLO_ID.value, 'hello.html')

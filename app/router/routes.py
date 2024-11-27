@@ -5,3 +5,4 @@ class AppRoutesEnum(Enum):
     
 class HelloRoutesEnum(Enum):
     HELLO = "/hello"
+    HELLO_ID = "/hello/<int:id>"

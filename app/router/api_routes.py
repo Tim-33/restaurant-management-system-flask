@@ -2,4 +2,4 @@ from enum import Enum
 
 class HelloApiRoutesEnum(Enum):
     HELLO = 'hello'
-    WORLD = 'world'
+    HELLO_ID = 'hello/<int:id>'

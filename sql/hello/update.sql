@@ -1,0 +1,1 @@
+UPDATE hello SET message = %s WHERE id = %s;

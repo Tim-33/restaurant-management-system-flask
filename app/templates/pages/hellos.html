@@ -1,0 +1,9 @@
+{% extends "index.html" %} {% block content %}
+<h1>Hello, World!</h1>
+{% for message in data %}
+<p>
+  <a href="{{url_for('hello_rotues.get_hello(message[0])')}}">
+    {{ message[1] }}
+  </a>
+</p>
+{% endfor %} {% endblock %}
