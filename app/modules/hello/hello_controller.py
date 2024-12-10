@@ -29,7 +29,7 @@ class HelloController(IController):
         message = self.hello_service.get_hello_messages()
         return jsonify(message)
     
-    def get_one(self, id):
+    def get_one(self, id) -> HelloModel:
         message = self.hello_service.get_hello_message(id)
         return jsonify(message)
     

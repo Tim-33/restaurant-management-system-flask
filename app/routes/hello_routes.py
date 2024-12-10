@@ -21,7 +21,6 @@ class HelloRoutes(IRoutes):
         self.app.register_blueprint(self.hello_routes_bp)
         
     def get_hellos(self):
-        self.app.logger.info("get_hellos called")
         try:
             url = build_api_route(self.base_url, self.port, HelloApiRoutesEnum.HELLO.value)
             self.app.logger.info(f"Request URL: {url}")
@@ -34,8 +33,12 @@ class HelloRoutes(IRoutes):
             return "Internal Server Error", 500
     
     def get_hello(self, id):
-        endpoint = f"{HelloApiRoutesEnum.HELLO_ID.value}/{id}"
-        url = build_api_route(self.base_url, self.port, endpoint)
-        headers = {"Content-type": "application/json"}
-        data = make_api_request(url, headers, self.app, ApiMethodsEnum.GET)
-        return render_template(self.app.router.get_template(HelloRoutesEnum.HELLO_ID.value), data=data)
+        try:
+            endpoint = HelloApiRoutesEnum.HELLO_ID.value.replace("<int:id>", str(id))
+            url = build_api_route(self.base_url, self.port, endpoint)
+            headers = {"Content-type": "application/json"}
+            data = make_api_request(url, headers, self.app, ApiMethodsEnum.GET)
+            return render_template(self.app.router.get_template(HelloRoutesEnum.HELLO_ID.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_hello: {e}")
+            return "Internal Server Error", 500
