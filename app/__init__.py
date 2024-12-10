@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 from flask_bootstrap import Bootstrap
 from app.config.app_config import AppConfig
 from app.database import Database

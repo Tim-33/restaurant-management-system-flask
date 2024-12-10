@@ -25,7 +25,8 @@ class HelloController(IController):
         pass
     
     def get_all(self):
-        message = self.hello_service.get_hello_messages()
+        # message = self.hello_service.get_hello_messages()
+        message = [ { "id": 1, "message": "Hello, World!" } ]
         return jsonify(message)
     
     def get_one(self, id):

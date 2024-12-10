@@ -2,8 +2,8 @@
 <h1>Hello, World!</h1>
 {% for message in data %}
 <p>
-  <a href="{{url_for('hello_rotues.get_hello(message[0])')}}">
-    {{ message[1] }}
+  <a href="{{ url_for('hello_routes.get_hello', id=message.id) }}">
+    {{ message.message }}
   </a>
 </p>
 {% endfor %} {% endblock %}
