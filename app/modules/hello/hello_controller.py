@@ -5,11 +5,12 @@ from app.utils.decorators import log_request, require_json
 from app.utils.api_utils import generate_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.interfaces.icontroller import IController
+from typing import List
 
 class HelloController(IController):
     def __init__(self, app: Flask):
         self.app = app
-        self.hello_service = HelloService(self.app.db)
+        self.hello_service = HelloService(self.app)
         self.hello_bp = Blueprint('hello', __name__)
         
     def register_routes(self):
@@ -24,9 +25,8 @@ class HelloController(IController):
     def apply_decorators(self):
         pass
     
-    def get_all(self):
-        # message = self.hello_service.get_hello_messages()
-        message = [ { "id": 1, "message": "Hello, World!" } ]
+    def get_all(self) -> List[HelloModel]:
+        message = self.hello_service.get_hello_messages()
         return jsonify(message)
     
     def get_one(self, id):
