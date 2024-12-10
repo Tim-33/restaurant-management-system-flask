@@ -12,6 +12,11 @@ class AppRouter:
         return generate_page_route(self.routes.get(route, None))
     
     def create_routes(self):
-        self.add_route(AppRoutesEnum.HOME.value, 'home.html')
-        self.add_route(HelloRoutesEnum.HELLO.value, 'hellos.html')
-        self.add_route(HelloRoutesEnum.HELLO_ID.value, 'hello.html')
+        self.add_route(AppRoutesEnum.HOME.value, 'app/home.html')
+        
+        # Add routes for Hello
+        self.add_route(HelloRoutesEnum.HELLO.value, 'hello/hellos.html')
+        self.add_route(HelloRoutesEnum.HELLO_CREATE.value, 'hello/hello_create.html')
+        self.add_route(HelloRoutesEnum.HELLO_ID.value, 'hello/hello.html')
+        self.add_route(HelloRoutesEnum.HELLO_UPDATE.value, 'hello/hello_update.html')
+        

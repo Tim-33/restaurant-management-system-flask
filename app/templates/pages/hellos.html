@@ -1,7 +1,0 @@
-{% extends "index.html" %} {% block content %} {% for message in data %}
-<p>
-  <a href="{{ url_for('hello_routes.get_hello', id=message.id) }}">
-    {{ message.message }}
-  </a>
-</p>
-{% endfor %} {% endblock %}
