@@ -1,5 +1,6 @@
 from app.router.sql_routes import HelloSqlRoutesEnum
 from app.modules.hello.dto.create_hello_dto import CreateHelloDto
+from app.modules.hello.dto.update_hello_dto import UpdateHelloDto
 from app.modules.hello.hello_model import HelloModel
 from app.utils.sql_utils import get_sql_script_from_file
 from typing import List
@@ -29,12 +30,12 @@ class HelloService:
         self.cursor.execute(sql_script, message)
         return self.cursor.lastrowid
     
-    def update_hello_message(self, message, id):
+    def update_hello_message(self, message: UpdateHelloDto, id: int):
         sql_script = get_sql_script_from_file(HelloSqlRoutesEnum.UPDATE.value)
         self.cursor.execute(sql_script, (message, id))
         return self.cursor.rowcount
     
-    def delete_hello_message(self, id):
+    def delete_hello_message(self, id: int):
         sql_script = get_sql_script_from_file(HelloSqlRoutesEnum.DELETE.value)
         self.cursor.execute(sql_script, id)
         return self.cursor.rowcount
