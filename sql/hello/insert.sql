@@ -1,1 +1,1 @@
-INSERT INTO TABLE hello (message) VALUES (%s);
+INSERT INTO hello (message) VALUES (%s);

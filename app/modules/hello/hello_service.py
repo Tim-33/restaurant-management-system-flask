@@ -31,7 +31,7 @@ class HelloService:
     
     def update_hello_message(self, message, id):
         sql_script = get_sql_script_from_file(HelloSqlRoutesEnum.UPDATE.value)
-        self.cursor.execute(sql_script, message, id)
+        self.cursor.execute(sql_script, (message, id))
         return self.cursor.rowcount
     
     def delete_hello_message(self, id):

@@ -4,6 +4,7 @@ from app.utils.api_utils import build_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.router.routes import HelloRoutesEnum
 from app.utils.api_utils import make_api_request, ApiMethodsEnum
+import requests
     
 class HelloRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -33,7 +34,6 @@ class HelloRoutes(IRoutes):
     def get_hellos(self):
         try:
             url = build_api_route(self.base_url, self.port, HelloApiRoutesEnum.HELLO.value)
-            self.app.logger.info(f"Request URL: {url}")
             headers = {"Content-type": "application/json"}
             data = make_api_request(url, headers, self.app, ApiMethodsEnum.GET)
             return render_template(self.app.router.get_template(HelloRoutesEnum.HELLO.value), data=data)
@@ -48,15 +48,22 @@ class HelloRoutes(IRoutes):
             self.app.logger.error(f"Error in create_hello: {e}")
             return "Internal Server Error", 500
     
-    def created_hello(self, body):
+    def created_hello(self):
         try:
             data = request.form
             message = data.get('message')
             
+            body = {
+                "message": message
+            }
+            
             url = build_api_route(self.base_url, self.port, HelloApiRoutesEnum.HELLO.value)
             headers = {"Content-type": "application/json"}
-            make_api_request(url, headers, self.app, ApiMethodsEnum.POST)
-            return redirect(url_for(HelloRoutesEnum.HELLO.value))
+            result = make_api_request(url, headers, self.app, ApiMethodsEnum.POST, body) 
+            if not result:
+                return "Internal Server Error", 500
+                       
+            return redirect(url_for('hello_routes.get_hellos'))
         except Exception as e:
             self.app.logger.error(f"Error in created_hello: {e}")
             return "Internal Server Error", 500
@@ -85,11 +92,20 @@ class HelloRoutes(IRoutes):
         
     def updated_hello(self, id):
         try:
+            data = request.form
+            message = data.get('message')
+            
+            body = {
+                "message": message
+            }
+            
             endpoint = HelloApiRoutesEnum.HELLO_ID.value.replace("<int:id>", str(id))
             url = build_api_route(self.base_url, self.port, endpoint)
             headers = {"Content-type": "application/json"}
-            make_api_request(url, headers, self.app, ApiMethodsEnum.PUT)
-            return redirect(url_for(HelloRoutesEnum.HELLO_ID.value, id=id))
+            result = make_api_request(url, headers, self.app, ApiMethodsEnum.PUT, body)
+            if not result:
+                return "Internal Server Error", 500
+            return redirect(url_for('hello_routes.get_hello', id=id))
         except Exception as e:
             self.app.logger.error(f"Error in update_hello: {e}")
             return "Internal Server Error", 500
@@ -99,8 +115,10 @@ class HelloRoutes(IRoutes):
             endpoint = HelloApiRoutesEnum.HELLO_ID.value.replace("<int:id>", str(id))
             url = build_api_route(self.base_url, self.port, endpoint)
             headers = {"Content-type": "application/json"}
-            make_api_request(url, headers, self.app, ApiMethodsEnum.DELETE)
-            return redirect(url_for(HelloRoutesEnum.HELLO.value))
+            result = make_api_request(url, headers, self.app, ApiMethodsEnum.DELETE)
+            if not result:
+                return "Internal Server Error", 500
+            return redirect(url_for('hello_routes.get_hellos'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_hello: {e}")
             return "Internal Server Error", 500
