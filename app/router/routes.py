@@ -2,6 +2,8 @@ from enum import Enum
 
 class AppRoutesEnum(Enum):
     HOME = "/"
+    GET_LOGIN = "/get-login"
+    LOGIN = "/login"
     
 class HelloRoutesEnum(Enum):
     HELLO = "/hello"

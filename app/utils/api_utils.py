@@ -1,4 +1,3 @@
-import requests
 from flask import Flask
 from enum import Enum
 
@@ -16,20 +15,16 @@ def build_api_route(base_url: str, port: int, route: str) -> str:
 
 def make_api_request(url: str, headers: dict, app: Flask, method: ApiMethodsEnum, body: dict | None = None ):
     app.logger.info(f"Making API request to {url}")
-    match method.value:
-        case "GET":
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            return response.json()
-        case "POST":
-            response = requests.post(url, headers=headers, json=body)
-            response.raise_for_status()
-            return response.json()
-        case "PUT":
-            response = requests.put(url, headers=headers, json=body)
-            response.raise_for_status()
-            return response.json()
-        case "DELETE":
-            response = requests.delete(url, headers=headers, json=body)
-            response.raise_for_status()
-            return response.json()
+    with app.test_client() as client:
+        if method == ApiMethodsEnum.GET:
+            response = client.get(url, headers=headers)
+        elif method == ApiMethodsEnum.POST:
+            response = client.post(url, headers=headers, json=body)
+        elif method == ApiMethodsEnum.PUT:
+            response = client.put(url, headers=headers, json=body)
+        elif method == ApiMethodsEnum.DELETE:
+            response = client.delete(url, headers=headers, json=body)
+        else:
+            raise ValueError(f"Unsupported method: {method}")
+
+        return response.get_json()

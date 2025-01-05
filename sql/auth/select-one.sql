@@ -1,0 +1,1 @@
+SELECT * FROM mysql.user WHERE user = $1 OR user = $2;

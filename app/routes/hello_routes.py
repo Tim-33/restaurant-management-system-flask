@@ -4,7 +4,6 @@ from app.utils.api_utils import build_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.router.routes import HelloRoutesEnum
 from app.utils.api_utils import make_api_request, ApiMethodsEnum
-import requests
     
 class HelloRoutes(IRoutes):
     def __init__(self, app: Flask):

@@ -1,11 +1,11 @@
-from app.modules.hello.hello_controller import HelloController
 from app.interfaces.imodule import IModule
 from flask import Flask
+from app.modules.auth.auth_controller import AuthController
 
-class HelloModule(IModule):
+class AuthModule(IModule):
     def __init__(self, app: Flask):
         self.app = app
-        self.controller = HelloController(self.app)
+        self.controller = AuthController(self.app)
         
     def register_blueprints(self):
         self.controller.register_routes()

@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, Flask, request
 from app.modules.hello.hello_service import HelloService
 from app.modules.hello.hello_model import HelloModel
 from app.modules.hello.dto.create_hello_dto import CreateHelloDto
-from app.utils.decorators import log_request, require_json
 from app.utils.api_utils import generate_api_route
 from app.router.api_routes import HelloApiRoutesEnum
 from app.interfaces.icontroller import IController
@@ -22,10 +21,7 @@ class HelloController(IController):
         self.hello_bp.route(generate_api_route(HelloApiRoutesEnum.HELLO_ID.value), methods=['PUT'])(self.update)
         self.hello_bp.route(generate_api_route(HelloApiRoutesEnum.HELLO_ID.value), methods=['DELETE'])(self.delete)
         self.app.register_blueprint(self.hello_bp)
-    
-    def apply_decorators(self):
-        pass
-    
+      
     def get_all(self) -> List[HelloModel]:
         message = self.hello_service.get_hello_messages()
         return jsonify(message)
