@@ -31,11 +31,11 @@ app.config['MYSQL_DATABASE_PASSWORD'] = config.MYSQL_PASSWORD
 
 app.router = AppRouter()
 app.mysql = mysql.connector.connect(
-    host="127.0.0.1",
-    port=3306,
-    user="root",
-    password="root",
-    database="sustav_za_upravljanje_restoranom"
+    host=app.config['MYSQL_DATABASE_HOST'],
+    port=app.config['MYSQL_DATABASE_PORT'],
+    user=app.config['MYSQL_DATABASE_USER'],
+    password=app.config['MYSQL_DATABASE_PASSWORD'],
+    database=app.config['MYSQL_DATABASE_DB']
 )
 
 app.router.create_routes()

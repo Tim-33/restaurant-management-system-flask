@@ -8,7 +8,6 @@ class ZaposlenikService:
     def __init__(self, app: Flask):
         self.app = app
         self.cursor = self.app.mysql.cursor()
-        print(self.cursor)
         
     def get_zaposlenici(self):
         try:
@@ -92,6 +91,6 @@ class ZaposlenikService:
     
     def delete_zaposlenik(self, id: int):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.DELETE.value)
-        self.cursor.execute(sql_script, id)
+        self.cursor.execute(sql_script, (id, ))
         self.app.mysql.commit()
         return self.cursor.rowcount

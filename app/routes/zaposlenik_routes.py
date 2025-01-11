@@ -41,7 +41,6 @@ class ZaposlenikRoutes(IRoutes):
     def get_zaposlenik(self, id):
         try:
             data = self.zaposlenik_service.get_zaposlenik(id)
-            print(data)
             return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_ID.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_zaposlenik: {e}")
