@@ -16,12 +16,6 @@ class AppRouter:
         self.add_route(AppRoutesEnum.HOME.value, 'app/home.html')
         self.add_route(AppRoutesEnum.GET_LOGIN.value, 'app/login.html')
         
-        # Add routes for Hello
-        self.add_route(HelloRoutesEnum.HELLO.value, 'hello/hellos.html')
-        self.add_route(HelloRoutesEnum.HELLO_CREATE.value, 'hello/hello_create.html')
-        self.add_route(HelloRoutesEnum.HELLO_ID.value, 'hello/hello.html')
-        self.add_route(HelloRoutesEnum.HELLO_UPDATE.value, 'hello/hello_update.html')
-        
         # Add routes for Zaposlenik
         self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK.value, 'zaposlenik/zaposlenici.html')
         self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_CREATE.value, 'zaposlenik/zaposlenik_create.html')

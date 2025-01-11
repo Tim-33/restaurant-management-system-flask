@@ -1,8 +1,0 @@
-{% extends "index.html" %} {% block content %}
-<h1>Message CREATE:</h1>
-<p>create A message</p>
-<form action="{{url_for('hello_routes.created_hello')}}" method="POST">
-  <input type="text" name="message" id="message" />
-  <input type="submit" value="CREATE HELLO" />
-</form>
-{% endblock %}

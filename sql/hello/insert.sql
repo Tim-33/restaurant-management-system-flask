@@ -1,1 +1,0 @@
-INSERT INTO hello (message) VALUES (%s);

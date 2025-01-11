@@ -6,11 +6,9 @@ import mysql.connector
 
 def register_routes(app):
     from app.routes.app_routes import AppRoutes
-    from app.routes.hello_routes import HelloRoutes
     from app.routes.zaposlenik_routes import ZaposlenikRoutes
     
     AppRoutes(app).register_routes()
-    HelloRoutes(app).register_routes()
     ZaposlenikRoutes(app).register_routes()
 
 app = Flask(__name__)

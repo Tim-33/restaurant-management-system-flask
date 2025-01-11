@@ -1,1 +1,0 @@
-SELECT * FROM hello WHERE id = %s;
