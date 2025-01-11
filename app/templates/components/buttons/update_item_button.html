@@ -1,0 +1,3 @@
+{% macro update_item_button_link(link, id, copy) -%}
+<a href="{{url_for(link, id=id)}}">{{copy}}</a>
+{%- endmacro %}

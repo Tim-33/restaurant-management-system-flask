@@ -83,9 +83,10 @@ class ZaposlenikService:
             zaposlenik["email"],
             zaposlenik["datum_rodenja"],
             zaposlenik["iznos_place"],
-            base64.b64decode(zaposlenik["slika"]) if zaposlenik["slika"] else None
+            base64.b64decode(zaposlenik["slika"]) if zaposlenik["slika"] else None,
+            id
         )
-        self.cursor.execute(sql_script, (values, id))
+        self.cursor.execute(sql_script, values)
         self.app.mysql.commit()
         return self.cursor.rowcount
     

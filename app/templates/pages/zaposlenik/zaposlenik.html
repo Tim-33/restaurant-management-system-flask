@@ -1,7 +1,10 @@
 {% extends "index.html" %} {% block content %} {% import
 'components/buttons/delete_item_button.html' as buttons %} {{
-buttons.delete_item_button_link('zaposlenik_routes.delete_zaposlenik', data.id,
-'Obriši zaposlenika') }}
+buttons.delete_item_button_form('zaposlenik_routes.delete_zaposlenik', data.id,
+'Obriši zaposlenika') }} {% import 'components/buttons/update_item_button.html'
+as buttons %} {{
+buttons.update_item_button_link('zaposlenik_routes.update_zaposlenik', data.id,
+'Ažuriraj zaposlenika') }}
 <p></p>
 <h2>Detalji zaposlenika:</h2>
 <div class="zaposlenik-detail">
