@@ -1,0 +1,50 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj zaposlenika:</h2>
+<form
+  class="create-form"
+  action="{{url_for('zaposlenik_routes.created_zaposlenik')}}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <div class="form-input-group">
+    <label for="slika">Slika:</label>
+    <input type="file" name="slika" id="slika" />
+  </div>
+  <div class="form-input-group">
+    <label for="restoran_id">Restoran ID:</label>
+    <input type="number" name="restoran_id" id="restoran_id" value="1" />
+  </div>
+  <div class="form-input-group">
+    <select name="zaposlenik_tip" id="zaposlenik_tip" required value="konobar">
+      <option value="vlasnik">Vlasnik</option>
+      <option value="konobar">Konobar</option>
+      <option value="glavni_konobar">Glavni Konobar</option>
+      <option value="kuhar">Kuhar</option>
+      <option value="cistac">Čistać</option>
+    </select>
+  </div>
+  <div class="form-input-group">
+    <label for="ime">Ime:</label>
+    <input type="text" name="ime" id="ime" required />
+  </div>
+  <div class="form-input-group">
+    <label for="prezime">Prezime:</label>
+    <input type="text" name="prezime" id="prezime" required />
+  </div>
+  <div class="form-input-group">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required />
+  </div>
+  <div class="form-input-group">
+    <label for="datum_rodenja">Datum Rođenja:</label>
+    <input type="date" name="datum_rodenja" id="datum_rodenja" required />
+  </div>
+  <div class="form-input-group">
+    <label for="iznos_place">Iznos Plače:</label>
+    <input type="number" name="iznos_place" id="iznos_place" required />
+  </div>
+  <div class="form-input-group">
+    <input type="submit" value="Dodaj zaposlenika" />
+  </div>
+</form>
+{% endblock %}

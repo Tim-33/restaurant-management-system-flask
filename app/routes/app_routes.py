@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, Flask, redirect, url_for, request
 from app.interfaces.iroutes import IRoutes
 from app.router.routes import AppRoutesEnum
-from app.router.api_routes import AuthApiRoutesEnum
-from app.utils.api_utils import build_api_route, make_api_request, ApiMethodsEnum
+from app.services.auth_service import AuthService
 
 class AppRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -10,6 +9,7 @@ class AppRoutes(IRoutes):
         self.app_routes_bp = Blueprint('app_routes', __name__)        
         self.base_url = self.app.config['API_BASE_URL']
         self.port = self.app.config['API_PORT']
+        self.auth_service = AuthService(self.app)
         
     def register_routes(self):
         self.app.logger.info("Registering routes for AppRoutes")
@@ -37,9 +37,7 @@ class AppRoutes(IRoutes):
                 "password": password
             }
             
-            url = build_api_route(self.base_url, self.port, AuthApiRoutesEnum.LOGIN.value)
-            headers = {"Content-type": "application/json"}
-            result = make_api_request(url, headers, self.app, ApiMethodsEnum.POST, body)
+            result = self.auth_service.login(username, password)
             
             if not result:
                 return "Login failed", 401

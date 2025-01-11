@@ -22,3 +22,10 @@ class AppRouter:
         self.add_route(HelloRoutesEnum.HELLO_ID.value, 'hello/hello.html')
         self.add_route(HelloRoutesEnum.HELLO_UPDATE.value, 'hello/hello_update.html')
         
+        # Add routes for Zaposlenik
+        self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK.value, 'zaposlenik/zaposlenici.html')
+        self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_CREATE.value, 'zaposlenik/zaposlenik_create.html')
+        self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_ID.value, 'zaposlenik/zaposlenik.html')
+        self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_UPDATE.value, 'zaposlenik/zaposlenik_update.html')
+        
+        

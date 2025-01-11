@@ -1,0 +1,1 @@
+DELETE FROM zaposlenik WHERE id = %s;

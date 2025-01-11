@@ -1,0 +1,10 @@
+{% import 'components/buttons/add_item_button.html' as buttons %} {% extends
+"index.html" %} {% block content %} {{
+buttons.add_item_button_link('zaposlenik_routes.create_zaposlenik', 'Dodaj
+zaposlenika') }} {% for zaposlenik in data %}
+<p>
+  <a href="{{ url_for('zaposlenik_routes.get_zaposlenik', id=zaposlenik.id) }}">
+    {{ zaposlenik.ime }} {{ zaposlenik.prezime }}
+  </a>
+</p>
+{% endfor %} {% endblock %}

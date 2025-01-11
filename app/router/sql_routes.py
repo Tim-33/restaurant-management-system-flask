@@ -13,3 +13,10 @@ class AuthSqlRoutesEnum(Enum):
     INSERT = 'sql/auth/insert.sql'
     UPDATE = 'sql/auth/update.sql'
     DELETE = 'sql/auth/delete.sql'
+    
+class ZaposlenikSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/zaposlenik/select-all.sql'
+    SELECT_ONE = 'sql/zaposlenik/select-one.sql'
+    INSERT = 'sql/zaposlenik/insert.sql'
+    UPDATE = 'sql/zaposlenik/update.sql'
+    DELETE = 'sql/zaposlenik/delete.sql'

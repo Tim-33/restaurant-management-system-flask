@@ -13,3 +13,12 @@ class HelloRoutesEnum(Enum):
     HELLO_UPDATE = "/hello/<int:id>/update"
     HELLO_UPDATED = "/hello/<int:id>/updated"
     HELLO_DELETE = "/hello/<int:id>/delete"
+    
+class ZaposlenikRoutesEnum(Enum):
+    ZAPOSLENIK = "/zaposlenik"
+    ZAPOSLENIK_CREATE = "/zaposlenik/create"
+    ZAPOSLENIK_CREATED = "/zaposlenik/created"
+    ZAPOSLENIK_ID = "/zaposlenik/<int:id>"
+    ZAPOSLENIK_UPDATE = "/zaposlenik/<int:id>/update"
+    ZAPOSLENIK_UPDATED = "/zaposlenik/<int:id>/updated"
+    ZAPOSLENIK_DELETE = "/zaposlenik/<int:id>/delete"

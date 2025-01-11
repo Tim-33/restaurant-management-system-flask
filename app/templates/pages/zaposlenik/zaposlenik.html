@@ -1,0 +1,13 @@
+{% extends "index.html" %} {% block content %}
+<h2>Detalji zaposlenika:</h2>
+<div class="zaposlenik-detail">
+  <div class="form-input-group">
+    <h1>{{data.id}}</h1>
+  </div>
+  {% if data.slika %}
+  <img src="data:image/jpeg;base64,{{ data.slika }}" alt="Zaposlenik Slika" />
+  {% else %}
+  <p>No image available</p>
+  {% endif %}
+</div>
+{% endblock %}

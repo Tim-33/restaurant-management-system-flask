@@ -1,0 +1,1 @@
+UPDATE zaposlenik SET message = %s WHERE id = %s;

@@ -1,6 +1,5 @@
 {% block navbar %}
 <nav class="navbar">
-  <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="navId">
     <li class="nav-item">
       <a href="{{url_for('app_routes.get_index')}}" class="nav-link">Home</a>
@@ -10,8 +9,16 @@
     </li>
     <li class="nav-item">
       <a href="{{url_for('hello_routes.get_hellos')}}" class="nav-link"
-        >Hello</a
+        >Hello
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        href="{{url_for('zaposlenik_routes.get_zaposlenici')}}"
+        class="nan-link"
       >
+        Zaposlenici
+      </a>
     </li>
   </ul>
 </nav>
