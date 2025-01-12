@@ -1,4 +1,4 @@
 UPDATE zaposlenik 
-SET disabled = true
-    deleted_at = now()
+SET disabled = true,
+    deleted_at = CURRENT_TIMESTAMP
 WHERE id = %s;
