@@ -1,10 +1,54 @@
-{% import 'components/buttons/add_item_button.html' as buttons %} {% extends
-"index.html" %} {% block content %} {{
-buttons.add_item_button_link('zaposlenik_routes.create_zaposlenik', 'Dodaj
-zaposlenika') }} {% for zaposlenik in data %}
-<p>
-  <a href="{{ url_for('zaposlenik_routes.get_zaposlenik', id=zaposlenik.id) }}">
-    {{ zaposlenik.ime }} {{ zaposlenik.prezime }}
-  </a>
-</p>
-{% endfor %} {% endblock %}
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{ add_item_button.add_item_button_link('zaposlenik_routes.create_zaposlenik',
+  'Dodaj zaposlenika') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Email</th>
+        <th>Datum Rođenja</th>
+        <th>Iznos Place</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td class="image-cell">
+          <div class="table-image-wrapper">
+            <img
+              src="data:image/jpeg;base64,{{ datapoint.slika }}"
+              alt="Zaposlenik Slika"
+              width="25"
+              height="25"
+            />
+          </div>
+        </td>
+        <td>{{ datapoint.ime }}</td>
+        <td>{{ datapoint.prezime }}</td>
+        <td>{{ datapoint.email }}</td>
+        <td>{{ datapoint.datum_rodenja }}</td>
+        <td>{{ datapoint.iznos_place }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('zaposlenik_routes.get_zaposlenik',
+            datapoint.id, 'Pregledaj') }} {{
+            delete_item_button.delete_item_button_form('zaposlenik_routes.delete_zaposlenik',
+            datapoint.id, 'Obriši') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

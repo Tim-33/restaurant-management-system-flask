@@ -1,20 +1,50 @@
 {% extends "index.html" %} {% block content %} {% import
-'components/buttons/delete_item_button.html' as buttons %} {{
-buttons.delete_item_button_form('zaposlenik_routes.delete_zaposlenik', data.id,
-'Obriši zaposlenika') }} {% import 'components/buttons/update_item_button.html'
-as buttons %} {{
-buttons.update_item_button_link('zaposlenik_routes.update_zaposlenik', data.id,
-'Ažuriraj zaposlenika') }}
-<p></p>
+'components/buttons/delete_item_button.html' as delete_item_button %}
 <h2>Detalji zaposlenika:</h2>
-<div class="zaposlenik-detail">
-  <div class="form-input-group">
-    <h1>{{data.id}}</h1>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('zaposlenik_routes.delete_zaposlenik',
+  data.id, 'Obriši zaposlenika') }} {{
+  update_item_button.update_item_button_link('zaposlenik_routes.update_zaposlenik',
+  data.id, 'Ažuriraj zaposlenika') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="image-container-single">
+      {% if data.slika %}
+      <img
+        src="data:image/jpeg;base64,{{ data.slika }}"
+        alt="Zaposlenik Slika"
+      />
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>IME:</label>
+      <span>{{data.ime}}</span>
+    </div>
+    <div class="details-item">
+      <label>PREZIME:</label>
+      <span>{{data.prezime}}</span>
+    </div>
+    <div class="details-item">
+      <label>EMAIL:</label>
+      <span>{{data.email}}</span>
+    </div>
+    <div class="details-item">
+      <label>DATUM ROĐENJA:</label>
+      <span>{{data.datum_rodenja}}</span>
+    </div>
+    <div class="details-item">
+      <label>IZNOS PLAĆE:</label>
+      <span>{{data.iznos_place}}</span>
+    </div>
   </div>
-  {% if data.slika %}
-  <img src="data:image/jpeg;base64,{{ data.slika }}" alt="Zaposlenik Slika" />
-  {% else %}
-  <p>No image available</p>
-  {% endif %}
 </div>
 {% endblock %}

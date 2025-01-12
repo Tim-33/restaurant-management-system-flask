@@ -1,1 +1,1 @@
-SELECT * FROM zaposlenik;
+SELECT * FROM zaposlenik WHERE disabled = false;

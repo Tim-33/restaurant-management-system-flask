@@ -1,1 +1,1 @@
-SELECT * FROM zaposlenik WHERE id = %s;
+SELECT * FROM zaposlenik WHERE id = %s AND disabled = false;

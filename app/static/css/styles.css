@@ -1,6 +1,168 @@
+:root {
+  --gray: #e5e5e5;
+  --white: #fff;
+  --dark-gray: #333;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+}
+
+.navbar {
+  background-color: var(--dark-gray);
+  color: var(--white);
+  height: 100vh;
+  padding: 20px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.navbar .nav-item:hover {
+  font-weight: bold;
+}
+
+.navbar .active {
+  font-weight: bold;
+}
+
+.body-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 128px 1fr;
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--gray);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table td img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+table .image-cell {
+  width: 50px;
+}
+
+table .table-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table .button-cell {
+  width: 100px;
+}
+
+table th {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+table tr {
+  background-color: var(--white);
+}
+
+table tr:hover {
+  background-color: var(--gray);
+}
+
+.card {
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.single-item-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.single-item-details,
+.create-form,
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+}
+
+.single-item-details .details-item,
+.form-input-group {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.single-item-details .details-item label,
+.form-input-group label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.single-item-details .details-item span,
+.form-input-group input,
+.form-input-group select {
+  background-color: var(--gray);
+  padding: 5px;
+  border-radius: 5px;
+  border: var(--dark-gray) 1px solid;
+  display: inline-block;
+  text-align: left;
+}
+
+.image-container-single img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.image-container-single {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

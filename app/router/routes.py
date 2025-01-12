@@ -6,10 +6,10 @@ class AppRoutesEnum(Enum):
     LOGIN = "/login"
     
 class ZaposlenikRoutesEnum(Enum):
-    ZAPOSLENIK = "/zaposlenik"
-    ZAPOSLENIK_CREATE = "/zaposlenik/create"
-    ZAPOSLENIK_CREATED = "/zaposlenik/created"
-    ZAPOSLENIK_ID = "/zaposlenik/<int:id>"
-    ZAPOSLENIK_UPDATE = "/zaposlenik/<int:id>/update"
-    ZAPOSLENIK_UPDATED = "/zaposlenik/<int:id>/updated"
-    ZAPOSLENIK_DELETE = "/zaposlenik/<int:id>/delete"
+    ZAPOSLENIK = "/zaposlenici"
+    ZAPOSLENIK_CREATE = "/zaposlenici/create"
+    ZAPOSLENIK_CREATED = "/zaposlenici/created"
+    ZAPOSLENIK_ID = "/zaposlenici/<int:id>"
+    ZAPOSLENIK_UPDATE = "/zaposlenici/<int:id>/update"
+    ZAPOSLENIK_UPDATED = "/zaposlenici/<int:id>/updated"
+    ZAPOSLENIK_DELETE = "/zaposlenici/<int:id>/delete"

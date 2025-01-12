@@ -1,57 +1,65 @@
 {% extends "index.html" %} 
+{% import 'components/buttons/view_item_button.html' as view_item_button %}
 {% block content %}
 <h2>Ažuriraj zaposlenika:</h2>
-<form
-  class="update-form"
-  action="{{url_for('zaposlenik_routes.updated_zaposlenik', id=data.id)}}"
-  method="POST"
-  enctype="multipart/form-data"
->
-  <div class="form-input-group">
-    <label for="slika">Slika:</label>
-    <input type="file" name="slika" id="slika" />
-    {% if data.slika %}
-    <img src="data:image/jpeg;base64,{{ data.slika }}" alt="Zaposlenik Slika" />
-    {% else %}
-    <p>No image available</p>
-    {% endif %}
-  </div>
-  <div class="form-input-group">
-    <label for="restoran_id">Restoran ID:</label>
-    <input type="number" name="restoran_id" id="restoran_id" value="{{ data.restoran_id }}" />
-  </div>
-  <div class="form-input-group">
-    <label for="zaposlenik_tip">Zaposlenik Tip:</label>
-    <select name="zaposlenik_tip" id="zaposlenik_tip" required>
-      <option value="vlasnik" {% if data.zaposlenik_tip == 'vlasnik' %}selected{% endif %}>Vlasnik</option>
-      <option value="konobar" {% if data.zaposlenik_tip == 'konobar' %}selected{% endif %}>Konobar</option>
-      <option value="glavni_konobar" {% if data.zaposlenik_tip == 'glavni_konobar' %}selected{% endif %}>Glavni Konobar</option>
-      <option value="kuhar" {% if data.zaposlenik_tip == 'kuhar' %}selected{% endif %}>Kuhar</option>
-      <option value="cistac" {% if data.zaposlenik_tip == 'cistac' %}selected{% endif %}>Čistać</option>
-    </select>
-  </div>
-  <div class="form-input-group">
-    <label for="ime">Ime:</label>
-    <input type="text" name="ime" id="ime" required value="{{ data.ime }}" />
-  </div>
-  <div class="form-input-group">
-    <label for="prezime">Prezime:</label>
-    <input type="text" name="prezime" id="prezime" required value="{{ data.prezime }}" />
-  </div>
-  <div class="form-input-group">
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required value="{{ data.email }}" />
-  </div>
-  <div class="form-input-group">
-    <label for="datum_rodenja">Datum Rođenja:</label>
-    <input type="date" name="datum_rodenja" id="datum_rodenja" required value="{{ data.datum_rodenja }}" />
-  </div>
-  <div class="form-input-group">
-    <label for="iznos_place">Iznos Plače:</label>
-    <input type="number" name="iznos_place" id="iznos_place" required value="{{ data.iznos_place }}" />
-  </div>
-  <div class="form-input-group">
-    <input type="submit" value="Ažuriraj zaposlenika" />
-  </div>
-</form>
+<div class="single-item-buttons card">
+    {{ view_item_button.view_item_button_link('zaposlenik_routes.get_zaposlenik',
+    data.id, 'Odustani') }}
+</div>
+<div class="card">  
+  <form
+    class="update-form"
+    action="{{url_for('zaposlenik_routes.updated_zaposlenik', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+      {% if data.slika %}
+      <div class="image-container-single"><img src="data:image/jpeg;base64,{{ data.slika }}" alt="Zaposlenik Slika" /></div>
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    <div class="form-input-group">
+      <label for="slika">Slika:</label>
+      <input type="file" name="slika" id="slika" />
+    </div>
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran ID:</label>
+      <input type="number" name="restoran_id" id="restoran_id" value="{{ data.restoran_id }}" />
+    </div>
+    <div class="form-input-group">
+      <label for="zaposlenik_tip">Zaposlenik Tip:</label>
+      <select name="zaposlenik_tip" id="zaposlenik_tip" required>
+        <option value="vlasnik" {% if data.zaposlenik_tip == 'vlasnik' %}selected{% endif %}>Vlasnik</option>
+        <option value="konobar" {% if data.zaposlenik_tip == 'konobar' %}selected{% endif %}>Konobar</option>
+        <option value="glavni_konobar" {% if data.zaposlenik_tip == 'glavni_konobar' %}selected{% endif %}>Glavni Konobar</option>
+        <option value="kuhar" {% if data.zaposlenik_tip == 'kuhar' %}selected{% endif %}>Kuhar</option>
+        <option value="cistac" {% if data.zaposlenik_tip == 'cistac' %}selected{% endif %}>Čistać</option>
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="ime">Ime:</label>
+      <input type="text" name="ime" id="ime" required value="{{ data.ime }}" />
+    </div>
+    <div class="form-input-group">
+      <label for="prezime">Prezime:</label>
+      <input type="text" name="prezime" id="prezime" required value="{{ data.prezime }}" />
+    </div>
+    <div class="form-input-group">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required value="{{ data.email }}" />
+    </div>
+    <div class="form-input-group">
+      <label for="datum_rodenja">Datum Rođenja:</label>
+      <input type="date" name="datum_rodenja" id="datum_rodenja" required value="{{ data.datum_rodenja }}" />
+    </div>
+    <div class="form-input-group">
+      <label for="iznos_place">Iznos Plače:</label>
+      <input type="number" name="iznos_place" id="iznos_place" required value="{{ data.iznos_place }}" />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj zaposlenika" />
+    </div>
+  </form>
+</div>
 {% endblock %}

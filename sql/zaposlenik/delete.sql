@@ -1,1 +1,4 @@
-DELETE FROM zaposlenik WHERE id = %s;
+UPDATE zaposlenik 
+SET disabled = true
+    deleted_at = now()
+WHERE id = %s;

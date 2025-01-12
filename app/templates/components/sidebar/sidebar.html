@@ -1,0 +1,10 @@
+{% block navbar %} {% from "components/sidebar/nav_link.html" import nav_link
+with context %}
+<nav class="navbar">
+  <ul class="nav" id="navId">
+    {{ nav_link('app_routes.get_index', 'Home') }} {{
+    nav_link('app_routes.get_login', 'Login') }} {{
+    nav_link('zaposlenik_routes.get_zaposlenici', 'Zaposlenici') }}
+  </ul>
+</nav>
+{% endblock navbar %}
