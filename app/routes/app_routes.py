@@ -42,7 +42,7 @@ class AppRoutes(IRoutes):
             if not result:
                 return "Login failed", 401
             
-            return redirect(url_for('hello_routes.get_hellos'))
+            return redirect(url_for('app_routes.get_index'))
         except Exception as e:
             self.app.logger.error(f"Error in login: {e}")
             return "Internal Server Error", 500

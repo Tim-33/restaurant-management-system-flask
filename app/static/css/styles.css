@@ -166,3 +166,16 @@ table tr:hover {
   justify-content: center;
   width: 100%;
 }
+
+.form-input-group input[type="submit"] {
+  background-color: var(--dark-gray);
+  color: var(--white);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-input-group input[type="submit"]:hover {
+  color: var(--gray);
+}
