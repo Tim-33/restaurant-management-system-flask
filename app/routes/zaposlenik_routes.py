@@ -8,8 +8,6 @@ class ZaposlenikRoutes(IRoutes):
     def __init__(self, app: Flask):
         self.app = app
         self.zaposlenik_routes_bp = Blueprint('zaposlenik_routes', __name__)
-        self.base_url = self.app.config['API_BASE_URL']
-        self.port = self.app.config['API_PORT']
         self.zaposlenik_service = ZaposlenikService(self.app)
         
     def register_routes(self):

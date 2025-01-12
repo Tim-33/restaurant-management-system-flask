@@ -1,0 +1,37 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{
+  add_item_button.add_item_button_link('zaposlenik_placa_routes.create_zaposlenik_place',
+  'Plati zaposlenicima plaću') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Mjesec</th>
+        <th>Iznos</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.mjesec }}</td>
+        <td>{{ datapoint.iznos }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            <a
+              href="{{ url_for('zaposlenik_placa_routes.get_zaposlenik_place_by_month', mjesec=datapoint.mjesec) }}"
+              >Pregledaj</a
+            >
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

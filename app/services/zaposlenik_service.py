@@ -1,6 +1,5 @@
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import ZaposlenikSqlRoutesEnum
-from typing import List
 from flask import Flask
 import base64
 

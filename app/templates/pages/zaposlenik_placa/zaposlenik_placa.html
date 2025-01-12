@@ -1,0 +1,27 @@
+{% extends "index.html" %} {% block content %}
+<h2>Detalji zaposlenik plaća:</h2>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>IME:</label>
+      <span>{{data.ime}}</span>
+    </div>
+    <div class="details-item">
+      <label>PREZIME:</label>
+      <span>{{data.prezime}}</span>
+    </div>
+    <div class="details-item">
+      <label>IZNOS:</label>
+      <span>{{data.iznos}}</span>
+    </div>
+    <div class="details-item">
+      <label>MJESEC:</label>
+      <span>{{data.mjesec}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

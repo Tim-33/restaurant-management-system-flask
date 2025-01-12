@@ -1,0 +1,34 @@
+{%import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Iznos</th>
+        <th>Mjesec</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.ime }}</td>
+        <td>{{ datapoint.prezime }}</td>
+        <td>{{ datapoint.iznos }}</td>
+        <td>{{ datapoint.mjesec }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('zaposlenik_placa_routes.get_zaposlenik_placa',
+            datapoint.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

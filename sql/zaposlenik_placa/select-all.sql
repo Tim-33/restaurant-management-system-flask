@@ -1,0 +1,1 @@
+SELECT * FROM zaposlenik_placa WHERE disabled = false;

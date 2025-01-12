@@ -1,0 +1,41 @@
+{% extends "index.html" %} {% block content %}
+<h2>Plati zaposlenicima plaću:</h2>
+<div class="card">
+  <a href="{{url_for('zaposlenik_placa_routes.get_zaposlenik_place_months')}}"
+    >Odustani</a
+  >
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('zaposlenik_placa_routes.created_zaposlenik_place')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="mjesec">Mjesec:</label>
+      <input type="month" name="mjesec" id="mjesec" required />
+    </div>
+    <div class="form-input-group">
+      <label>Zaposlenici:</label>
+    </div>
+    {% for datapoint in data %}
+    <div class="form-input-group">
+      <label for="iznos_place"
+        >{{ datapoint.ime }} {{ datapoint.prezime }}:</label
+      >
+      <input
+        type="number"
+        name="iznos_place_{{ datapoint.id }}"
+        id="iznos_place"
+        value="{{ datapoint.iznos_place }}"
+      />
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Plati zaposlenike" />
+    </div>
+  </form>
+</div>
+{% endblock %}
