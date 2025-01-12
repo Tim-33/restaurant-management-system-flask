@@ -1,0 +1,65 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj zaposlenika:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('restoran_routes.get_restoran',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('restoran_routes.updated_restoran', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% if data.slika %}
+    <div class="image-container-single">
+      <img
+        src="data:image/jpeg;base64,{{ data.slika }}"
+        alt="Zaposlenik Slika"
+      />
+    </div>
+    {% else %}
+    <p>No image available</p>
+    {% endif %}
+    <div class="form-input-group">
+      <label for="slika">Slika:</label>
+      <input type="file" name="slika" id="slika" />
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{ data.naziv }}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Adresa:</label>
+      <input
+        type="text"
+        name="adresa"
+        id="adresa"
+        required
+        value="{{ data.adresa }}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Broj telefona:</label>
+      <input
+        type="text"
+        name="broj_telefona"
+        id="broj_telefona"
+        required
+        value="{{ data.broj_telefona }}"
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj zaposlenika" />
+    </div>
+  </form>
+</div>
+{% endblock %}

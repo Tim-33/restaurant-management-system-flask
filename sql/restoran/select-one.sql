@@ -1,0 +1,1 @@
+SELECT * FROM restoran WHERE id = %s AND disabled = false;

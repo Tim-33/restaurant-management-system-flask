@@ -22,3 +22,10 @@ class ZaposlenikPlacaSqlRoutesEnum(Enum):
     DELETE = 'sql/zaposlenik_placa/delete.sql'
     SELECT_BY_MONTH = "sql/zaposlenik_placa/select-by-month.sql"
     SELECT_MONTHS = "sql/zaposlenik_placa/select-months.sql"
+    
+class RestoranSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/restoran/select-all.sql'
+    SELECT_ONE = 'sql/restoran/select-one.sql'
+    INSERT = 'sql/restoran/insert.sql'
+    UPDATE = 'sql/restoran/update.sql'
+    DELETE = 'sql/restoran/delete.sql'

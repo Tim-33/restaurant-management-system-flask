@@ -1,0 +1,42 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji restorana:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('restoran_routes.delete_restoran',
+  data.id, 'Obriši restoran') }} {{
+  update_item_button.update_item_button_link('restoran_routes.update_restoran',
+  data.id, 'Ažuriraj restoran') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="image-container-single">
+      {% if data.slika %}
+      <img
+        src="data:image/jpeg;base64,{{ data.slika }}"
+        alt="Zaposlenik Slika"
+      />
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>ADRESA:</label>
+      <span>{{data.adresa}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ TELEFONA:</label>
+      <span>{{data.broj_telefona}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

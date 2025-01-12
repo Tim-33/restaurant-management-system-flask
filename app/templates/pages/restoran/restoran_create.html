@@ -1,0 +1,35 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj restoran:</h2>
+<div class="card">
+  <a href="{{url_for('restoran_routes.get_restorani')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('restoran_routes.created_restoran')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="slika">Slika:</label>
+      <input type="file" name="slika" id="slika" />
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" name="naziv" id="naziv" required />
+    </div>
+    <div class="form-input-group">
+      <label for="adresa">Adresa:</label>
+      <input type="text" name="adresa" id="adresa" required />
+    </div>
+    <div class="form-input-group">
+      <label for="broj_telefona">Broj telefona:</label>
+      <input type="tel" name="broj_telefona" id="broj_telefona" required />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj zaposlenika" />
+    </div>
+  </form>
+</div>
+{% endblock %}

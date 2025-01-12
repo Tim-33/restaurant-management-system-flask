@@ -1,0 +1,50 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{ add_item_button.add_item_button_link('restoran_routes.create_restoran',
+  'Dodaj restoran') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Naziv</th>
+        <th>Adresa</th>
+        <th>Broj telefona</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td class="image-cell">
+          <div class="table-image-wrapper">
+            <img
+              src="data:image/jpeg;base64,{{ datapoint.slika }}"
+              alt="Zaposlenik Slika"
+              width="25"
+              height="25"
+            />
+          </div>
+        </td>
+        <td>{{ datapoint.naziv }}</td>
+        <td>{{ datapoint.adresa }}</td>
+        <td>{{ datapoint.broj_telefona }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('restoran_routes.get_restoran',
+            datapoint.id, 'Pregledaj') }} {{
+            delete_item_button.delete_item_button_form('restoran_routes.delete_restoran',
+            datapoint.id, 'Obriši') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
