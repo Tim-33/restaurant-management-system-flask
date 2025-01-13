@@ -29,3 +29,10 @@ class RestoranSqlRoutesEnum(Enum):
     INSERT = 'sql/restoran/insert.sql'
     UPDATE = 'sql/restoran/update.sql'
     DELETE = 'sql/restoran/delete.sql'
+    
+class SkladisteSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/skladiste/select-all.sql'
+    SELECT_ONE = 'sql/skladiste/select-one.sql'
+    INSERT = 'sql/skladiste/insert.sql'
+    UPDATE = 'sql/skladiste/update.sql'
+    DELETE = 'sql/skladiste/delete.sql'

@@ -9,11 +9,13 @@ def register_routes(app):
     from app.routes.zaposlenik_routes import ZaposlenikRoutes
     from app.routes.zaposlenik_placa_routes import ZaposlenikPlacaRoutes
     from app.routes.restoran_routes import RestoranRoutes
+    from app.routes.skladiste_routes import SkladisteRoutes
     
     AppRoutes(app).register_routes()
     ZaposlenikRoutes(app).register_routes()
     ZaposlenikPlacaRoutes(app).register_routes()
     RestoranRoutes(app).register_routes()
+    SkladisteRoutes(app).register_routes()
 
 app = Flask(__name__)
 Bootstrap(app)
