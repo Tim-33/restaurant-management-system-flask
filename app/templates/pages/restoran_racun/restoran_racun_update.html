@@ -1,0 +1,50 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj restoranski račun:</h2>
+<div class="single-item-buttons card">
+  {{
+  view_item_button.view_item_button_link('restoran_racun_routes.get_restoran_racun',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('restoran_racun_routes.updated_restoran_racun', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="valuta">Valuta:</label>
+      <select
+        name="valuta"
+        id="valuta"
+        required
+        value="{{
+        data.valuta}}"
+      >
+        {% for valuta in valute %}
+        <option value="{{valuta}}">{{valuta}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj skladište" />
+    </div>
+  </form>
+</div>
+{% endblock %}

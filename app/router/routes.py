@@ -41,3 +41,12 @@ class SkladisteRoutesEnum(Enum):
     SKLADISTE_UPDATE = "/skladista/<int:id>/update"
     SKLADISTE_UPDATED = "/skladista/<int:id>/updated"
     SKLADISTE_DELETE = "/skladista/<int:id>/delete"
+    
+class RestoranRacunRoutesEnum(Enum):
+    RESTORAN_RACUN = "/restoran-racuni"
+    RESTORAN_RACUN_CREATE = "/restoran-racuni/create"
+    RESTORAN_RACUN_CREATED = "/restoran-racuni/created"
+    RESTORAN_RACUN_ID = "/restoran-racuni/<int:id>"
+    RESTORAN_RACUN_UPDATE = "/restoran-racuni/<int:id>/update"
+    RESTORAN_RACUN_UPDATED = "/restoran-racuni/<int:id>/updated"
+    RESTORAN_RACUN_DELETE = "/restoran-racuni/<int:id>/delete"

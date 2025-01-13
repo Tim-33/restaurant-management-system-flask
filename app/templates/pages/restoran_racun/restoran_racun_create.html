@@ -1,0 +1,43 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj restoranski račun:</h2>
+<div class="card">
+  <a href="{{url_for('restoran_racun_routes.get_restoran_racuni')}}"
+    >Odustani</a
+  >
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('restoran_racun_routes.created_restoran_racun')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select name="restoran_id" id="restoran_id" required {% if data|length>
+        0 %} value="{{data[0].id}}" {% endif %} > {% for datapoint in data %}
+        <option value="{{datapoint.id}}">{{datapoint.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="valuta">Valuta:</label>
+      <select
+        name="valuta"
+        id="valuta"
+        required
+        value="{{
+        valute[0]}}"
+      >
+        {% for valuta in valute %}
+        <option value="{{valuta}}">{{valuta}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj restoranski račun" />
+    </div>
+  </form>
+</div>
+{% endblock %}

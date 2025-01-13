@@ -1,0 +1,32 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji restoranskog računa:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('restoran_racun_routes.delete_restoran_racun',
+  data.id, 'Obriši restoranski račun') }} {{
+  update_item_button.update_item_button_link('restoran_racun_routes.update_restoran_racun',
+  data.id, 'Ažuriraj restoranski račun') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>STANJE:</label>
+      <span>{{data.stanje}}</span>
+    </div>
+    <div class="details-item">
+      <label>VALUTA:</label>
+      <span>{{data.valuta}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

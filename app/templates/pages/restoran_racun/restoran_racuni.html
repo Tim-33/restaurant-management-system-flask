@@ -1,0 +1,40 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{
+  add_item_button.add_item_button_link('restoran_racun_routes.create_restoran_racun',
+  'Dodaj restoranski račun') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Stanje</th>
+        <th>Valuta</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv }}</td>
+        <td>{{ datapoint.stanje }}</td>
+        <td>{{ datapoint.valuta }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('restoran_racun_routes.get_restoran_racun',
+            datapoint.id, 'Pregledaj') }} {{
+            delete_item_button.delete_item_button_form('restoran_racun_routes.delete_restoran_racun',
+            datapoint.id, 'Obriši') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

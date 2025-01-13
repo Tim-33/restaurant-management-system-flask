@@ -36,3 +36,10 @@ class SkladisteSqlRoutesEnum(Enum):
     INSERT = 'sql/skladiste/insert.sql'
     UPDATE = 'sql/skladiste/update.sql'
     DELETE = 'sql/skladiste/delete.sql'
+    
+class RestoranRacunSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/restoran_racun/select-all.sql'
+    SELECT_ONE = 'sql/restoran_racun/select-one.sql'
+    INSERT = 'sql/restoran_racun/insert.sql'
+    UPDATE = 'sql/restoran_racun/update.sql'
+    DELETE = 'sql/restoran_racun/delete.sql'

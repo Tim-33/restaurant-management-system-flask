@@ -41,3 +41,8 @@ class AppRouter:
         self.add_route(SkladisteRoutesEnum.SKLADISTE_ID.value, 'skladiste/skladiste.html')
         self.add_route(SkladisteRoutesEnum.SKLADISTE_UPDATE.value, 'skladiste/skladiste_update.html')
         
+        # Add routes for RestoranRacun
+        self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN.value, 'restoran_racun/restoran_racuni.html')
+        self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_CREATE.value, 'restoran_racun/restoran_racun_create.html')
+        self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_ID.value, 'restoran_racun/restoran_racun.html')
+        self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_UPDATE.value, 'restoran_racun/restoran_racun_update.html')

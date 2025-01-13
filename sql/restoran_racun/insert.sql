@@ -1,0 +1,1 @@
+INSERT INTO restoran_racun (restoran_id, valuta) VALUES (%s, %s);
