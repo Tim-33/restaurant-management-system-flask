@@ -55,3 +55,9 @@ class AppRouter:
         self.add_route(TransakcijaZaposlenikRoutesEnum.TRANSAKCIJA_ZAPOSLENIK.value, 'transakcija_zaposlenik/transakcije_zaposlenik.html')
         self.add_route(TransakcijaZaposlenikRoutesEnum.TRANSAKCIJA_ZAPOSLENIK_ID.value, 'transakcija_zaposlenik/transakcija_zaposlenik.html')
         
+        # Add routes for Trosak
+        self.add_route(TrosakRoutesEnum.TROSAK.value, 'trosak/troskovi.html')
+        self.add_route(TrosakRoutesEnum.TROSAK_CREATE.value, 'trosak/trosak_create.html')
+        self.add_route(TrosakRoutesEnum.TROSAK_ID.value, 'trosak/trosak.html')
+        self.add_route(TrosakRoutesEnum.TROSAK_UPDATE.value, 'trosak/trosak_update.html')
+        

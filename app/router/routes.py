@@ -59,3 +59,11 @@ class TransakcijaZaposlenikRoutesEnum(Enum):
     TRANSAKCIJA_ZAPOSLENIK = "/transakcije-zaposlenik"
     TRANSAKCIJA_ZAPOSLENIK_ID = "/transakcije-zaposlenik/<int:id>"
     
+class TrosakRoutesEnum(Enum):
+    TROSAK = "/troskovi"
+    TROSAK_CREATE = "/troskovi/create"
+    TROSAK_CREATED = "/troskovi/created"
+    TROSAK_ID = "/troskovi/<int:id>"
+    TROSAK_UPDATE = "/troskovi/<int:id>/update"
+    TROSAK_UPDATED = "/troskovi/<int:id>/updated"
+    TROSAK_DELETE = "/troskovi/<int:id>/delete"

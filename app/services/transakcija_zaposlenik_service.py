@@ -1,5 +1,5 @@
 from flask import Flask
-from app.router.sql_routes import TransakcijaZaposlenikRoutesEnum
+from app.router.sql_routes import TransakcijaZaposlenikSqlRoutesEnum
 from app.utils.sql_utils import get_sql_script_from_file
 
 class TransakcijaZaposlenikService:
@@ -9,7 +9,7 @@ class TransakcijaZaposlenikService:
         
     def get_transakcije_zaposlenika(self):
         try:
-            sql_script = get_sql_script_from_file(TransakcijaZaposlenikRoutesEnum.SELECT_ALL.value)
+            sql_script = get_sql_script_from_file(TransakcijaZaposlenikSqlRoutesEnum.SELECT_ALL.value)
             self.cursor.execute(sql_script)
             data = self.cursor.fetchall()
             transakcije_zaposlenika = [
@@ -31,7 +31,7 @@ class TransakcijaZaposlenikService:
         
     def get_transakcija_zaposlenika(self, id):
         try:
-            sql_script = get_sql_script_from_file(TransakcijaZaposlenikRoutesEnum.SELECT_ONE.value)
+            sql_script = get_sql_script_from_file(TransakcijaZaposlenikSqlRoutesEnum.SELECT_ONE.value)
             self.cursor.execute(sql_script, (id,))
             data = self.cursor.fetchone()
             transakcija_zaposlenika = {

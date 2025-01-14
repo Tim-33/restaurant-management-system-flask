@@ -1,0 +1,39 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji troška:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('trosak_routes.delete_trosak',
+  data.id, 'Obriši trošak') }} {{
+  update_item_button.update_item_button_link('trosak_routes.update_trosak',
+  data.id, 'Ažuriraj trošak') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv_restoran}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>IZNOS:</label>
+      <span>{{data.iznos}}</span>
+    </div>
+    <div class="details-item">
+      <label>MJESEČNO:</label>
+      <span
+        ><input type="checkbox" readonly {% if data.mjesecno == 1 %} checked {%
+        endif %} />
+      </span>
+    </div>
+  </div>
+</div>
+{% endblock %}

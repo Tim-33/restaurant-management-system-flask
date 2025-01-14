@@ -48,6 +48,14 @@ class TransakcijaRestoranSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/transakcija_restoran/select-all.sql'
     SELECT_ONE = 'sql/transakcija_restoran/select-one.sql'
 
-class TransakcijaZaposlenikRoutesEnum(Enum):
+class TransakcijaZaposlenikSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/transakcija_zaposlenik/select-all.sql'
     SELECT_ONE = 'sql/transakcija_zaposlenik/select-one.sql'
+
+class TrosakSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/trosak/select-all.sql'
+    SELECT_ONE = 'sql/trosak/select-one.sql'
+    INSERT = 'sql/trosak/insert.sql'
+    UPDATE = 'sql/trosak/update.sql'
+    DELETE = 'sql/trosak/delete.sql'
+    

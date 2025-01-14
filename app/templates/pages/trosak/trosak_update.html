@@ -1,0 +1,74 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj trošak:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('trosak_routes.get_trosak', data.id,
+  'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('trosak_routes.updated_trosak', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{data.naziv}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="iznos">Iznos:</label>
+      <input
+        type="number"
+        step="0.01"
+        name="iznos"
+        id="iznos"
+        required
+        value="{{data.iznos}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="mjesecno">Mjesečno:</label>
+      <div>
+        <input
+          type="checkbox"
+          name="mjesecno"
+          id="mjesecno"
+          {%
+          if
+          data.mjesecno
+          %}
+          checked
+          {%
+          endif
+          %}
+        />
+      </div>
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj trošak" />
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj trošak:</h2>
+<div class="card">
+  <a href="{{url_for('trosak_routes.get_troskovi')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('trosak_routes.created_trosak')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select name="restoran_id" id="restoran_id" required {% if data|length>
+        0 %} value="{{data[0].id}}" {% endif %} > {% for datapoint in data %}
+        <option value="{{datapoint.id}}">{{datapoint.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" name="naziv" id="naziv" required />
+    </div>
+    <div class="form-input-group">
+      <label for="iznos">Iznos:</label>
+      <input type="number" name="iznos" id="iznos" required step="0.01" />
+    </div>
+    <div class="form-input-group">
+      <label for="mjesecno">Mjesečno:</label>
+      <div>
+        <input type="checkbox" name="mjesecno" id="mjesecno" />
+      </div>
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj trošak" />
+    </div>
+  </form>
+</div>
+{% endblock %}
