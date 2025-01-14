@@ -1,0 +1,40 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{ add_item_button.add_item_button_link('stol_routes.create_stol', 'Dodaj
+  stol') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Broj</th>
+        <th>Lokacija</th>
+        <th>Broj mjesta</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.broj }}</td>
+        <td>{{ datapoint.lokacija }}</td>
+        <td>{{ datapoint.broj_mjesta }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{ view_item_button.view_item_button_link('stol_routes.get_stol',
+            datapoint.id, 'Pregledaj') }} {{
+            delete_item_button.delete_item_button_form('stol_routes.delete_stol',
+            datapoint.id, 'Obriši') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

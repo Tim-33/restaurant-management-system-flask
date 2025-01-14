@@ -67,3 +67,12 @@ class TrosakRoutesEnum(Enum):
     TROSAK_UPDATE = "/troskovi/<int:id>/update"
     TROSAK_UPDATED = "/troskovi/<int:id>/updated"
     TROSAK_DELETE = "/troskovi/<int:id>/delete"
+    
+class StolRoutesEnum(Enum):
+    STOL = "/stolovi"
+    STOL_CREATE = "/stolovi/create"
+    STOL_CREATED = "/stolovi/created"
+    STOL_ID = "/stolovi/<int:id>"
+    STOL_UPDATE = "/stolovi/<int:id>/update"
+    STOL_UPDATED = "/stolovi/<int:id>/updated"
+    STOL_DELETE = "/stolovi/<int:id>/delete"

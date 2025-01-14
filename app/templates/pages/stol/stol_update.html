@@ -1,0 +1,70 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj trošak:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('stol_routes.get_stol', data.id,
+  'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('stol_routes.updated_stol', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj">Broj:</label>
+      <input
+        type="number"
+        name="broj"
+        id="broj"
+        required
+        value="{{data.broj}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="valuta">Lokacija:</label>
+      <select
+        name="lokacija"
+        id="lokacija"
+        required
+        value="{{
+        data.lokacija}}"
+      >
+        {% for lokacija in lokacije %}
+        <option value="{{lokacija}}">{{lokacija}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj_mjesta">Broj mjesta:</label>
+      <input
+        type="number"
+        name="broj_mjesta"
+        id="broj_mjesta"
+        max="255"
+        required
+        value="{{data.broj_mjesta}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj stol" />
+    </div>
+  </form>
+</div>
+{% endblock %}

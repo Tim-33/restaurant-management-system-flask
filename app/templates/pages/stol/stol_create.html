@@ -1,0 +1,63 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj stol:</h2>
+<div class="card">
+  <a href="{{url_for('stol_routes.get_stolovi')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('stol_routes.created_stol')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        {%
+        if
+        restorani|length
+      >
+        0 %} value="{{restorani[0].id}}" {% endif %} > {% for restoran in
+        restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj">Broj:</label>
+      <input type="number" name="broj" id="broj" required />
+    </div>
+    <div class="form-input-group">
+      <label for="lokacija">Lokacija:</label>
+      <select
+        name="lokacija"
+        id="lokacija"
+        required
+        value="{{
+        lokacije[0]}}"
+      >
+        {% for lokacija in lokacije %}
+        <option value="{{lokacija}}">{{lokacija}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj_mjesta">Broj mjesta:</label>
+      <input
+        type="number"
+        name="broj_mjesta"
+        id="broj_mjesta"
+        max="255"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj stol" />
+    </div>
+  </form>
+</div>
+{% endblock %}

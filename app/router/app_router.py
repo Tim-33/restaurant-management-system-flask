@@ -61,3 +61,9 @@ class AppRouter:
         self.add_route(TrosakRoutesEnum.TROSAK_ID.value, 'trosak/trosak.html')
         self.add_route(TrosakRoutesEnum.TROSAK_UPDATE.value, 'trosak/trosak_update.html')
         
+        # Add routes for Stol
+        self.add_route(StolRoutesEnum.STOL.value, 'stol/stolovi.html')
+        self.add_route(StolRoutesEnum.STOL_CREATE.value, 'stol/stol_create.html')
+        self.add_route(StolRoutesEnum.STOL_ID.value, 'stol/stol.html')
+        self.add_route(StolRoutesEnum.STOL_UPDATE.value, 'stol/stol_update.html')   
+        

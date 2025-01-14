@@ -59,3 +59,9 @@ class TrosakSqlRoutesEnum(Enum):
     UPDATE = 'sql/trosak/update.sql'
     DELETE = 'sql/trosak/delete.sql'
     
+class StolSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/stol/select-all.sql'
+    SELECT_ONE = 'sql/stol/select-one.sql'
+    INSERT = 'sql/stol/insert.sql'
+    UPDATE = 'sql/stol/update.sql'
+    DELETE = 'sql/stol/delete.sql'
