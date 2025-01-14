@@ -46,3 +46,8 @@ class AppRouter:
         self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_CREATE.value, 'restoran_racun/restoran_racun_create.html')
         self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_ID.value, 'restoran_racun/restoran_racun.html')
         self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_UPDATE.value, 'restoran_racun/restoran_racun_update.html')
+        
+        # Add routes for TransakcijaRestoran
+        self.add_route(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESOTRAN.value, 'transakcija_restoran/transakcije_restoran.html')
+        self.add_route(TransakcijaRestoranRoutesEnum.TRANSKACIJA_RESTORAN_ID.value, 'transakcija_restoran/transakcija_restoran.html')
+        

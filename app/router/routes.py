@@ -50,3 +50,7 @@ class RestoranRacunRoutesEnum(Enum):
     RESTORAN_RACUN_UPDATE = "/restoran-racuni/<int:id>/update"
     RESTORAN_RACUN_UPDATED = "/restoran-racuni/<int:id>/updated"
     RESTORAN_RACUN_DELETE = "/restoran-racuni/<int:id>/delete"
+    
+class TransakcijaRestoranRoutesEnum(Enum):
+    TRANSAKCIJA_RESOTRAN = "/transakcije-restoran"
+    TRANSKACIJA_RESTORAN_ID = "/transakcije-restoran/<int:id>"

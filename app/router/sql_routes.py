@@ -43,3 +43,7 @@ class RestoranRacunSqlRoutesEnum(Enum):
     INSERT = 'sql/restoran_racun/insert.sql'
     UPDATE = 'sql/restoran_racun/update.sql'
     DELETE = 'sql/restoran_racun/delete.sql'
+    
+class TransakcijaRestoranSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/transakcija_restoran/select-all.sql'
+    SELECT_ONE = 'sql/transakcija_restoran/select-one.sql'

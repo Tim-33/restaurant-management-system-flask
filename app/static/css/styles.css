@@ -44,7 +44,7 @@ ul {
 .body-container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 198px 1fr;
+  grid-template-columns: 216px 1fr;
 }
 
 main {

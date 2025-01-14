@@ -1,0 +1,33 @@
+{% import 'components/buttons/view_item_button.html' as view_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Naziv</th>
+        <th>Datum</th>
+        <th>Iznos</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.naziv }}</td>
+        <td>{{ datapoint.created_at }}</td>
+        <td>{{ datapoint.iznos }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('transakcija_restoran_routes.get_transakcija_restorana',
+            datapoint.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

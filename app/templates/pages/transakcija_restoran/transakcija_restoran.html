@@ -1,0 +1,27 @@
+{% extends "index.html" %} {% block content %}
+<h2>Detalji transakcije restorana:</h2>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>DATUM</label>
+      <span>{{data.created_at}}</span>
+    </div>
+    <div class="details-item">
+      <label>IZNOS:</label>
+      <span>{{data.iznos}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
