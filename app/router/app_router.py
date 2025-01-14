@@ -67,3 +67,8 @@ class AppRouter:
         self.add_route(StolRoutesEnum.STOL_ID.value, 'stol/stol.html')
         self.add_route(StolRoutesEnum.STOL_UPDATE.value, 'stol/stol_update.html')   
         
+        # Add routes for Rezervacija
+        self.add_route(RezervacijaRoutesEnum.REZERVACIJA.value, 'rezervacija/rezervacije.html')
+        self.add_route(RezervacijaRoutesEnum.REZERVACIJA_CREATE.value, 'rezervacija/rezervacija_create.html')
+        self.add_route(RezervacijaRoutesEnum.REZERVACIJA_ID.value, 'rezervacija/rezervacija.html')
+        self.add_route(RezervacijaRoutesEnum.REZERVACIJA_UPDATE.value, 'rezervacija/rezervacija_update.html')

@@ -1,0 +1,64 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj rezervaciju:</h2>
+<div class="card">
+  <a href="{{url_for('rezervacija_routes.get_rezervacije')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('rezervacija_routes.created_rezervacija')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        {%
+        if
+        restorani|length
+      >
+        0 %} value="{{restorani[0].id}}" {% endif %} > {% for restoran in
+        restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="stol_id">Stol:</label>
+      <select name="stol_id" id="stol_id" required {% if stolovi|length>
+        0 %} value="{{stolovi[0].id}}" {% endif %} > {% for stol in stolovi %}
+        <option value="{{stol.id}}">
+          stol {{stol.broj}}: {{stol.broj_mjesta}} mjesta
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="ime">Ime:</label>
+      <input type="text" name="ime" id="ime" required />
+    </div>
+    <div class="form-input-group">
+      <label for="vrijeme">Vrijeme:</label>
+      <input type="datetime-local" name="vrijeme" id="vrijeme" required />
+    </div>
+    <div class="form-input-group">
+      <label for="broj_osoba">Broj osoba:</label>
+      <input
+        type="number"
+        name="broj_osoba"
+        id="broj_osoba"
+        min="1"
+        max="255"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj rezervaciju" />
+    </div>
+  </form>
+</div>
+{% endblock %}

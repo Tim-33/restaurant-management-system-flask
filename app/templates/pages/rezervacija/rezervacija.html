@@ -1,0 +1,44 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji rezervacija:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('rezervacija_routes.delete_rezervacija',
+  data.id, 'Obriši rezervaciju') }} {{
+  update_item_button.update_item_button_link('rezervacija_routes.update_rezervacija',
+  data.id, 'Ažuriraj rezervaciju') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv_restoran}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ STOLA:</label>
+      <span>{{data.broj_stola}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ MJESTA STOLA:</label>
+      <span>{{data.broj_mjesta_stola}}</span>
+    </div>
+    <div class="details-item">
+      <label>IME:</label>
+      <span>{{data.ime}}</span>
+    </div>
+    <div class="details-item">
+      <label>VRIJEME:</label>
+      <span>{{data.vrijeme}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ OSOBA:</label>
+      <span>{{data.broj_osoba}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

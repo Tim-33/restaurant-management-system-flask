@@ -65,3 +65,10 @@ class StolSqlRoutesEnum(Enum):
     INSERT = 'sql/stol/insert.sql'
     UPDATE = 'sql/stol/update.sql'
     DELETE = 'sql/stol/delete.sql'
+    
+class RezervacijaSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/rezervacija/select-all.sql'
+    SELECT_ONE = 'sql/rezervacija/select-one.sql'
+    INSERT = 'sql/rezervacija/insert.sql'
+    UPDATE = 'sql/rezervacija/update.sql'
+    DELETE = 'sql/rezervacija/delete.sql'

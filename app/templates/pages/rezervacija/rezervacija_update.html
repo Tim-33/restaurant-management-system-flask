@@ -1,0 +1,79 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj rezervaciju:</h2>
+<div class="single-item-buttons card">
+  {{
+  view_item_button.view_item_button_link('rezervacija_routes.get_rezervacija',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('rezervacija_routes.updated_rezervacija', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="stol_id">Stol:</label>
+      <select
+        name="stol_id"
+        id="stol_id"
+        required
+        value="{{
+        data.stol_id}}"
+      >
+        {% for stol in stolovi %}
+        <option value="{{stol.id}}">
+          stol {{stol.broj}}: {{stol.broj_mjesta}} mjesta
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="ime">Ime:</label>
+      <input type="text" name="ime" id="ime" required value="{{data.ime}}" />
+    </div>
+    <div class="form-input-group">
+      <label for="vrijeme">Vrijeme:</label>
+      <input
+        type="datetime-local"
+        name="vrijeme"
+        id="vrijeme"
+        required
+        value="{{
+        data.vrijeme}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="broj_osoba">Broj osoba:</label>
+      <input
+        type="number"
+        name="broj_osoba"
+        id="broj_osoba"
+        max="255"
+        min="1"
+        required
+        value="{{data.broj_osoba}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj rezervaciju" />
+    </div>
+  </form>
+</div>
+{% endblock %}

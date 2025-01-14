@@ -76,3 +76,12 @@ class StolRoutesEnum(Enum):
     STOL_UPDATE = "/stolovi/<int:id>/update"
     STOL_UPDATED = "/stolovi/<int:id>/updated"
     STOL_DELETE = "/stolovi/<int:id>/delete"
+    
+class RezervacijaRoutesEnum(Enum):
+    REZERVACIJA = "/rezervacije"
+    REZERVACIJA_CREATE = "/rezervacije/create"
+    REZERVACIJA_CREATED = "/rezervacije/created"
+    REZERVACIJA_ID = "/rezervacije/<int:id>"
+    REZERVACIJA_UPDATE = "/rezervacije/<int:id>/update"
+    REZERVACIJA_UPDATED = "/rezervacije/<int:id>/updated"
+    REZERVACIJA_DELETE = "/rezervacije/<int:id>/delete"
