@@ -47,3 +47,7 @@ class RestoranRacunSqlRoutesEnum(Enum):
 class TransakcijaRestoranSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/transakcija_restoran/select-all.sql'
     SELECT_ONE = 'sql/transakcija_restoran/select-one.sql'
+
+class TransakcijaZaposlenikRoutesEnum(Enum):
+    SELECT_ALL = 'sql/transakcija_zaposlenik/select-all.sql'
+    SELECT_ONE = 'sql/transakcija_zaposlenik/select-one.sql'

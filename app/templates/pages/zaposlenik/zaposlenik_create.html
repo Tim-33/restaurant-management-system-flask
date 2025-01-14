@@ -15,8 +15,12 @@
       <input type="file" name="slika" id="slika" />
     </div>
     <div class="form-input-group">
-      <label for="restoran_id">Restoran ID:</label>
-      <input type="number" name="restoran_id" id="restoran_id" value="1" />
+      <label for="restoran_id">Restoran:</label>
+      <select name="restoran_id" id="restoran_id" required {% if data|length>
+        0 %} value="{{data[0].id}}" {% endif %} > {% for datapoint in data %}
+        <option value="{{datapoint.id}}">{{datapoint.naziv}}</option>
+        {% endfor %}
+      </select>
     </div>
     <div class="form-input-group">
       <label for="zaposlenik_tip">Zaposlenik Tip:</label>

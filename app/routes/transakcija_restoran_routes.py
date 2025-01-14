@@ -11,8 +11,8 @@ class TransakcijaRestoranRoutes(IRoutes):
         
     def register_routes(self):
         self.app.logger.info("Registering transakcija restoran routes")
-        self.app.logger.info(f"Registering route: {TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESOTRAN.value}")
-        self.transakcija_restoran_bp.route(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESOTRAN.value, methods=["GET"])(self.get_transakcije_restorana)
+        self.app.logger.info(f"Registering route: {TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESTORAN.value}")
+        self.transakcija_restoran_bp.route(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESTORAN.value, methods=["GET"])(self.get_transakcije_restorana)
         self.app.logger.info(f"Registering route: {TransakcijaRestoranRoutesEnum.TRANSKACIJA_RESTORAN_ID.value}")
         self.transakcija_restoran_bp.route(TransakcijaRestoranRoutesEnum.TRANSKACIJA_RESTORAN_ID.value, methods=["GET"])(self.get_transakcija_restorana)
         self.app.register_blueprint(self.transakcija_restoran_bp)
@@ -20,7 +20,7 @@ class TransakcijaRestoranRoutes(IRoutes):
     def get_transakcije_restorana(self):
         try:
             data = self.transakcija_restoran_service.get_transakcije_restorana()
-            return render_template(self.app.router.get_template(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESOTRAN.value), data=data)
+            return render_template(self.app.router.get_template(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESTORAN.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_transakcije_restorana: {e}")
             return "Internal Server Error", 500

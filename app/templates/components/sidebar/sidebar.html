@@ -10,7 +10,9 @@ with context %}
     nav_link('skladiste_routes.get_skladista', 'Skladišta') }}{{
     nav_link('restoran_racun_routes.get_restoran_racuni', 'Restoranski računi')
     }} {{ nav_link('transakcija_restoran_routes.get_transakcije_restorana',
-    'Transakcije restorana') }}
+    'Transakcije restorana') }} {{
+    nav_link('transakcija_zaposlenik_routes.get_transakcije_zaposlenika',
+    'Transakcije zaposlenika') }}
   </ul>
 </nav>
 {% endblock navbar %}

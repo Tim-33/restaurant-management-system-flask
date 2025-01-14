@@ -48,6 +48,10 @@ class AppRouter:
         self.add_route(RestoranRacunRoutesEnum.RESTORAN_RACUN_UPDATE.value, 'restoran_racun/restoran_racun_update.html')
         
         # Add routes for TransakcijaRestoran
-        self.add_route(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESOTRAN.value, 'transakcija_restoran/transakcije_restoran.html')
+        self.add_route(TransakcijaRestoranRoutesEnum.TRANSAKCIJA_RESTORAN.value, 'transakcija_restoran/transakcije_restoran.html')
         self.add_route(TransakcijaRestoranRoutesEnum.TRANSKACIJA_RESTORAN_ID.value, 'transakcija_restoran/transakcija_restoran.html')
+        
+        # Add routes for TransakcijaZaposlenik
+        self.add_route(TransakcijaZaposlenikRoutesEnum.TRANSAKCIJA_ZAPOSLENIK.value, 'transakcija_zaposlenik/transakcije_zaposlenik.html')
+        self.add_route(TransakcijaZaposlenikRoutesEnum.TRANSAKCIJA_ZAPOSLENIK_ID.value, 'transakcija_zaposlenik/transakcija_zaposlenik.html')
         
