@@ -91,3 +91,12 @@ class RacunRoutesEnum(Enum):
     RACUN_CREATE = "/racuni/create"
     RACUN_CREATED = "/racuni/created"
     RACUN_ID = "/racuni/<int:id>"
+    
+class ReceptRoutesEnum(Enum):
+    RECEPT = "/recepti"
+    RECEPT_CREATE = "/recepti/create"
+    RECEPT_CREATED = "/recepti/created"
+    RECEPT_ID = "/recepti/<int:id>"
+    RECEPT_UPDATE = "/recepti/<int:id>/update"
+    RECEPT_UPDATED = "/recepti/<int:id>/updated"
+    RECEPT_DELETE = "/recepti/<int:id>/delete"

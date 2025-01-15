@@ -1,0 +1,49 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj recept:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('recept_routes.get_recept', data.id,
+  'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('recept_routes.updated_recept', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{ data.naziv }}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="upute">Upute:</label>
+      <textarea name="upute" id="upute" required>{{ data.upute }}</textarea>
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj recept" />
+    </div>
+  </form>
+</div>
+{% endblock %}

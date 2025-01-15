@@ -1,0 +1,32 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji recepta:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('recept_routes.delete_recept',
+  data.id, 'Obriši recept') }} {{
+  update_item_button.update_item_button_link('recept_routes.update_recept',
+  data.id, 'Ažuriraj recept') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv_restoran}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>UPUTE:</label>
+      <span>{{data.upute}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
