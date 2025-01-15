@@ -77,5 +77,4 @@ class AppRouter:
         self.add_route(RacunRoutesEnum.RACUN.value, 'racun/racuni.html')
         self.add_route(RacunRoutesEnum.RACUN_CREATE.value, 'racun/racun_create.html')
         self.add_route(RacunRoutesEnum.RACUN_ID.value, 'racun/racun.html')
-        self.add_route(RacunRoutesEnum.RACUN_UPDATE.value, 'racun/racun_update.html')
         

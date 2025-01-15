@@ -64,13 +64,3 @@ class RacunService():
         except Exception as e:
             self.app.logger.error(f"Error in insert_racun: {e}")
             raise e
-        
-    def update_racun(self, racun):
-        try:
-            sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.UPDATE.value)
-            self.cursor.execute(sql_script, (racun['stol_id'], racun['restoran_id'], racun['zaposlenik_id'], racun['broj_racuna'], racun['napojnica'], racun['iznos'], racun['id']))
-            self.app.mysql.commit()
-            return True
-        except Exception as e:
-            self.app.logger.error(f"Error in update_racun: {e}")
-            raise e
