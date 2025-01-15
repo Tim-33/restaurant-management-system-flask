@@ -1,0 +1,36 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji račun:</h2>
+<div class="card">
+  <div class="single-item-details">
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv_restoran}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ STOLA:</label>
+      <span>{{data.broj_stola}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV ZAPOSLENIKA:</label>
+      <span>{{data.naziv_zaposlenik}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ RAČUNA:</label>
+      <span>{{data.broj_racuna}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAPOJNICA:</label>
+      <span>{{data.napojnica}}</span>
+    </div>
+    <div class="details-item">
+      <label>IZNOS:</label>
+      <span>{{data.iznos}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

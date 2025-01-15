@@ -1,0 +1,41 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+extends "index.html" %} {% block content %}
+<div class="card">
+  {{ add_item_button.add_item_button_link('racun_routes.create_racun', 'Dodaj
+  račun') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Broj stola</th>
+        <th>Naziv zaposlenika</th>
+        <th>Broj računa</th>
+        <th>Napojnica</th>
+        <th>Iznos</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.broj_stola }}</td>
+        <td>{{ datapoint.naziv_zaposlenik }}</td>
+        <td>{{ datapoint.broj_racuna }}</td>
+        <td>{{ datapoint.napojnica }}</td>
+        <td>{{ datapoint.iznos }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{ view_item_button.view_item_button_link('racun_routes.get_racun',
+            datapoint.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

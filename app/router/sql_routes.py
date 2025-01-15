@@ -72,3 +72,8 @@ class RezervacijaSqlRoutesEnum(Enum):
     INSERT = 'sql/rezervacija/insert.sql'
     UPDATE = 'sql/rezervacija/update.sql'
     DELETE = 'sql/rezervacija/delete.sql'
+    
+class RacunSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/racun/select-all.sql'
+    SELECT_ONE = 'sql/racun/select-one.sql'
+    INSERT = 'sql/racun/insert.sql'

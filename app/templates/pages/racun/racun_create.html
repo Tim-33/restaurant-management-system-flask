@@ -1,0 +1,78 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj račun:</h2>
+<div class="card">
+  <a href="{{url_for('racun_routes.get_racuni')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('racun_routes.created_racun')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        {%
+        if
+        restorani|length
+      >
+        0 %} value="{{restorani[0].id}}" {% endif %} > {% for restoran in
+        restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="stol_id">Stol:</label>
+      <select name="stol_id" id="stol_id" required {% if stolovi|length>
+        0 %} value="{{stolovi[0].id}}" {% endif %} > {% for stol in stolovi %}
+        <option value="{{stol.id}}">
+          stol {{stol.broj}}: {{stol.broj_mjesta}} mjesta
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="zaposlenik_id">Zaposlenik:</label>
+      <select
+        name="zaposlenik_id"
+        id="zaposlenik_id"
+        required
+        {%
+        if
+        zaposlenici|length
+      >
+        0 %} value="{{zaposlenici[0].id}}" {% endif %} > {% for zaposlenik in
+        zaposlenici %}
+        <option value="{{zaposlenik.id}}">
+          {{zaposlenik.ime}} {{zaposlenik.prezime}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj_racuna">Broj računa:</label>
+      <input type="text" name="broj_racuna" id="broj_racuna" required />
+    </div>
+    <div class="form-input-group">
+      <label for="napojnica">Napojnica:</label>
+      <input
+        type="number"
+        step="0.1"
+        min="0.1"
+        name="napojnica"
+        id="napojnica"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj rezervaciju" />
+    </div>
+  </form>
+</div>
+{% endblock %}
