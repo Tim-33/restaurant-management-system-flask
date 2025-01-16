@@ -3,17 +3,20 @@ import 'components/buttons/view_item_button.html' as view_item_button %} {%
 import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
 extends "index.html" %} {% block content %}
 <div class="card">
-  {{ add_item_button.add_item_button_link('restoran_routes.create_restoran',
-  'Dodaj restoran') }}
+  {{ add_item_button.add_item_button_link('stavka_routes.create_stavka', 'Dodaj
+  stavku') }}
 </div>
 <div class="card">
   <table>
     <thead>
       <tr>
         <th></th>
-        <th>Naziv</th>
-        <th>Adresa</th>
-        <th>Broj telefona</th>
+        <th>Naziv restorana</th>
+        <th>Naziv recepta</th>
+        <th>Naziv stavke</th>
+        <th>Tip</th>
+        <th>Cijena</th>
+        <th>Opis</th>
         <th></th>
       </tr>
     </thead>
@@ -24,21 +27,24 @@ extends "index.html" %} {% block content %}
           <div class="table-image-wrapper">
             <img
               src="data:image/jpeg;base64,{{ datapoint.slika }}"
-              alt="Restoran Slika"
+              alt="Stavka Slika"
               width="25"
               height="25"
             />
           </div>
         </td>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.naziv_recept }}</td>
         <td>{{ datapoint.naziv }}</td>
-        <td>{{ datapoint.adresa }}</td>
-        <td>{{ datapoint.broj_telefona }}</td>
+        <td>{{ datapoint.stavka_tip }}</td>
+        <td>{{ datapoint.cijena }}</td>
+        <td>{{ datapoint.opis }}</td>
         <td class="button-cell">
           <div class="button-group">
             {{
-            view_item_button.view_item_button_link('restoran_routes.get_restoran',
+            view_item_button.view_item_button_link('stavka_routes.get_stavka',
             datapoint.id, 'Pregledaj') }} {{
-            delete_item_button.delete_item_button_form('restoran_routes.delete_restoran',
+            delete_item_button.delete_item_button_form('stavka_routes.delete_stavka',
             datapoint.id, 'Obriši') }}
           </div>
         </td>

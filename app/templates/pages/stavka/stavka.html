@@ -1,0 +1,51 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji stavke:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('stavka_routes.delete_stavka',
+  data.id, 'Obriši stavku') }} {{
+  update_item_button.update_item_button_link('stavka_routes.update_stavka',
+  data.id, 'Ažuriraj stavku') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="image-container-single">
+      {% if data.slika %}
+      <img src="data:image/jpeg;base64,{{ data.slika }}" alt="Stavka Slika" />
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RESTORANA:</label>
+      <span>{{data.naziv_restoran}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV RECEPTA:</label>
+      <span>{{data.naziv_recept}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>STAVKA TIP:</label>
+      <span>{{data.stavka_tip}}</span>
+    </div>
+    <div class="details-item">
+      <label>CIJENA:</label>
+      <span>{{data.cijena}}</span>
+    </div>
+    <div class="details-item">
+      <label>BROJ OPIS:</label>
+      <span>{{data.opis}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

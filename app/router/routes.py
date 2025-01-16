@@ -100,3 +100,12 @@ class ReceptRoutesEnum(Enum):
     RECEPT_UPDATE = "/recepti/<int:id>/update"
     RECEPT_UPDATED = "/recepti/<int:id>/updated"
     RECEPT_DELETE = "/recepti/<int:id>/delete"
+    
+class StavkaRoutesEnum(Enum):
+    STAVKA = "/stavke"
+    STAVKA_CREATE = "/stavke/create"
+    STAVKA_CREATED = "/stavke/created"
+    STAVKA_ID = "/stavke/<int:id>"
+    STAVKA_UPDATE = "/stavke/<int:id>/update"
+    STAVKA_UPDATED = "/stavke/<int:id>/updated"
+    STAVKA_DELETE = "/stavke/<int:id>/delete"

@@ -84,3 +84,9 @@ class AppRouter:
         self.add_route(ReceptRoutesEnum.RECEPT_ID.value, 'recept/recept.html')
         self.add_route(ReceptRoutesEnum.RECEPT_UPDATE.value, 'recept/recept_update.html')
         
+        # Add routes for Stavka
+        self.add_route(StavkaRoutesEnum.STAVKA.value, 'stavka/stavke.html')
+        self.add_route(StavkaRoutesEnum.STAVKA_CREATE.value, 'stavka/stavka_create.html')
+        self.add_route(StavkaRoutesEnum.STAVKA_ID.value, 'stavka/stavka.html')
+        self.add_route(StavkaRoutesEnum.STAVKA_UPDATE.value, 'stavka/stavka_update.html')
+        
