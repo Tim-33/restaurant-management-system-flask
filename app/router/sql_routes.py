@@ -77,6 +77,7 @@ class RacunSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/racun/select-all.sql'
     SELECT_ONE = 'sql/racun/select-one.sql'
     INSERT = 'sql/racun/insert.sql'
+    INSERT_STAVKE = 'sql/racun/insert-stavke.sql'
     
 class ReceptSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/recept/select-all.sql'
@@ -91,3 +92,4 @@ class StavkaSqlRoutesEnum(Enum):
     INSERT = 'sql/stavka/insert.sql'
     UPDATE = 'sql/stavka/update.sql'
     DELETE = 'sql/stavka/delete.sql'
+    SELECT_BY_RACUN = 'sql/stavka/select-by-racun.sql'

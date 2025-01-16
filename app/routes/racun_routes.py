@@ -5,6 +5,7 @@ from app.services.racun_service import RacunService
 from app.services.restoran_service import RestoranService
 from app.services.zaposlenik_service import ZaposlenikService
 from app.services.stol_service import StolService
+from app.services.stavka_service import StavkaService
 
 class RacunRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -14,6 +15,7 @@ class RacunRoutes(IRoutes):
         self.restoran_service = RestoranService(self.app)
         self.zaposlenik_service = ZaposlenikService(self.app)
         self.stol_service = StolService(self.app)
+        self.stavka_service = StavkaService(self.app)
         
     def register_routes(self):
         self.app.logger.info("Registering routes for Racun")
@@ -38,7 +40,8 @@ class RacunRoutes(IRoutes):
     def get_racun(self, id):
         try:
             data = self.racun_service.get_racun(id)
-            return render_template(self.app.router.get_template(RacunRoutesEnum.RACUN_ID.value), data=data)
+            stavke = self.stavka_service.get_stavke_by_racun(id)
+            return render_template(self.app.router.get_template(RacunRoutesEnum.RACUN_ID.value), data=data, stavke=stavke)
         except Exception as e:
             self.app.logger.error(f"Error in get_racun: {e}")
             return "Internal Server Error", 500
@@ -48,7 +51,8 @@ class RacunRoutes(IRoutes):
             restorani = self.restoran_service.get_restorani()
             zaposlenici = self.zaposlenik_service.get_zaposlenici()
             stolovi = self.stol_service.get_stolovi()
-            return render_template(self.app.router.get_template(RacunRoutesEnum.RACUN_CREATE.value), restorani=restorani, zaposlenici=zaposlenici, stolovi=stolovi)
+            stavke = self.stavka_service.get_stavke()
+            return render_template(self.app.router.get_template(RacunRoutesEnum.RACUN_CREATE.value), restorani=restorani, zaposlenici=zaposlenici, stolovi=stolovi, stavke=stavke)
         except Exception as e:
             self.app.logger.error(f"Error in create_racun: {e}")
             return "Internal Server Error", 500
@@ -62,9 +66,18 @@ class RacunRoutes(IRoutes):
                 'stol_id': form['stol_id'],
                 'broj_racuna': form['broj_racuna'],
                 'napojnica': form['napojnica'],
-                'iznos': form['iznos']
             }
-            self.racun_service.insert_racun(racun)
+            stavke = []
+            for key, value in form.items():
+                if key.startswith('stavka_') and int(value) > 0:
+                    stavka_id = key.split('_')[1]
+                    kolicina = value
+                    stavke.append({
+                        'stavka_id': stavka_id,
+                        'kolicina': kolicina
+                    })
+                        
+            self.racun_service.insert_racun_stavke(racun, stavke)
             return redirect(url_for('racun_routes.get_racuni'))
         except Exception as e:
             self.app.logger.error(f"Error in created_racun: {e}")

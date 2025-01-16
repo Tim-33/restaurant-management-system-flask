@@ -1,5 +1,6 @@
 {% extends "index.html" %} {% block content %} {% import
-'components/buttons/delete_item_button.html' as delete_item_button %}
+'components/buttons/delete_item_button.html' as delete_item_button %} {% import
+'components/buttons/view_item_button.html' as view_item_button %}
 <h2>Detalji račun:</h2>
 <div class="card">
   <div class="single-item-details">
@@ -32,5 +33,53 @@
       <span>{{data.iznos}}</span>
     </div>
   </div>
+</div>
+<h3>Stavke:</h3>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Naziv restorana</th>
+        <th>Naziv recepta</th>
+        <th>Naziv stavke</th>
+        <th>Tip</th>
+        <th>Cijena</th>
+        <th>Opis</th>
+        <th>Količina</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stavka in stavke %}
+      <tr>
+        <td class="image-cell">
+          <div class="table-image-wrapper">
+            <img
+              src="data:image/jpeg;base64,{{ stavka.slika }}"
+              alt="Stavka Slika"
+              width="25"
+              height="25"
+            />
+          </div>
+        </td>
+        <td>{{ stavka.naziv_restoran }}</td>
+        <td>{{ stavka.naziv_recept }}</td>
+        <td>{{ stavka.naziv }}</td>
+        <td>{{ stavka.stavka_tip }}</td>
+        <td>{{ stavka.cijena }}</td>
+        <td>{{ stavka.opis }}</td>
+        <td>{{ stavka.kolicina}}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('stavka_routes.get_stavka',
+            stavka.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

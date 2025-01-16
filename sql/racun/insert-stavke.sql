@@ -1,0 +1,1 @@
+INSERT INTO stavka_racun (racun_id, stavka_id, kolicina) VALUES (%s, %s, %s);

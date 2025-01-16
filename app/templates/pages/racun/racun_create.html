@@ -69,9 +69,23 @@
         required
       />
     </div>
+    <h3>Stavke:</h3>
+    {% for stavka in stavke %}
+    <div class="form-input-group">
+      <label for="stavka_{{stavka.id}}">{{stavka.naziv}}</label>
+      <input
+        type="number"
+        step="1"
+        value="0"
+        name="stavka_{{stavka.id}}"
+        id="stavka_{{stavka.id}}"
+        required
+      />
+    </div>
+    {% endfor %}
     <div class="form-input-group">
       <span></span>
-      <input type="submit" value="Dodaj rezervaciju" />
+      <input type="submit" value="Dodaj račun" />
     </div>
   </form>
 </div>

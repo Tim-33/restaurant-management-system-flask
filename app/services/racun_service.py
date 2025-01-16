@@ -55,12 +55,16 @@ class RacunService():
             self.app.logger.error(f"Error in get_racun: {e}")
             raise e
         
-    def insert_racun(self, racun):
+    def insert_racun_stavke(self, racun, stavke):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.INSERT.value)
-            self.cursor.execute(sql_script, (racun['stol_id'], racun['restoran_id'], racun['zaposlenik_id'], racun['broj_racuna'], racun['napojnica'], racun['iznos']))
+            self.cursor.execute(sql_script, (racun['stol_id'], racun['restoran_id'], racun['zaposlenik_id'], racun['broj_racuna'], racun['napojnica']))
+            racun_id = self.cursor.lastrowid
+            for stavka in stavke:
+                sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.INSERT_STAVKE.value)
+                self.cursor.execute(sql_script, (racun_id, stavka['stavka_id'], stavka['kolicina']))
             self.app.mysql.commit()
             return True
         except Exception as e:
-            self.app.logger.error(f"Error in insert_racun: {e}")
+            self.app.logger.error(f"Error in insert_racun_stavke: {e}")
             raise e
