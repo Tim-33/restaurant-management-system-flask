@@ -1,0 +1,65 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj jelovnik:</h2>
+<div class="card">
+  <a href="{{url_for('jelovnik_routes.get_jelovnici')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('jelovnik_routes.created_jelovnik')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        {%
+        if
+        restorani|length
+      >
+        0 %} value="{{restorani[0].id}}" {% endif %} > {% for restoran in
+        restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" name="naziv" id="naziv" required />
+    </div>
+    <div class="form-input-group">
+      <label for="jelovnik_tip">Tip:</label>
+      <select
+        name="jelovnik_tip"
+        id="jelovnik_tip"
+        required
+        {%
+        if
+        tipovi|length
+      >
+        0 %} value="{{tipovi[0]}}" {% endif %} > {% for tip in tipovi %}
+        <option value="{{tip}}">{{tip}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <h3>Stavke:</h3>
+    {% for stavka in stavke %}
+    <div class="form-input-group">
+      <label for="stavka_{{stavka.id}}">{{stavka.naziv}}</label>
+      <input
+        type="checkbox"
+        name="stavka_{{stavka.id}}"
+        id="stavka_{{stavka.id}}"
+      />
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj jelovnik" />
+    </div>
+  </form>
+</div>
+{% endblock %}

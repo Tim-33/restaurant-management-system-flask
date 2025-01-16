@@ -93,3 +93,13 @@ class StavkaSqlRoutesEnum(Enum):
     UPDATE = 'sql/stavka/update.sql'
     DELETE = 'sql/stavka/delete.sql'
     SELECT_BY_RACUN = 'sql/stavka/select-by-racun.sql'
+    SELECT_BY_JELOVNIK = 'sql/stavka/select-by-jelovnik.sql'
+    
+class JelovnikSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/jelovnik/select-all.sql'
+    SELECT_ONE = 'sql/jelovnik/select-one.sql'
+    INSERT = 'sql/jelovnik/insert.sql'
+    INSERT_STAVKE = 'sql/jelovnik/insert-stavke.sql'
+    UPDATE = 'sql/jelovnik/update.sql'
+    DELETE = 'sql/jelovnik/delete.sql'
+    DELETE_STAVKE = 'sql/jelovnik/delete-stavke.sql'

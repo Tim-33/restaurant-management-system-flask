@@ -1,0 +1,77 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj jelovnik:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('jelovnik_routes.get_jelovnik',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('jelovnik_routes.updated_jelovnik', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        value="{{
+        data.restoran_id}}"
+      >
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{data.naziv}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="jelovnik_tip">Tip:</label>
+      <select
+        name="jelovnik_tip"
+        id="jelovnik_tip"
+        required
+      >
+        {% for tip in tipovi %}
+        <option value="{{tip}}" {% if tip == data.jelovnik_tip %} selected {% endif %} >{{tip}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% for stavka in stavke %}
+    <div class="form-input-group">
+      <label for="stavka_{{stavka.id}}">{{stavka.naziv}}</label>
+      <input
+        type="checkbox"
+        name="stavka_{{stavka.id}}"
+        id="stavka_{{stavka.id}}"
+        {%
+        if
+        stavka.id
+        in
+        jelovnik_stavke_ids
+        %}
+        checked
+        {%
+        endif
+        %}
+      />
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj jelovnik" />
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+INSERT INTO jelovnik_stavka (jelovnik_id, stavka_id) VALUES (%s, %s);

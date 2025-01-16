@@ -1,0 +1,1 @@
+INSERT INTO jelovnik (restoran_id, naziv, jelovnik_tip) VALUES (%s, %s, %s);
