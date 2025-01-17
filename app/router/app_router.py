@@ -96,3 +96,8 @@ class AppRouter:
         self.add_route(JelovnikRoutesEnum.JELOVNIK_ID.value, 'jelovnik/jelovnik.html')
         self.add_route(JelovnikRoutesEnum.JELOVNIK_UPDATE.value, 'jelovnik/jelovnik_update.html')
         
+        # Add routes for Sastojak
+        self.add_route(SastojakRoutesEnum.SASTOJAK.value, 'sastojak/sastojci.html')
+        self.add_route(SastojakRoutesEnum.SASTOJAK_CREATE.value, 'sastojak/sastojak_create.html')
+        self.add_route(SastojakRoutesEnum.SASTOJAK_ID.value, 'sastojak/sastojak.html')
+        self.add_route(SastojakRoutesEnum.SASTOJAK_UPDATE.value, 'sastojak/sastojak_update.html')

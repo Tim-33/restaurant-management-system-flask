@@ -1,0 +1,93 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj sastojak:</h2>
+<div class="card">
+  <a href="{{url_for('sastojak_routes.get_sastojci')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('sastojak_routes.created_sastojak')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="slika">Slika:</label>
+      <input type="file" name="slika" id="slika" />
+    </div>
+    <div class="form-input-group">
+      <label for="skladiste_id">Skladište:</label>
+      <select
+        name="skladiste_id"
+        id="skladiste_id"
+        required
+        {%
+        if
+        skladista|length
+      >
+        0 %} value="{{skladista[0].id}}" {% endif %} > {% for skladiste in
+        skladista %}
+        <option value="{{skladiste.id}}">
+          {{skladiste.naziv}}: {{skladiste.id }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" name="naziv" id="naziv" required />
+    </div>
+    <div class="form-input-group">
+      <label for="cijena">Cijena:</label>
+      <input
+        type="number"
+        min="0.01"
+        step="0.01"
+        name="cijena"
+        id="cijena"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="kolicina_tip">Tip:</label>
+      <select
+        name="kolicina_tip"
+        id="kolicina_tip"
+        required
+        {%
+        if
+        tipovi|length
+      >
+        0 %} value="{{tipovi[0]}}" {% endif %} > {% for tip in tipovi %}
+        <option value="{{tip}}">{{tip}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="trenutna_kolicina">Trenutna količina:</label>
+      <input
+        type="number"
+        min="0"
+        value="0"
+        name="trenutna_kolicina"
+        id="trenutna_kolicina"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="potrebna_kolicina">Potrebna količina:</label>
+      <input
+        type="number"
+        min="0"
+        value="0"
+        name="potrebna_kolicina"
+        id="potrebna_kolicina"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj zaposlenika" />
+    </div>
+  </form>
+</div>
+{% endblock %}

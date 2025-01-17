@@ -1,0 +1,51 @@
+{% extends "index.html" %} {% block content %} {% import
+'components/buttons/delete_item_button.html' as delete_item_button %}
+<h2>Detalji sastojka:</h2>
+<div class="single-item-buttons card">
+  {% import 'components/buttons/update_item_button.html' as update_item_button
+  %} {{
+  delete_item_button.delete_item_button_form('sastojak_routes.delete_sastojak',
+  data.id, 'Obriši sastojak') }} {{
+  update_item_button.update_item_button_link('sastojak_routes.update_sastojak',
+  data.id, 'Ažuriraj sastojak') }}
+</div>
+<div class="card">
+  <div class="single-item-details">
+    <div class="image-container-single">
+      {% if data.slika %}
+      <img src="data:image/jpeg;base64,{{ data.slika }}" alt="sastojak Slika" />
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="details-item">
+      <label>ID:</label>
+      <span>{{data.id}}</span>
+    </div>
+    <div class="details-item">
+      <label>SKLADSITE:</label>
+      <span>{{data.naziv_restorana}}: {{data.skladiste_id}}</span>
+    </div>
+    <div class="details-item">
+      <label>NAZIV:</label>
+      <span>{{data.naziv}}</span>
+    </div>
+    <div class="details-item">
+      <label>CIJENA:</label>
+      <span>{{data.cijena}}</span>
+    </div>
+    <div class="details-item">
+      <label>TIP KOLIČINE:</label>
+      <span>{{data.kolicina_tip}}</span>
+    </div>
+    <div class="details-item">
+      <label>TRENUTNA KOLIČINA:</label>
+      <span>{{data.trenutna_kolicina}}</span>
+    </div>
+    <div class="details-item">
+      <label>POTREBNA KOLIČINA:</label>
+      <span>{{data.potrebna_kolicina}}</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

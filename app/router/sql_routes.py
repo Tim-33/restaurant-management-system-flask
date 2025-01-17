@@ -103,3 +103,10 @@ class JelovnikSqlRoutesEnum(Enum):
     UPDATE = 'sql/jelovnik/update.sql'
     DELETE = 'sql/jelovnik/delete.sql'
     DELETE_STAVKE = 'sql/jelovnik/delete-stavke.sql'
+    
+class SastojakSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/sastojak/select-all.sql'
+    SELECT_ONE = 'sql/sastojak/select-one.sql'
+    INSERT = 'sql/sastojak/insert.sql'
+    UPDATE = 'sql/sastojak/update.sql'
+    DELETE = 'sql/sastojak/delete.sql'

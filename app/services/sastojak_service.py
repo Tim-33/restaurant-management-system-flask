@@ -1,0 +1,110 @@
+from flask import Flask
+from app.router.sql_routes import SastojakSqlRoutesEnum
+from app.utils.sql_utils import get_sql_script_from_file
+import base64
+
+class SastojakService:
+    def __init__(self, app: Flask):
+        self.app = app
+        self.cursor = self.app.mysql.cursor()
+        
+    def get_sastojci(self):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_ALL.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            sastojci = [
+                {
+                    'id': row[0],
+                    'created_at': row[1],
+                    'updated_at': row[2],
+                    'deleted_at': row[3],
+                    'disabled': row[4],
+                    'naziv_restorana': row[5],
+                    'skladiste_id': row[6],
+                    'naziv': row[7],
+                    'cijena': row[8],
+                    'kolicina_tip': row[9],
+                    'slika': base64.b64encode(row[10]).decode('utf-8') if row[10] else None,
+                    'potrebna_kolicina': row[11],
+                    'trenutna_kolicina': row[12],
+                } 
+            for row in data]
+            return sastojci
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojci: {e}")
+            raise e
+        
+    def get_sastojak(self, id):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_ONE.value)
+            self.cursor.execute(sql_script, (id,))
+            data = self.cursor.fetchone()
+            sastojak = {
+                'id': data[0],
+                'created_at': data[1],
+                'updated_at': data[2],
+                'deleted_at': data[3],
+                'disabled': data[4],
+                'naziv_restorana': data[5],
+                'skladiste_id': data[6],
+                'naziv': data[7],
+                'cijena': data[8],
+                'kolicina_tip': data[9],
+                'slika': base64.b64encode(data[10]).decode('utf-8') if data[10] else None,
+                'potrebna_kolicina': data[11],
+                'trenutna_kolicina': data[12],
+            }
+            return sastojak
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojak: {e}")
+            raise e
+        
+    def insert_sastojak(self, sastojak):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.INSERT.value)
+            values = (
+                sastojak["skladiste_id"],
+                sastojak["naziv"],
+                sastojak["cijena"],
+                sastojak["kolicina_tip"],
+                sastojak["slika"],
+                sastojak["potrebna_kolicina"],
+                sastojak["trenutna_kolicina"],
+            )
+            self.cursor.execute(sql_script, values)
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_sastojak: {e}")
+            raise e
+        
+    def update_sastojak(self, sastojak, id):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.UPDATE.value)
+            values = (
+                sastojak["skladiste_id"],
+                sastojak["naziv"],
+                sastojak["cijena"],
+                sastojak["kolicina_tip"],
+                sastojak["slika"],
+                sastojak["potrebna_kolicina"],
+                sastojak["trenutna_kolicina"],
+                id
+            )
+            self.cursor.execute(sql_script, values)
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in update_sastojak: {e}")
+            raise e
+        
+    def delete_sastojak(self, id):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.DELETE.value)
+            self.cursor.execute(sql_script, (id,))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in delete_sastojak: {e}")
+            raise e

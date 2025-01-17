@@ -1,0 +1,102 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj jelovnik:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('sastojak_routes.get_sastojak',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('sastojak_routes.updated_sastojak', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% if data.slika %}
+    <div class="image-container-single">
+      <img
+        src="data:image/jpeg;base64,{{ data.slika }}"
+        alt="Zaposlenik Slika"
+      />
+    </div>
+    {% else %}
+    <p>No image available</p>
+    {% endif %}
+    <div class="form-input-group">
+      <label for="slika">Slika:</label>
+      <input type="file" name="slika" id="slika" />
+    </div>
+    <div class="form-input-group">
+      <label for="skladiste_id">Skladište:</label>
+      <select
+        name="skladiste_id"
+        id="skladiste_id"
+        required
+        value="{{data.skladiste_id}}"
+      >
+        {% for skladiste in skladista %}
+        <option value="{{skladiste.id}}">
+          {{skladiste.naziv}}: {{skladiste.id }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{data.naziv}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="cijena">Cijena:</label>
+      <input
+        type="number"
+        min="0.01"
+        step="0.01"
+        name="cijena"
+        id="cijena"
+        required
+        value="{{data.cijena}}"
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="kolicina_tip">Tip:</label>
+      <select name="kolicina_tip" id="kolicina_tip" required>
+        {% for tip in tipovi %}
+        <option value="{{tip}}" {% if tip == data.kolicina_tip %} selected {% endif %} >{{tip}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="trenutna_kolicina">Trenutna količina:</label>
+      <input
+        type="number"
+        min="0"
+        name="trenutna_kolicina"
+        id="trenutna_kolicina"
+        value="{{data.trenutna_kolicina}}"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <label for="potrebna_kolicina">Potrebna količina:</label>
+      <input
+        type="number"
+        min="0"
+        name="potrebna_kolicina"
+        id="potrebna_kolicina"
+        value="{{data.potrebna_kolicina}}"
+        required
+      />
+    </div>
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj sastojak" />
+    </div>
+  </form>
+</div>
+{% endblock %}

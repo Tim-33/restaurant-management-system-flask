@@ -118,3 +118,12 @@ class JelovnikRoutesEnum(Enum):
     JELOVNIK_UPDATE = "/jelovnici/<int:id>/update"
     JELOVNIK_UPDATED = "/jelovnici/<int:id>/updated"
     JELOVNIK_DELETE = "/jelovnici/<int:id>/delete"
+    
+class SastojakRoutesEnum(Enum):
+    SASTOJAK = "/sastojci"
+    SASTOJAK_CREATE = "/sastojci/create"
+    SASTOJAK_CREATED = "/sastojci/created"
+    SASTOJAK_ID = "/sastojci/<int:id>"
+    SASTOJAK_UPDATE = "/sastojci/<int:id>/update"
+    SASTOJAK_UPDATED = "/sastojci/<int:id>/updated"
+    SASTOJAK_DELETE = "/sastojci/<int:id>/delete"
