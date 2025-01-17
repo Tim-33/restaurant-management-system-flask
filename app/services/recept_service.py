@@ -78,3 +78,33 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in delete_recept: {e}")
             raise e
+        
+    def insert_recept_sastojci(self, recept, sastojci):
+        try:
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT.value)
+            self.cursor.execute(sql_script, (recept['restoran_id'], recept['naziv'], recept['upute']))
+            recept_id = self.cursor.lastrowid
+            for sastojak in sastojci:
+                sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT_SASTOJCI.value)
+                self.cursor.execute(sql_script, (recept_id, sastojak['sastojak_id'], sastojak['kolicina']))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_recept_sastojci: {e}")
+            raise e
+        
+    def update_recept_sastojci(self, id, recept, sastojci, sastojci_updated):
+        try:
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.UPDATE.value)
+            self.cursor.execute(sql_script, (recept['restoran_id'], recept['naziv'], recept['upute'], id))
+            for sastojak in sastojci:
+                sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT_SASTOJCI.value)
+                self.cursor.execute(sql_script, (id, sastojak['sastojak_id'], sastojak['kolicina']))
+            for sastojak in sastojci_updated:
+                sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.DELETE_SASTOJCI.value)
+                self.cursor.execute(sql_script, (id, sastojak['id']))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in update_recept_sastojci: {e}")
+            raise e

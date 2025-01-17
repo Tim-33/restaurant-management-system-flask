@@ -1,5 +1,6 @@
 {% extends "index.html" %} {% block content %} {% import
-'components/buttons/delete_item_button.html' as delete_item_button %}
+'components/buttons/delete_item_button.html' as delete_item_button %} {% import
+'components/buttons/view_item_button.html' as view_item_button %}
 <h2>Detalji recepta:</h2>
 <div class="single-item-buttons card">
   {% import 'components/buttons/update_item_button.html' as update_item_button
@@ -28,5 +29,47 @@
       <span>{{data.upute}}</span>
     </div>
   </div>
+</div>
+<h3>Sastojci:</h3>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Naziv</th>
+        <th>Cijena</th>
+        <th>Količina</th>
+        <th>Tip količine</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sastojak in sastojci %}
+      <tr>
+        <td class="image-cell">
+          <div class="table-image-wrapper">
+            <img
+              src="data:image/jpeg;base64,{{ sastojak.slika }}"
+              alt="Sastojak Slika"
+              width="25"
+              height="25"
+            />
+          </div>
+        </td>
+        <td>{{ sastojak.naziv }}</td>
+        <td>{{ sastojak.cijena }}</td>
+        <td>{{ sastojak.kolicina }}</td>
+        <td>{{ sastojak.kolicina_tip }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{
+            view_item_button.view_item_button_link('sastojak_routes.get_sastojak',
+            sastojak.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

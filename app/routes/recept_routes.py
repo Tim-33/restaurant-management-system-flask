@@ -3,6 +3,7 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from app.router.routes import ReceptRoutesEnum
 from app.services.recept_service import ReceptService
 from app.services.restoran_service import RestoranService
+from app.services.sastojak_service import SastojakService
 
 class ReceptRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -10,6 +11,7 @@ class ReceptRoutes(IRoutes):
         self.recept_routes_bp = Blueprint('recept_routes', __name__)
         self.recept_service = ReceptService(self.app)
         self.restoran_service = RestoranService(self.app)
+        self.sastojak_service = SastojakService(self.app)
         
     def register_routes(self):
         self.app.logger.info("Registering routes for Recept")
@@ -40,7 +42,8 @@ class ReceptRoutes(IRoutes):
     def get_recept(self, id):
         try:
             data = self.recept_service.get_recept(id)
-            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_ID.value), data=data)
+            sastojci = self.sastojak_service.get_sastojak_by_recept(id)
+            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_ID.value), data=data, sastojci=sastojci)
         except Exception as e:
             self.app.logger.error(f"Error in get_recept: {e}")
             return "Internal Server Error", 500
@@ -48,7 +51,8 @@ class ReceptRoutes(IRoutes):
     def create_recept(self):
         try:
             restorani = self.restoran_service.get_restorani()
-            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_CREATE.value), restorani=restorani)
+            sastojci = self.sastojak_service.get_sastojci()
+            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_CREATE.value), restorani=restorani, sastojci=sastojci)
         except Exception as e:
             self.app.logger.error(f"Error in create_recept: {e}")
             return "Internal Server Error", 500
@@ -61,7 +65,18 @@ class ReceptRoutes(IRoutes):
                 'naziv': form['naziv'],
                 'upute': form['upute']
             }
-            self.recept_service.insert_recept(recept)
+            
+            sastojci = []
+            for key, value in form.items():
+                if key.startswith('sastojak_') and int(value) > 0:
+                    sastojak_id = key.split('_')[1]
+                    kolicina = value
+                    sastojci.append({
+                        'sastojak_id': sastojak_id,
+                        'kolicina': kolicina
+                    })
+                       
+            self.recept_service.insert_recept_sastojci(recept, sastojci)
             return redirect(url_for('recept_routes.get_recepti'))
         except Exception as e:
             self.app.logger.error(f"Error in created_recept: {e}")
@@ -71,7 +86,9 @@ class ReceptRoutes(IRoutes):
         try:
             data = self.recept_service.get_recept(id)
             restorani = self.restoran_service.get_restorani()
-            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_UPDATE.value), data=data, restorani=restorani)
+            sastojci = self.sastojak_service.get_sastojci()
+            sastojci_recepta = self.sastojak_service.get_sastojak_by_recept(id)
+            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_UPDATE.value), data=data, restorani=restorani, sastojci=sastojci, sastojci_recepta=sastojci_recepta)
         except Exception as e:
             self.app.logger.error(f"Error in update_recept: {e}")
             return "Internal Server Error", 500
@@ -84,7 +101,20 @@ class ReceptRoutes(IRoutes):
                 'naziv': form['naziv'],
                 'upute': form['upute']
             }
-            self.recept_service.update_recept(recept, id)
+            
+            sastojci = []
+            for key, value in form.items():
+                if key.startswith('sastojak_') and int(value) > 0:
+                    sastojak_id = key.split('_')[1]
+                    kolicina = value
+                    sastojci.append({
+                        'sastojak_id': sastojak_id,
+                        'kolicina': kolicina
+                    })
+                    
+            sastojci_updated = self.sastojak_service.get_sastojak_by_recept(id)
+                    
+            self.recept_service.update_recept_sastojci(id, recept, sastojci, sastojci_updated)
             return redirect(url_for('recept_routes.get_recept', id=id))
         except Exception as e:
             self.app.logger.error(f"Error in updated_recept: {e}")

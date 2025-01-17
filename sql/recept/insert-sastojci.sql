@@ -1,0 +1,1 @@
+INSERT INTO recept_sastojak (recept_id, sastojak_id, kolicina) VALUES (%s, %s, %s);

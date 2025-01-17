@@ -85,6 +85,8 @@ class ReceptSqlRoutesEnum(Enum):
     INSERT = 'sql/recept/insert.sql'
     UPDATE = 'sql/recept/update.sql'
     DELETE = 'sql/recept/delete.sql'
+    INSERT_SASTOJCI = 'sql/recept/insert-sastojci.sql'
+    DELETE_SASTOJCI = 'sql/recept/delete-sastojci.sql'
     
 class StavkaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/stavka/select-all.sql'
@@ -110,3 +112,4 @@ class SastojakSqlRoutesEnum(Enum):
     INSERT = 'sql/sastojak/insert.sql'
     UPDATE = 'sql/sastojak/update.sql'
     DELETE = 'sql/sastojak/delete.sql'
+    SELECT_BY_RECEPT = 'sql/sastojak/select-by-recept.sql'

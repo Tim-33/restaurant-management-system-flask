@@ -137,6 +137,10 @@ table tr:hover {
   gap: 20px;
 }
 
+.sastojak-input {
+  grid-template-columns: 150px 1fr 50px;
+}
+
 .single-item-details .details-item label,
 .form-input-group label {
   font-weight: bold;
