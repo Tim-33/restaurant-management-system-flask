@@ -124,3 +124,19 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recept_ukupni_prihod: {e}")
             raise e
+        
+    def get_recept_prihod_prvog_racuna(self):
+        try:
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_RECEPT_PRIHOD_PRVOG_RACUNA.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            recepti = [
+                {
+                    'naziv': row[0],
+                    'prihod_prvog_racuna': row[1]
+                }
+            for row in data]
+            return recepti
+        except Exception as e:
+            self.app.logger.error(f"Error in get_recept_prihod_prvog_racuna: {e}")
+            raise e

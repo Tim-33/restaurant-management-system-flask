@@ -31,6 +31,8 @@ class ReceptRoutes(IRoutes):
         self.recept_routes_bp.route(ReceptRoutesEnum.RECEPT_DELETE.value, methods=["POST"])(self.delete_recept)
         self.app.logger.info(f"Registering route: {ReceptRoutesEnum.RECEPT_UKUPNI_PRIHOD.value}")
         self.recept_routes_bp.route(ReceptRoutesEnum.RECEPT_UKUPNI_PRIHOD.value, methods=["GET"])(self.get_recept_ukupni_prihod)
+        self.app.logger.info(f"Registering route: {ReceptRoutesEnum.RECEPT_PRIHOD_PRVOG_RACUNA.value}")
+        self.recept_routes_bp.route(ReceptRoutesEnum.RECEPT_PRIHOD_PRVOG_RACUNA.value, methods=["GET"])(self.get_recept_prihod_prvog_racuna)
         self.app.register_blueprint(self.recept_routes_bp)
         
     def get_recepti(self):
@@ -136,4 +138,12 @@ class ReceptRoutes(IRoutes):
             return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_UKUPNI_PRIHOD.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_recept_ukupni_prihod: {e}")
+            return "Internal Server Error", 500
+        
+    def get_recept_prihod_prvog_racuna(self):
+        try:
+            data = self.recept_service.get_recept_prihod_prvog_racuna()
+            return render_template(self.app.router.get_template(ReceptRoutesEnum.RECEPT_PRIHOD_PRVOG_RACUNA.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_recept_prihod_prvog_racuna: {e}")
             return "Internal Server Error", 500

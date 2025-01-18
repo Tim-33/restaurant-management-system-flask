@@ -1,0 +1,28 @@
+{% import 'components/buttons/add_item_button.html' as add_item_button %} {%
+import 'components/buttons/view_item_button.html' as view_item_button %} {%
+import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
+extends "index.html" %} {% import 'components/nav-cards/recept_nav_card.html' as
+recept_nav_card %} {% block content %} {{ recept_nav_card.recept_nav_card() }}
+<div class="card">
+  {{ add_item_button.add_item_button_link('recept_routes.create_recept', 'Dodaj
+  recept') }}
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Prihod prvog računa</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv }}</td>
+        <td>{{ datapoint.prihod_prvog_racuna }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
