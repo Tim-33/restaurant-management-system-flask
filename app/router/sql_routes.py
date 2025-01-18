@@ -144,3 +144,7 @@ class VelikaNezgodaSqlRoutesEnum(Enum):
     SELECT_ONE = 'sql/velika_nezgoda/select-one.sql'
     INSERT = 'sql/velika_nezgoda/insert.sql'
     INSERT_STAVKE = 'sql/velika_nezgoda/insert-stavke.sql'
+    
+class UserSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/user/select-all.sql'
+    SELECT_ONE = 'sql/user/select-one.sql'

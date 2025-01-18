@@ -1,0 +1,22 @@
+{% extends "index.html" %} {% block content %}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Table</th>
+        <th>Privilege</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.user }}</td>
+        <td>{{ datapoint.table }}</td>
+        <td>{{ datapoint.privilege }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
