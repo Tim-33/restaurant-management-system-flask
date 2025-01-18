@@ -68,3 +68,17 @@ class RacunService():
         except Exception as e:
             self.app.logger.error(f"Error in insert_racun_stavke: {e}")
             raise e
+        
+    def get_racun_ukupna_vrijednost(self):
+        try:
+            sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_RACUN_UKUPNA_VRIJEDNOST.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            racun_ukupna_vrijednost = [{
+                'id': row[0],
+                'ukupna_vrijednost': row[1],
+            } for row in data]
+            return racun_ukupna_vrijednost
+        except Exception as e:
+            self.app.logger.error(f"Error in get_racun_ukupna_vrijednost: {e}")
+            raise e

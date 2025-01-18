@@ -91,6 +91,7 @@ class RacunRoutesEnum(Enum):
     RACUN_CREATE = "/racuni/create"
     RACUN_CREATED = "/racuni/created"
     RACUN_ID = "/racuni/<int:id>"
+    RACUN_UKUPNA_VRIJEDNOST = "/racuni/ukupna-vrijednost"
     
 class ReceptRoutesEnum(Enum):
     RECEPT = "/recepti"

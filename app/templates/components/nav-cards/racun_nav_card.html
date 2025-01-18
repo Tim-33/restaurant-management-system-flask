@@ -1,0 +1,8 @@
+{% macro racun_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('racun_routes.get_racuni') }}">Računi</a>
+  <a href="{{ url_for('racun_routes.get_racun_ukupna_vrijednost') }}"
+    >Ukupne vrijednost računa</a
+  >
+</div>
+{% endmacro %}

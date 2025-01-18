@@ -78,6 +78,7 @@ class RacunSqlRoutesEnum(Enum):
     SELECT_ONE = 'sql/racun/select-one.sql'
     INSERT = 'sql/racun/insert.sql'
     INSERT_STAVKE = 'sql/racun/insert-stavke.sql'
+    SELECT_RACUN_UKUPNA_VRIJEDNOST = 'sql/racun/select-racun-ukupna-vrijednost.sql'
     
 class ReceptSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/recept/select-all.sql'

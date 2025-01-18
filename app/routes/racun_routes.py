@@ -27,6 +27,8 @@ class RacunRoutes(IRoutes):
         self.racun_routes_bp.route(RacunRoutesEnum.RACUN_CREATE.value, methods=["GET"])(self.create_racun)
         self.app.logger.info(f"Registering route: {RacunRoutesEnum.RACUN_CREATED.value}")
         self.racun_routes_bp.route(RacunRoutesEnum.RACUN_CREATED.value, methods=["POST"])(self.created_racun)
+        self.app.logger.info(f"Registering route: {RacunRoutesEnum.RACUN_UKUPNA_VRIJEDNOST.value}")
+        self.racun_routes_bp.route(RacunRoutesEnum.RACUN_UKUPNA_VRIJEDNOST.value, methods=["GET"])(self.get_racun_ukupna_vrijednost)
         self.app.register_blueprint(self.racun_routes_bp)
         
     def get_racuni(self):
@@ -81,4 +83,12 @@ class RacunRoutes(IRoutes):
             return redirect(url_for('racun_routes.get_racuni'))
         except Exception as e:
             self.app.logger.error(f"Error in created_racun: {e}")
+            return "Internal Server Error", 500
+        
+    def get_racun_ukupna_vrijednost(self):
+        try:
+            data = self.racun_service.get_racun_ukupna_vrijednost()
+            return render_template(self.app.router.get_template(RacunRoutesEnum.RACUN_UKUPNA_VRIJEDNOST.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_racun_ukupna_vrijednost: {e}")
             return "Internal Server Error", 500

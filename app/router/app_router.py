@@ -77,6 +77,7 @@ class AppRouter:
         self.add_route(RacunRoutesEnum.RACUN.value, 'racun/racuni.html')
         self.add_route(RacunRoutesEnum.RACUN_CREATE.value, 'racun/racun_create.html')
         self.add_route(RacunRoutesEnum.RACUN_ID.value, 'racun/racun.html')
+        self.add_route(RacunRoutesEnum.RACUN_UKUPNA_VRIJEDNOST.value, 'racun/racun_ukupna_vrijednost.html')
         
         # Add routes for Recept
         self.add_route(ReceptRoutesEnum.RECEPT.value, 'recept/recepti.html')
