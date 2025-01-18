@@ -140,3 +140,20 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recept_prihod_prvog_racuna: {e}")
             raise e
+        
+    def get_recept_sastojci_po_receptu(self):
+        try:
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_SASTOJCI_PO_RECEPTU.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            recepti = [
+                {
+                    'naziv': row[0],
+                    'sastojak': row[1],
+                    'kolicina': row[2]
+                }
+            for row in data]
+            return recepti
+        except Exception as e:
+            self.app.logger.error(f"Error in get_recept_sastojci_po_receptu: {e}")
+            raise e
