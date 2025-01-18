@@ -113,3 +113,14 @@ class SastojakSqlRoutesEnum(Enum):
     UPDATE = 'sql/sastojak/update.sql'
     DELETE = 'sql/sastojak/delete.sql'
     SELECT_BY_RECEPT = 'sql/sastojak/select-by-recept.sql'
+    SELECT_BY_NARUDZBA = 'sql/sastojak/select-by-narudzba.sql'
+    SELECT_BY_SKLADISTE = 'sql/sastojak/select-by-skladiste.sql'
+    
+class NarudzbaSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/narudzba/select-all.sql'
+    SELECT_ONE = 'sql/narudzba/select-one.sql'
+    INSERT = 'sql/narudzba/insert.sql'
+    UPDATE = 'sql/narudzba/update.sql'
+    DELETE = 'sql/narudzba/delete.sql'
+    INSERT_SASTOJCI = 'sql/narudzba/insert-sastojci.sql'
+    DELETE_SASTOJCI = 'sql/narudzba/delete-sastojci.sql'

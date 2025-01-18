@@ -21,6 +21,7 @@ def register_routes(app):
     from app.routes.stavka_routes import StavkaRoutes
     from app.routes.jelovnik_routes import JelovnikRoutes
     from app.routes.sastojak_routes import SastojakRoutes
+    from app.routes.narudzba_routes import NarudzbaRoutes
     
     AppRoutes(app).register_routes()
     ZaposlenikRoutes(app).register_routes()
@@ -38,6 +39,7 @@ def register_routes(app):
     StavkaRoutes(app).register_routes()
     JelovnikRoutes(app).register_routes()
     SastojakRoutes(app).register_routes()
+    NarudzbaRoutes(app).register_routes()
 
 app = Flask(__name__)
 Bootstrap(app)

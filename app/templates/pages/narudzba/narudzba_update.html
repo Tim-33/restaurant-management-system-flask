@@ -1,0 +1,51 @@
+{% extends "index.html" %} {% import 'components/buttons/view_item_button.html'
+as view_item_button %} {% block content %}
+<h2>Ažuriraj narudžbu:</h2>
+<div class="single-item-buttons card">
+  {{ view_item_button.view_item_button_link('narudzba_routes.get_narudzba',
+  data.id, 'Odustani') }}
+</div>
+<div class="card">
+  <form
+    class="update-form"
+    action="{{url_for('narudzba_routes.updated_narudzba', id=data.id)}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="skladiste_id">Restoran:</label>
+      <select name="skladiste_id" id="skladiste_id" required>
+        {% for skladiste in skladista %}
+        <option value="{{skladiste.id}}" {% if skladiste.id == data.skladiste_id %} selected {% endif %}>{{skladiste.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input
+        type="text"
+        name="naziv"
+        id="naziv"
+        required
+        value="{{ data.naziv }}"
+      />
+    </div>
+    <h3>Sastojci:</h3>
+    {% for sastojak in sastojci %}
+    <div class="form-input-group sastojak-input">
+      <label for="sastojak_{{sastojak.id}}">{{sastojak.naziv}}</label>
+      <input type="number" step="1" {% set sastojak_narudzbe =
+      sastojci_narudzbe|selectattr('id', 'equalto', sastojak.id)|first %}
+      value="{{ sastojak_narudzbe.kolicina if sastojak_narudzbe else 0 }}"
+      name="sastojak_{{sastojak.id}}" id="sastojak_{{sastojak.id}}" required />
+      <span> {{sastojak.trenutna_kolicina}} / {{sastojak.potrebna_kolicina}} {{
+        sastojak.kolicina_tip }} </span>
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Ažuriraj narudžbu" />
+    </div>
+  </form>
+</div>
+{% endblock %}

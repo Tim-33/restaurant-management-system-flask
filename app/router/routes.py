@@ -127,3 +127,12 @@ class SastojakRoutesEnum(Enum):
     SASTOJAK_UPDATE = "/sastojci/<int:id>/update"
     SASTOJAK_UPDATED = "/sastojci/<int:id>/updated"
     SASTOJAK_DELETE = "/sastojci/<int:id>/delete"
+    
+class NarudzbaRoutesEnum(Enum):
+    NARUDZBA = "/narudzbe"
+    NARUDZBA_CREATE = "/narudzbe/create"
+    NARUDZBA_CREATED = "/narudzbe/created"
+    NARUDZBA_ID = "/narudzbe/<int:id>"
+    NARUDZBA_UPDATE = "/narudzbe/<int:id>/update"
+    NARUDZBA_UPDATED = "/narudzbe/<int:id>/updated"
+    NARUDZBA_DELETE = "/narudzbe/<int:id>/delete"

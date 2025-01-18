@@ -43,7 +43,7 @@ as view_item_button %} {% block content %}
     <h3>Sastojci:</h3>
     {% for sastojak in sastojci %}
     <div class="form-input-group sastojak-input">
-      <label for="stavka_{{sastojak.id}}">{{sastojak.naziv}}</label>
+      <label for="sastojak_{{sastojak.id}}">{{sastojak.naziv}}</label>
       <input type="number" step="1" {% set sastojak_recepta =
       sastojci_recepta|selectattr('id', 'equalto', sastojak.id)|first %}
       value="{{ sastojak_recepta.kolicina if sastojak_recepta else 0 }}"

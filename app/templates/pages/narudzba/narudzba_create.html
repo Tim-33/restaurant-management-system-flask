@@ -1,0 +1,59 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj narudžbu:</h2>
+<div class="card">
+  <a href="{{url_for('narudzba_routes.get_narudzbe')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('narudzba_routes.created_narudzba')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="skladiste_id">Skladište:</label>
+      <select
+        name="skladiste_id"
+        id="skladiste_id"
+        required
+        {%
+        if
+        skladista|length
+      >
+        0 %} value="{{skladista[0].id}}" {% endif %} > {% for skladiste in
+        skladista %}
+        <option value="{{skladiste.id}}">
+          {{skladiste.naziv}}: {{skladiste.id}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" name="naziv" id="naziv" required />
+    </div>
+    <h3>Sastojci:</h3>
+    {% for sastojak in sastojci %}
+    <div class="form-input-group sastojak-input">
+      <label for="sastojak_{{sastojak.id}}">{{sastojak.naziv}}</label>
+      <input
+        type="number"
+        step="1"
+        value="0"
+        name="sastojak_{{sastojak.id}}"
+        id="sastojak_{{sastojak.id}}"
+        required
+      />
+      <span
+        >{{sastojak.trenutna_kolicina}} / {{sastojak.potrebna_kolicina}} {{
+        sastojak.kolicina_tip }}
+      </span>
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj narudžbu" />
+    </div>
+  </form>
+</div>
+{% endblock %}

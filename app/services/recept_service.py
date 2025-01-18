@@ -97,11 +97,11 @@ class ReceptService:
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.UPDATE.value)
             self.cursor.execute(sql_script, (recept['restoran_id'], recept['naziv'], recept['upute'], id))
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT_SASTOJCI.value)
             for sastojak in sastojci:
-                sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT_SASTOJCI.value)
                 self.cursor.execute(sql_script, (id, sastojak['sastojak_id'], sastojak['kolicina']))
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.DELETE_SASTOJCI.value)
             for sastojak in sastojci_updated:
-                sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.DELETE_SASTOJCI.value)
                 self.cursor.execute(sql_script, (id, sastojak['id']))
             self.app.mysql.commit()
             return True
