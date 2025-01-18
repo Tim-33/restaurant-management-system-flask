@@ -108,3 +108,19 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in update_recept_sastojci: {e}")
             raise e
+    
+    def get_recept_ukupni_prihod(self):
+        try:
+            sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_UKUPNI_PRIHOD.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            recepti = [
+                {
+                    'naziv': row[0],
+                    'ukupni_prihod': row[1]
+            }
+            for row in data]
+            return recepti
+        except Exception as e:
+            self.app.logger.error(f"Error in get_recept_ukupni_prihod: {e}")
+            raise e

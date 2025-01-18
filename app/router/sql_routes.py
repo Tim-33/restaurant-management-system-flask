@@ -87,6 +87,7 @@ class ReceptSqlRoutesEnum(Enum):
     DELETE = 'sql/recept/delete.sql'
     INSERT_SASTOJCI = 'sql/recept/insert-sastojci.sql'
     DELETE_SASTOJCI = 'sql/recept/delete-sastojci.sql'
+    SELECT_UKUPNI_PRIHOD = 'sql/recept/select-ukupni-prihod.sql'
     
 class StavkaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/stavka/select-all.sql'
