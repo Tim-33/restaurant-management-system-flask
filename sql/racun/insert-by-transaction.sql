@@ -1,0 +1,1 @@
+CALL NovaRacunTransakcija(%s, %s, %s, %s, %s);

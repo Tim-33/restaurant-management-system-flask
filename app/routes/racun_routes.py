@@ -6,6 +6,7 @@ from app.services.restoran_service import RestoranService
 from app.services.zaposlenik_service import ZaposlenikService
 from app.services.stol_service import StolService
 from app.services.stavka_service import StavkaService
+import json
 
 class RacunRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -66,7 +67,6 @@ class RacunRoutes(IRoutes):
                 'restoran_id': form['restoran_id'],
                 'zaposlenik_id': form['zaposlenik_id'],
                 'stol_id': form['stol_id'],
-                'broj_racuna': form['broj_racuna'],
                 'napojnica': form['napojnica'],
             }
             stavke = []
@@ -78,8 +78,10 @@ class RacunRoutes(IRoutes):
                         'stavka_id': stavka_id,
                         'kolicina': kolicina
                     })
+                    
+            racun['stavke'] = json.dumps(stavke)
                         
-            self.racun_service.insert_racun_stavke(racun, stavke)
+            self.racun_service.insert_racun_by_transaction(racun)
             return redirect(url_for('racun_routes.get_racuni'))
         except Exception as e:
             self.app.logger.error(f"Error in created_racun: {e}")

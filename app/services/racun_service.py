@@ -1,6 +1,7 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import RacunSqlRoutesEnum
+import json
 
 class RacunService():
     def __init__(self, app: Flask):
@@ -105,4 +106,25 @@ class RacunService():
             return racuni
         except Exception as e:
             self.app.logger.error(f"Error in get_racun_by_zaposlenik: {e}")
+            raise e
+        
+    def insert_racun_by_transaction(self, transaction):
+        try:
+            sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.INSERT_BY_TRANSACTION.value)
+            restoran_id = transaction['restoran_id']
+            zaposlenik_id = transaction['zaposlenik_id']
+            napojnica = transaction['napojnica']
+            stol_id = transaction['stol_id']
+            stavke = transaction['stavke']
+            self.cursor.execute(sql_script, (
+                restoran_id,
+                zaposlenik_id,
+                napojnica,
+                stol_id,
+                stavke
+            ))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_racun_by_transaction: {e}")
             raise e
