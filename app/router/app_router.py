@@ -107,3 +107,13 @@ class AppRouter:
         self.add_route(NarudzbaRoutesEnum.NARUDZBA_CREATE.value, 'narudzba/narudzba_create.html')
         self.add_route(NarudzbaRoutesEnum.NARUDZBA_ID.value, 'narudzba/narudzba.html')
         self.add_route(NarudzbaRoutesEnum.NARUDZBA_UPDATE.value, 'narudzba/narudzba_update.html')
+        
+        # Add routes for MalaNezgoda
+        self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA.value, 'mala_nezgoda/male_nezgode.html')
+        self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_CREATE.value, 'mala_nezgoda/mala_nezgoda_create.html')
+        self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_ID.value, 'mala_nezgoda/mala_nezgoda.html')
+        
+        # Add routes for VelikaNezgoda
+        self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA.value, 'velika_nezgoda/velike_nezgode.html')
+        self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_CREATE.value, 'velika_nezgoda/velika_nezgoda_create.html')
+        self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_ID.value, 'velika_nezgoda/velika_nezgoda.html')

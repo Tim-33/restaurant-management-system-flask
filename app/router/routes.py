@@ -136,3 +136,15 @@ class NarudzbaRoutesEnum(Enum):
     NARUDZBA_UPDATE = "/narudzbe/<int:id>/update"
     NARUDZBA_UPDATED = "/narudzbe/<int:id>/updated"
     NARUDZBA_DELETE = "/narudzbe/<int:id>/delete"
+    
+class MalaNezgodaRoutesEnum(Enum):
+    MALA_NEZGODA = "/mala-nezgoda"
+    MALA_NEZGODA_CREATE = "/mala-nezgoda/create"
+    MALA_NEZGODA_CREATED = "/mala-nezgoda/created"
+    MALA_NEZGODA_ID = "/mala-nezgoda/<int:id>"
+    
+class VelikaNezgodaRoutesEnum(Enum):
+    VELIKA_NEZGODA = "/velika-nezgoda"
+    VELIKA_NEZGODA_CREATE = "/velika-nezgoda/create"
+    VELIKA_NEZGODA_CREATED = "/velika-nezgoda/created"
+    VELIKA_NEZGODA_ID = "/velika-nezgoda/<int:id>"

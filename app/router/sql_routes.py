@@ -96,6 +96,7 @@ class StavkaSqlRoutesEnum(Enum):
     DELETE = 'sql/stavka/delete.sql'
     SELECT_BY_RACUN = 'sql/stavka/select-by-racun.sql'
     SELECT_BY_JELOVNIK = 'sql/stavka/select-by-jelovnik.sql'
+    SELECT_BY_VELIKA_NEZGODA = 'sql/stavka/select-by-velika-nezgoda.sql'
     
 class JelovnikSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/jelovnik/select-all.sql'
@@ -115,6 +116,7 @@ class SastojakSqlRoutesEnum(Enum):
     SELECT_BY_RECEPT = 'sql/sastojak/select-by-recept.sql'
     SELECT_BY_NARUDZBA = 'sql/sastojak/select-by-narudzba.sql'
     SELECT_BY_SKLADISTE = 'sql/sastojak/select-by-skladiste.sql'
+    SELECT_BY_MALA_NEZGODA = 'sql/sastojak/select-by-mala-nezgoda.sql'
     
 class NarudzbaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/narudzba/select-all.sql'
@@ -124,3 +126,15 @@ class NarudzbaSqlRoutesEnum(Enum):
     DELETE = 'sql/narudzba/delete.sql'
     INSERT_SASTOJCI = 'sql/narudzba/insert-sastojci.sql'
     DELETE_SASTOJCI = 'sql/narudzba/delete-sastojci.sql'
+    
+class MalaNezgodaSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/mala_nezgoda/select-all.sql'
+    SELECT_ONE = 'sql/mala_nezgoda/select-one.sql'
+    INSERT = 'sql/mala_nezgoda/insert.sql'
+    INSERT_SASTOJCI = 'sql/mala_nezgoda/insert-sastojci.sql'
+    
+class VelikaNezgodaSqlRoutesEnum(Enum):
+    SELECT_ALL = 'sql/velika_nezgoda/select-all.sql'
+    SELECT_ONE = 'sql/velika_nezgoda/select-one.sql'
+    INSERT = 'sql/velika_nezgoda/insert.sql'
+    INSERT_STAVKE = 'sql/velika_nezgoda/insert-stavke.sql'

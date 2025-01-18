@@ -32,7 +32,7 @@
     </div>
     <div class="form-input-group">
       <label for="recept_id">Recept:</label>
-      <select name="recept_id" id="recept_id" required {% if restorani|length>
+      <select name="recept_id" id="recept_id" required {% if recepti|length>
         0 %} value="{{recepti[0].id}}" {% endif %} > {% for recept in recepti %}
         <option value="{{recept.id}}">{{recept.naziv}}</option>
         {% endfor %}

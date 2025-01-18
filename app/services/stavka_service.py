@@ -140,3 +140,30 @@ class StavkaService:
         except Exception as e:
             self.app.logger.error(f"Error in get_stavke_by_jelovnik: {e}")
             raise e
+        
+    def get_stavke_by_velika_nezgoda(self, velika_nezgoda_id):
+        try:
+            sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_BY_VELIKA_NEZGODA.value)
+            self.cursor.execute(sql_script, (velika_nezgoda_id,))
+            data = self.cursor.fetchall()
+            stavke = [
+                {
+                    'id': row[0],
+                    'created_at': row[1],
+                    'updated_at': row[2],
+                    'deleted_at': row[3],
+                    'disabled': row[4],
+                    'naziv_restoran': row[5],
+                    'naziv_recept': row[6],
+                    'naziv': row[7],
+                    'stavka_tip': row[8],
+                    'cijena': row[9],
+                    'opis': row[10],
+                    'slika': base64.b64encode(row[11]).decode('utf-8') if row[11] else None,
+                    "kolicina": row[12]
+                }
+            for row in data]
+            return stavke
+        except Exception as e:
+            self.app.logger.error(f"Error in get_stavke_by_velika_nezgoda: {e}")
+            raise e

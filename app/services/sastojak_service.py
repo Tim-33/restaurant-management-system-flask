@@ -181,3 +181,27 @@ class SastojakService:
         except Exception as e:
             self.app.logger.error(f"Error in get_sastojak_by_skladiste: {e}")
             raise e
+        
+    def get_sastojak_by_mala_nezgoda(self, mala_nezgoda_id):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_MALA_NEZGODA.value)
+            self.cursor.execute(sql_script, (mala_nezgoda_id,))
+            data = self.cursor.fetchall()
+            sastojci = [
+                {
+                    'id': row[0],
+                    'created_at': row[1],
+                    'updated_at': row[2],
+                    'deleted_at': row[3],
+                    'disabled': row[4],
+                    'naziv': row[5],
+                    'cijena': row[6],
+                    'kolicina_tip': row[7],
+                    'kolicina': row[8],
+                    'slika': base64.b64encode(row[9]).decode('utf-8') if row[9] else None,
+                } 
+            for row in data]
+            return sastojci
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojak_by_mala_nezgoda: {e}")
+            raise e

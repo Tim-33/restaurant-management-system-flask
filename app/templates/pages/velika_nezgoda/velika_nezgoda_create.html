@@ -1,0 +1,67 @@
+{% extends "index.html" %} {% block content %}
+<h2>Dodaj veliku nezgodu:</h2>
+<div class="card">
+  <a href="{{url_for('velika_nezgoda_routes.get_velike_nezgode')}}">Odustani</a>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('velika_nezgoda_routes.created_velika_nezgoda')}}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select
+        name="restoran_id"
+        id="restoran_id"
+        required
+        {%
+        if
+        restorani|length
+      >
+        0 %} value="{{restorani[0].id}}" {% endif %} > {% for restoran in
+        restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="zaposlenik_id">Zaposlenik:</label>
+      <select
+        name="zaposlenik_id"
+        id="zaposlenik_id"
+        required
+        {%
+        if
+        zaposlenici|length
+      >
+        0 %} value="{{zaposlenici[0].id}}" {% endif %} > {% for zaposlenik in
+        zaposlenici %}
+        <option value="{{zaposlenik.id}}">
+          {{zaposlenik.ime}} {{zaposlenik.prezime}}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <h3>Stavke:</h3>
+    {% for stavka in stavke %}
+    <div class="form-input-group">
+      <label for="stavka_{{stavka.id}}">{{stavka.naziv}}</label>
+      <input
+        type="number"
+        step="1"
+        value="0"
+        name="stavka_{{stavka.id}}"
+        id="stavka_{{stavka.id}}"
+        required
+      />
+    </div>
+    {% endfor %}
+    <div class="form-input-group">
+      <span></span>
+      <input type="submit" value="Dodaj veliku nezgodu" />
+    </div>
+  </form>
+</div>
+{% endblock %}
