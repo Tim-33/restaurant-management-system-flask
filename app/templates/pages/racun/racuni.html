@@ -16,6 +16,7 @@ nav_card %} {% block content %} {{ nav_card.racun_nav_card() }}
         <th>Broj računa</th>
         <th>Napojnica</th>
         <th>Iznos</th>
+        <th>Ukupna vrijednost</th>
         <th></th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@ nav_card %} {% block content %} {{ nav_card.racun_nav_card() }}
         <td>{{ datapoint.broj_racuna }}</td>
         <td>{{ datapoint.napojnica }}</td>
         <td>{{ datapoint.iznos }}</td>
+        <td>{{ datapoint.ukupna_vrijednost }}</td>
         <td class="button-cell">
           <div class="button-group">
             {{ view_item_button.view_item_button_link('racun_routes.get_racun',

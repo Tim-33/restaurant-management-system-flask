@@ -25,6 +25,7 @@ class RacunService():
                     'broj_racuna': row[8],
                     'napojnica': row[9],
                     'iznos': row[10],
+                    'ukupna_vrijednost': row[11],
                 }
             for row in data]
             return racuni
