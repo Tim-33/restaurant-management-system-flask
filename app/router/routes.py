@@ -101,6 +101,7 @@ class ReceptRoutesEnum(Enum):
     RECEPT_UPDATED = "/recepti/<int:id>/updated"
     RECEPT_DELETE = "/recepti/<int:id>/delete"
     RECEPT_UKUPNI_PRIHOD = "/recepti/ukupni-prihod"
+    RECEPT_PRIHOD_PRVOG_RACUNA = "/recepti/prihod-prvog-racuna"
     
 class StavkaRoutesEnum(Enum):
     STAVKA = "/stavke"

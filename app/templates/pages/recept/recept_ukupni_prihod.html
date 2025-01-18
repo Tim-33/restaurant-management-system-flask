@@ -1,13 +1,8 @@
 {% import 'components/buttons/add_item_button.html' as add_item_button %} {%
 import 'components/buttons/view_item_button.html' as view_item_button %} {%
 import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
-extends "index.html" %} {% block content %}
-<div class="card nav-card">
-  <a href="{{url_for('recept_routes.get_recepti')}}">Recepti</a>
-  <a href="{{url_for('recept_routes.get_recept_ukupni_prihod')}}"
-    >Ukupni prihodi recepta</a
-  >
-</div>
+extends "index.html" %} {% import 'components/nav-cards/recept_nav_card.html' as
+recept_nav_card %} {% block content %} {{ recept_nav_card.recept_nav_card() }}
 <div class="card">
   {{ add_item_button.add_item_button_link('recept_routes.create_recept', 'Dodaj
   recept') }}

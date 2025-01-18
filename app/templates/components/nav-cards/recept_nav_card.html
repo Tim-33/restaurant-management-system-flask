@@ -1,0 +1,8 @@
+{% macro recept_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('recept_routes.get_recepti') }}">Recepti</a>
+  <a href="{{ url_for('recept_routes.get_recept_ukupni_prihod') }}"
+    >Ukupni prihodi recepta</a
+  >
+</div>
+{% endmacro %}

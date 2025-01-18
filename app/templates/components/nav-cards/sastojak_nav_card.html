@@ -1,0 +1,8 @@
+{% macro sastojak_nav_card() %}
+<div class="card nav-card">
+  <a href="{{url_for('sastojak_routes.get_sastojci')}}">Sastojci</a>
+  <a href="{{url_for('sastojak_routes.get_sastojak_ukupna_kolicina')}}"
+    >Ukupni količina sastojaka</a
+  >
+</div>
+{% endmacro %}
