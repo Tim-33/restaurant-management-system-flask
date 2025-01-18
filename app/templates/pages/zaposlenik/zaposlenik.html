@@ -1,4 +1,5 @@
 {% extends "index.html" %} {% block content %} {% import
+'components/buttons/view_item_button.html' as view_item_button %} {% import
 'components/buttons/delete_item_button.html' as delete_item_button %}
 <h2>Detalji zaposlenika:</h2>
 <div class="single-item-buttons card">
@@ -46,5 +47,35 @@
       <span>{{data.iznos_place}}</span>
     </div>
   </div>
+</div>
+<h2>Računi:</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Broj stola</th>
+        <th>Broj računa</th>
+        <th>Napojnica</th>
+        <th>Iznos</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for racun in racuni %}
+      <tr>
+        <td>{{ racun.broj_stola }}</td>
+        <td>{{ racun.broj_racuna }}</td>
+        <td>{{ racun.napojnica }}</td>
+        <td>{{ racun.iznos }}</td>
+        <td class="button-cell">
+          <div class="button-group">
+            {{ view_item_button.view_item_button_link('racun_routes.get_racun',
+            racun.id, 'Pregledaj') }}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

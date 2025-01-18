@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, Flask, redirect, url_for, request,
 from app.interfaces.iroutes import IRoutes
 from app.services.zaposlenik_service import ZaposlenikService
 from app.services.restoran_service import RestoranService
+from app.services.racun_service import RacunService
 from app.router.routes import ZaposlenikRoutesEnum
 import base64
 
@@ -11,6 +12,7 @@ class ZaposlenikRoutes(IRoutes):
         self.zaposlenik_routes_bp = Blueprint('zaposlenik_routes', __name__)
         self.zaposlenik_service = ZaposlenikService(self.app)
         self.restorna_service = RestoranService(self.app)
+        self.racun_service = RacunService(self.app)
         
     def register_routes(self):
         self.app.logger.info("Registering routes for Zaposlenik")
@@ -41,7 +43,8 @@ class ZaposlenikRoutes(IRoutes):
     def get_zaposlenik(self, id):
         try:
             data = self.zaposlenik_service.get_zaposlenik(id)
-            return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_ID.value), data=data)
+            racuni = self.racun_service.get_racun_by_zaposlenik(id)
+            return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_ID.value), data=data, racuni=racuni)
         except Exception as e:
             self.app.logger.error(f"Error in get_zaposlenik: {e}")
             return "Internal Server Error", 500

@@ -82,3 +82,26 @@ class RacunService():
         except Exception as e:
             self.app.logger.error(f"Error in get_racun_ukupna_vrijednost: {e}")
             raise e
+        
+    def get_racun_by_zaposlenik(self, zaposlenik_id):
+        try:
+            sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_BY_ZAPOSLENIK.value)
+            self.cursor.execute(sql_script, (zaposlenik_id,))
+            data = self.cursor.fetchall()
+            racuni = [
+                {
+                    'id': row[0],
+                    'created_at': row[1],
+                    'updated_at': row[2],
+                    'deleted_at': row[3],
+                    'disabled': row[4],
+                    'broj_stola': row[5],
+                    'broj_racuna': row[6],
+                    'napojnica': row[7],
+                    'iznos': row[8],
+                }
+            for row in data]
+            return racuni
+        except Exception as e:
+            self.app.logger.error(f"Error in get_racun_by_zaposlenik: {e}")
+            raise e
