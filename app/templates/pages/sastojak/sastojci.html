@@ -2,6 +2,12 @@
 import 'components/buttons/view_item_button.html' as view_item_button %} {%
 import 'components/buttons/delete_item_button.html' as delete_item_button %} {%
 extends "index.html" %} {% block content %}
+<div class="card nav-card">
+  <a href="{{url_for('sastojak_routes.get_sastojci')}}">Sastojci</a>
+  <a href="{{url_for('sastojak_routes.get_sastojak_ukupna_kolicina')}}"
+    >Ukupni količina sastojaka</a
+  >
+</div>
 <div class="card">
   {{ add_item_button.add_item_button_link('sastojak_routes.create_sastojak',
   'Dodaj sastojak') }}

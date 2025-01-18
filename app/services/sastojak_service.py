@@ -205,3 +205,19 @@ class SastojakService:
         except Exception as e:
             self.app.logger.error(f"Error in get_sastojak_by_mala_nezgoda: {e}")
             raise e
+        
+    def get_sastojak_ukupna_kolicina(self):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_UKUPNA_KOLICINA.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            sastojci = [
+                {
+                    'naziv': row[0],
+                    'ukupna_kolicina': row[1],
+                }
+            for row in data]
+            return sastojci
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojak_ukupna_kolicina: {e}")
+            raise e

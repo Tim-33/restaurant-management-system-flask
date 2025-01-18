@@ -29,6 +29,8 @@ class SastojakRoutes(IRoutes):
         self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_UPDATED.value, methods=["POST"])(self.updated_sastojak)
         self.app.logger.info(f"Registering route: {SastojakRoutesEnum.SASTOJAK_DELETE.value}")
         self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_DELETE.value, methods=["POST"])(self.delete_sastojak)
+        self.app.logger.info(f"Registering route: {SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value}")
+        self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value, methods=["GET"])(self.get_sastojak_ukupna_kolicina)
         self.app.register_blueprint(self.sastojak_routes_bp)
         
     def get_sastojci(self):
@@ -115,4 +117,12 @@ class SastojakRoutes(IRoutes):
             return redirect(url_for('sastojak_routes.get_sastojci'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_sastojak: {e}")
+            return "Internal Server Error", 500
+        
+    def get_sastojak_ukupna_kolicina(self):
+        try:
+            data = self.sastojak_service.get_sastojak_ukupna_kolicina()
+            return render_template(self.app.router.get_template(SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojak_ukupna_kolicina: {e}")
             return "Internal Server Error", 500
