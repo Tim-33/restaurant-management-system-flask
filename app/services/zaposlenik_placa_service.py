@@ -67,7 +67,10 @@ class ZaposlenikPlacaService:
         try:
             sql_script = get_sql_script_from_file(ZaposlenikPlacaSqlRoutesEnum.INSERT.value)
             self.cursor.execute(sql_script, (zaposlenik_id, iznos_place, datum, ))
+            self.cursor.execute("SELECT LAST_INSERT_ID()")
+            inserted_id = self.cursor.fetchone()[0]
             self.app.mysql.commit()
+            return inserted_id
         except Exception as e:
             self.app.logger.error(f"Error in insert_zaposlenik_placa: {e}")
             raise e
@@ -90,4 +93,14 @@ class ZaposlenikPlacaService:
             return zaposlenik_place
         except Exception as e:
             self.app.logger.error(f"Error in get_zaposlenik_place_all: {e}")
+            raise e
+        
+    @with_db_connection
+    def process_zaposlenik_placa_transaction(self, id):
+        try:
+            sql_script = get_sql_script_from_file(ZaposlenikPlacaSqlRoutesEnum.PROCESS_ZAPOSLENIK_PLACA_TRANSACTION.value)
+            self.cursor.execute(sql_script, (id,))
+            self.app.mysql.commit()
+        except Exception as e:
+            self.app.logger.error(f"Error in process_zaposlenik_placa_transaction: {e}")
             raise e

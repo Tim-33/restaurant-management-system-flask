@@ -71,7 +71,8 @@ class ZaposlenikPlacaRoutes(IRoutes):
                 if key.startswith('iznos_place_'):
                     zaposlenik_id = key.split('_')[2]
                     iznos_place = value
-                    self.zaposlenik_placa_service.insert_zaposlenik_placa(zaposlenik_id, iznos_place, month)
+                    id = self.zaposlenik_placa_service.insert_zaposlenik_placa(zaposlenik_id, iznos_place, month)
+                    self.zaposlenik_placa_service.process_zaposlenik_placa_transaction(id)
             
             return redirect(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE.value)
         except Exception as e:

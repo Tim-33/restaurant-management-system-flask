@@ -1,0 +1,1 @@
+CALL process_zaposlenik_placa_transaction(%s);

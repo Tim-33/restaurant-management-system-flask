@@ -130,6 +130,7 @@ class NarudzbaRoutes(IRoutes):
     def finish_narudzba(self, id):
         try:
             self.narudzba_service.finish_narudzba(id)
+            self.narudzba_service.process_narudzba_transaction(id)
             return redirect(url_for('narudzba_routes.get_narudzbe'))
         except Exception as e:
             self.app.logger.error(f"Error in finish_narudzba: {e}")

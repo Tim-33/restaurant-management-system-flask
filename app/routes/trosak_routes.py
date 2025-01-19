@@ -64,7 +64,8 @@ class TrosakRoutes(IRoutes):
                 'iznos': form['iznos'],
                 'mjesecno': 1 if form.get('mjesecno') else 0,
             }
-            self.trosak_service.insert_trosak(trosak)
+            id = self.trosak_service.insert_trosak(trosak)
+            self.trosak_service.process_trosak_transaction(id)
             return redirect(url_for('trosak_routes.get_troskovi'))
         except Exception as e:
             self.app.logger.error(f"Error in created_trosak: {e}")

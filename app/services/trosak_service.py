@@ -58,8 +58,10 @@ class TrosakService():
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.INSERT.value)
             self.cursor.execute(sql_script, (trosak['restoran_id'], trosak['naziv'], trosak['iznos'], trosak['mjesecno']))
+            self.cursor.execute("SELECT LAST_INSERT_ID()")
+            inserted_id = self.cursor.fetchone()[0]
             self.app.mysql.commit()
-            return True
+            return inserted_id
         except Exception as e:
             self.app.logger.error(f"Error in insert_trosak: {e}")
             raise e
@@ -101,5 +103,16 @@ class TrosakService():
             return troskovi
         except Exception as e:
             self.app.logger.error(f"Error in get_troskovi_total: {e}")
+            raise e
+        
+    @with_db_connection
+    def process_trosak_transaction(self, id):
+        try:
+            sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.PROCESS_TROSAK_TRANSACTION.value)
+            self.cursor.execute(sql_script, (id,))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in process_trosak_transaction: {e}")
             raise e
         

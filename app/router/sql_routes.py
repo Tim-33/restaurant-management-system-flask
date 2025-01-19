@@ -25,6 +25,7 @@ class ZaposlenikPlacaSqlRoutesEnum(Enum):
     SELECT_BY_MONTH = "sql/zaposlenik_placa/select-by-month.sql"
     SELECT_MONTHS = "sql/zaposlenik_placa/select-months.sql"
     SELECT_ALL_WITH_ZAPOSLENIK = "sql/zaposlenik_placa/select-all-with-zaposlenik.sql"
+    PROCESS_ZAPOSLENIK_PLACA_TRANSACTION = "sql/zaposlenik_placa/process-zaposlenik-placa-transaction.sql"
     
 class RestoranSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/restoran/select-all.sql'
@@ -54,6 +55,7 @@ class RestoranRacunSqlRoutesEnum(Enum):
 class TransakcijaRestoranSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/transakcija_restoran/select-all.sql'
     SELECT_ONE = 'sql/transakcija_restoran/select-one.sql'
+    PROCESS_FINANCIAL_TRANSACTION = 'sql/transakcija_restoran/process-financial-transaction.sql'
 
 class TransakcijaZaposlenikSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/transakcija_zaposlenik/select-all.sql'
@@ -66,6 +68,7 @@ class TrosakSqlRoutesEnum(Enum):
     UPDATE = 'sql/trosak/update.sql'
     DELETE = 'sql/trosak/delete.sql'
     SELECT_TOTAL = 'sql/trosak/select-total.sql'
+    PROCESS_TROSAK_TRANSACTION = 'sql/trosak/process-trosak-transaction.sql'
     
 class StolSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/stol/select-all.sql'
@@ -95,6 +98,7 @@ class RacunSqlRoutesEnum(Enum):
     SELECT_RACUN_UKUPNA_VRIJEDNOST = 'sql/racun/select-racun-ukupna-vrijednost.sql'
     SELECT_BY_ZAPOSLENIK = 'sql/racun/select-by-zaposlenik.sql'
     INSERT_BY_TRANSACTION = 'sql/racun/insert-by-transaction.sql'
+    PROCESS_RACUN_TRANSACTION = 'sql/racun/process-racun-transaction.sql'
     
 class ReceptSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/recept/select-all.sql'
@@ -154,6 +158,7 @@ class NarudzbaSqlRoutesEnum(Enum):
     INSERT_SASTOJCI = 'sql/narudzba/insert-sastojci.sql'
     DELETE_SASTOJCI = 'sql/narudzba/delete-sastojci.sql'
     FINISH_NARUDZBA = 'sql/narudzba/finish-narudzba.sql'
+    PROCESS_NARUDZBA_TRANSACTION = 'sql/narudzba/process-narudzba-transaction.sql'
     
 class MalaNezgodaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/mala_nezgoda/select-all.sql'

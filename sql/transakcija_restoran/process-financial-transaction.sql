@@ -1,0 +1,1 @@
+CALL process_financial_transaction(%s, %s, %s);

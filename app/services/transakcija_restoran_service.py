@@ -50,3 +50,13 @@ class TransakcijaRestoranService:
         except Exception as e:
             self.app.logger.error(f"Error in get_transakcija_restorana: {e}")
             raise e
+        
+    @with_db_connection
+    def process_financial_transaction(self, transakcija):
+        try:
+            sql_script = get_sql_script_from_file(TransakcijaRestoranSqlRoutesEnum.PROCESS_FINANCIAL_TRANSACTION.value)
+            self.cursor.execute(sql_script, (transakcija["restoran_id"], transakcija["iznos"], transakcija["naziv"]))
+            self.connection.commit()
+        except Exception as e:
+            self.app.logger.error(f"Error in process_financial_transaction: {e}")
+            raise e

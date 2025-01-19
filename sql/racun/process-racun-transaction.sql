@@ -1,0 +1,1 @@
+CALL process_racun_transaction(%s);

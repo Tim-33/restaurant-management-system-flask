@@ -133,3 +133,14 @@ class RacunService():
         except Exception as e:
             self.app.logger.error(f"Error in insert_racun_by_transaction: {e}")
             raise e
+        
+    @with_db_connection
+    def process_racun_transaction(self, id):
+        try:
+            sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.PROCESS_RACUN_TRANSACTION.value)
+            self.cursor.execute(sql_script, (id,))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in process_racun_transaction: {e}")
+            raise e
