@@ -33,6 +33,8 @@ class StavkaRoutes(IRoutes):
         self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_DELETE.value, methods=["POST"])(self.delete_stavka)
         self.app.logger.info(f"Registering route: {StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value}")
         self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value, methods=["GET"])(self.get_stavke_most_expensive)
+        self.app.logger.info(f"Registering route: {StavkaRoutesEnum.STAVKA_COUNT_BY_TIP_AND_RESTORAN.value}")
+        self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_COUNT_BY_TIP_AND_RESTORAN.value, methods=["GET"])(self.get_stavka_count_by_tip_and_restoran)
         self.app.register_blueprint(self.stavka_routes_bp)
         
     def get_stavke(self):
@@ -124,4 +126,12 @@ class StavkaRoutes(IRoutes):
             return render_template(self.app.router.get_template(StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_stavke_most_expensive: {e}")
+            return "Internal Server Error", 500
+        
+    def get_stavka_count_by_tip_and_restoran(self):
+        try:
+            data = self.stavka_service.get_stavka_count_by_tip_and_restoran()
+            return render_template(self.app.router.get_template(StavkaRoutesEnum.STAVKA_COUNT_BY_TIP_AND_RESTORAN.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_stavka_count_by_tip_and_restoran: {e}")
             return "Internal Server Error", 500

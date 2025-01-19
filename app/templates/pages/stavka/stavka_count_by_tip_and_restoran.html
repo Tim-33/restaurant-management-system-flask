@@ -1,0 +1,23 @@
+{% extends "index.html" %} {% import 'components/nav-cards/stavka_nav_card.html'
+as nav_card %} {% block content %} {{ nav_card.stavka_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Tip stavke</th>
+        <th>Broj stavki</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.stavka_tip }}</td>
+        <td>{{ datapoint.broj_stavki }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

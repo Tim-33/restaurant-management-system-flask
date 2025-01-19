@@ -1,0 +1,1 @@
+SELECT * FROM broj_stavki_po_restoranu;

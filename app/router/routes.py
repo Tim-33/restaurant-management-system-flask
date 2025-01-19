@@ -124,6 +124,7 @@ class StavkaRoutesEnum(Enum):
     STAVKA_UPDATED = "/stavke/<int:id>/updated"
     STAVKA_DELETE = "/stavke/<int:id>/delete"
     STAVKA_MOST_EXPENSIVE = "/stavke/most-expensive"
+    STAVKA_COUNT_BY_TIP_AND_RESTORAN = "/stavke/count-by-tip-and-restoran"
     
 class JelovnikRoutesEnum(Enum):
     JELOVNIK = "/jelovnici"

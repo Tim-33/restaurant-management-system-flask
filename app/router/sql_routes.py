@@ -116,6 +116,7 @@ class StavkaSqlRoutesEnum(Enum):
     SELECT_BY_JELOVNIK = 'sql/stavka/select-by-jelovnik.sql'
     SELECT_BY_VELIKA_NEZGODA = 'sql/stavka/select-by-velika-nezgoda.sql'
     SELECT_MOST_EXPENSIVE = 'sql/stavka/select-most-expensive.sql'
+    SELECT_COUNT_BY_TIP_AND_RESTORAN = 'sql/stavka/select-count-by-tip-and-restoran.sql'
     
 class JelovnikSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/jelovnik/select-all.sql'

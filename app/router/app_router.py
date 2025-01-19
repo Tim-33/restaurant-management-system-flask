@@ -104,6 +104,7 @@ class AppRouter:
         self.add_route(StavkaRoutesEnum.STAVKA_ID.value, 'stavka/stavka.html')
         self.add_route(StavkaRoutesEnum.STAVKA_UPDATE.value, 'stavka/stavka_update.html')
         self.add_route(StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value, 'stavka/stavka_most_expensive.html')
+        self.add_route(StavkaRoutesEnum.STAVKA_COUNT_BY_TIP_AND_RESTORAN.value, 'stavka/stavka_count_by_tip_and_restoran.html')
         
         # Add routes for Jelovnik
         self.add_route(JelovnikRoutesEnum.JELOVNIK.value, 'jelovnik/jelovnici.html')
