@@ -145,6 +145,7 @@ class SastojakRoutesEnum(Enum):
     SASTOJAK_UPDATED = "/sastojci/<int:id>/updated"
     SASTOJAK_DELETE = "/sastojci/<int:id>/delete"
     SASTOJAK_UKUPNA_KOLICINA = "/sastojci/ukupna-kolicina"
+    SASTOJAK_MOST_COMMON = "/sastojci/most-common"
     
 class NarudzbaRoutesEnum(Enum):
     NARUDZBA = "/narudzbe"

@@ -139,6 +139,7 @@ class SastojakSqlRoutesEnum(Enum):
     SELECT_BY_SKLADISTE = 'sql/sastojak/select-by-skladiste.sql'
     SELECT_BY_MALA_NEZGODA = 'sql/sastojak/select-by-mala-nezgoda.sql'
     SELECT_UKUPNA_KOLICINA = 'sql/sastojak/select-ukupna-kolicina.sql'
+    SELECT_MOST_COMMON = 'sql/sastojak/select-most-common.sql'
     
 class NarudzbaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/narudzba/select-all.sql'

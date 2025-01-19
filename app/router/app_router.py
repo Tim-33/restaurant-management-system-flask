@@ -119,6 +119,7 @@ class AppRouter:
         self.add_route(SastojakRoutesEnum.SASTOJAK_ID.value, 'sastojak/sastojak.html')
         self.add_route(SastojakRoutesEnum.SASTOJAK_UPDATE.value, 'sastojak/sastojak_update.html')
         self.add_route(SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value, 'sastojak/sastojak_ukupna_kolicina.html')
+        self.add_route(SastojakRoutesEnum.SASTOJAK_MOST_COMMON.value, 'sastojak/sastojak_most_common.html')
         
         # Add routes for Narudzba
         self.add_route(NarudzbaRoutesEnum.NARUDZBA.value, 'narudzba/narudzbe.html')

@@ -31,6 +31,8 @@ class SastojakRoutes(IRoutes):
         self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_DELETE.value, methods=["POST"])(self.delete_sastojak)
         self.app.logger.info(f"Registering route: {SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value}")
         self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value, methods=["GET"])(self.get_sastojak_ukupna_kolicina)
+        self.app.logger.info(f"Registering route: {SastojakRoutesEnum.SASTOJAK_MOST_COMMON.value}")
+        self.sastojak_routes_bp.route(SastojakRoutesEnum.SASTOJAK_MOST_COMMON.value, methods=["GET"])(self.get_sastojak_most_common)
         self.app.register_blueprint(self.sastojak_routes_bp)
         
     def get_sastojci(self):
@@ -125,4 +127,12 @@ class SastojakRoutes(IRoutes):
             return render_template(self.app.router.get_template(SastojakRoutesEnum.SASTOJAK_UKUPNA_KOLICINA.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_sastojak_ukupna_kolicina: {e}")
+            return "Internal Server Error", 500
+        
+    def get_sastojak_most_common(self):
+        try:
+            data = self.sastojak_service.get_sastojci_most_common()
+            return render_template(self.app.router.get_template(SastojakRoutesEnum.SASTOJAK_MOST_COMMON.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojak_most_common: {e}")
             return "Internal Server Error", 500
