@@ -25,7 +25,7 @@ nav_card %} {% block content %} {{ nav_card.trosak_nav_card() }}
         <td>{{ datapoint.naziv }}</td>
         <td>{{ datapoint.iznos }}</td>
         <td>
-          <input type="checkbox" readonly {% if datapoint.mjesecno == 1 %}
+          <input type="checkbox" disabled {% if datapoint.mjesecno == 1 %}
           checked {% endif %} />
         </td>
         <td class="button-cell">

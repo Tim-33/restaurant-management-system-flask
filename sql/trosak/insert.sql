@@ -1,2 +1,1 @@
-INSERT INTO trosak (restoran_id, naziv, iznos, mjesecno) VALUES
-(%s, %s, %s, %s);
+CALL dodaj_trosak(%s, %s, %s, %s);
