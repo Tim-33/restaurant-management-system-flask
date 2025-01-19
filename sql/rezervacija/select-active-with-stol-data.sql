@@ -1,0 +1,1 @@
+SELECT * FROM aktivne_rezervacije;

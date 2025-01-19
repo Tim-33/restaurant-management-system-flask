@@ -35,6 +35,8 @@ class RezervacijaRoutes(IRoutes):
         self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_WITH_STOL_DATA.value, methods=["GET"])(self.get_rezervacija_with_stol_data)
         self.app.logger.info(f"Registering route: {RezervacijaRoutesEnum.REZERVACIJA_COUNT_BY_STOL_LOCATION.value}")
         self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_COUNT_BY_STOL_LOCATION.value, methods=["GET"])(self.get_rezervacija_count_by_stol_location)
+        self.app.logger.info(f"Registering route: {RezervacijaRoutesEnum.REZERVACIJA_ACTIVE_WITH_STOL_DATA.value}")
+        self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_ACTIVE_WITH_STOL_DATA.value, methods=["GET"])(self.get_active_rezervacija_with_stol_data)
         self.app.register_blueprint(self.rezervacija_routes_bp)
         
     def get_rezervacije(self):
@@ -134,4 +136,12 @@ class RezervacijaRoutes(IRoutes):
             return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_COUNT_BY_STOL_LOCATION.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_rezervacija_count_by_stol_location: {e}")
+            return "Internal Server Error", 500
+        
+    def get_active_rezervacija_with_stol_data(self):
+        try:
+            data = self.rezervacija_service.get_active_rezervacija_with_stol_data()
+            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_ACTIVE_WITH_STOL_DATA.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_active_rezervacija_with_stol_data: {e}")
             return "Internal Server Error", 500

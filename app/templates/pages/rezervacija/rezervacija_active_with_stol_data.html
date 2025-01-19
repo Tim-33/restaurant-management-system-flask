@@ -2,12 +2,10 @@
 'components/nav-cards/rezervacija_nav_card.html' as nav_card %} {% block content
 %} {{ nav_card.rezervacija_nav_card() }}
 <div class="card">
-  <a
-    href="{{url_for('rezervacija_routes.get_active_rezervacija_with_stol_data')}}"
-  >
+  <a href="{{url_for('rezervacija_routes.get_rezervacija_with_stol_data')}}">
     Sve
   </a>
-  <input type="checkbox" name="active" id="active" disabled checked />
+  <input type="checkbox" name="active" id="active" disabled />
 </div>
 <div class="card">
   <table>
