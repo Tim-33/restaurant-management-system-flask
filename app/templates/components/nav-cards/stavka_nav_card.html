@@ -1,0 +1,8 @@
+{% macro stavka_nav_card() %}
+<div class="card nav-card">
+  <a href="{{url_for('stavka_routes.get_stavke')}}">Stavke</a>
+  <a href="{{ url_for('stavka_routes.get_stavke_most_expensive')}}"
+    >Najskuplje stavke</a
+  >
+</div>
+{% endmacro %}

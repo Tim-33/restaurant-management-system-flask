@@ -175,3 +175,21 @@ class StavkaService:
         except Exception as e:
             self.app.logger.error(f"Error in get_stavke_by_velika_nezgoda: {e}")
             raise e
+        
+    @with_db_connection
+    def get_stavke_most_expensive(self):
+        try:
+            sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_MOST_EXPENSIVE.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            stavke = [
+                {
+                    'naziv_restoran': row[0],
+                    'najskuplja_stavka': row[1],
+                    'najvisa_cijena': row[2]
+                }
+            for row in data]
+            return stavke
+        except Exception as e:
+            self.app.logger.error(f"Error in get_stavke_most_expensive: {e}")
+            raise e

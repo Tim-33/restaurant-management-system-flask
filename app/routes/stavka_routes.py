@@ -31,6 +31,8 @@ class StavkaRoutes(IRoutes):
         self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_UPDATED.value, methods=["POST"])(self.updated_stavka)
         self.app.logger.info(f"Registering route: {StavkaRoutesEnum.STAVKA_DELETE.value}")
         self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_DELETE.value, methods=["POST"])(self.delete_stavka)
+        self.app.logger.info(f"Registering route: {StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value}")
+        self.stavka_routes_bp.route(StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value, methods=["GET"])(self.get_stavke_most_expensive)
         self.app.register_blueprint(self.stavka_routes_bp)
         
     def get_stavke(self):
@@ -114,4 +116,12 @@ class StavkaRoutes(IRoutes):
             return redirect(url_for('stavka_routes.get_stavke'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_stavka: {e}")
+            return "Internal Server Error", 500
+        
+    def get_stavke_most_expensive(self):
+        try:
+            data = self.stavka_service.get_stavke_most_expensive()
+            return render_template(self.app.router.get_template(StavkaRoutesEnum.STAVKA_MOST_EXPENSIVE.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_stavke_most_expensive: {e}")
             return "Internal Server Error", 500
