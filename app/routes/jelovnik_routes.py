@@ -32,6 +32,8 @@ class JelovnikRoutes(IRoutes):
         self.jelovnik_routes_bp.route(JelovnikRoutesEnum.JELOVNIK_DELETE.value, methods=["POST"])(self.delete_jelovnik)
         self.app.logger.info(f"Registering route: {JelovnikRoutesEnum.JELOVNIK_WITH_STAVKA_COUNT.value}")
         self.jelovnik_routes_bp.route(JelovnikRoutesEnum.JELOVNIK_WITH_STAVKA_COUNT.value, methods=["GET"])(self.get_jelovnik_with_stavke_count)
+        self.app.logger.info(f"Registering route: {JelovnikRoutesEnum.JELOVNIK_STAVKE_TIPA_JELA.value}")
+        self.jelovnik_routes_bp.route(JelovnikRoutesEnum.JELOVNIK_STAVKE_TIPA_JELA.value, methods=["GET"])(self.get_jelovnik_stavke_tipa_jela)
         self.app.register_blueprint(self.jelovnik_routes_bp)
         
     def get_jelovnici(self):
@@ -131,4 +133,12 @@ class JelovnikRoutes(IRoutes):
             return render_template(self.app.router.get_template(JelovnikRoutesEnum.JELOVNIK_WITH_STAVKA_COUNT.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_jelovnik_with_stavke_count: {e}")
+            return "Internal Server Error", 500
+        
+    def get_jelovnik_stavke_tipa_jela(self):
+        try:
+            data = self.jelovnik_service.get_jelovnik_stavke_tipa_jela()
+            return render_template(self.app.router.get_template(JelovnikRoutesEnum.JELOVNIK_STAVKE_TIPA_JELA.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_jelovnik_stavke_tip_jela: {e}")
             return "Internal Server Error", 500

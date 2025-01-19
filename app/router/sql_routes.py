@@ -119,6 +119,7 @@ class JelovnikSqlRoutesEnum(Enum):
     DELETE = 'sql/jelovnik/delete.sql'
     DELETE_STAVKE = 'sql/jelovnik/delete-stavke.sql'
     SELECT_WITH_STAVKA_COUNT = 'sql/jelovnik/select-with-stavka-count.sql'
+    SELECT_STAVKE_TYPE_JELA = 'sql/jelovnik/select-stavke-type-jela.sql'
     
 class SastojakSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/sastojak/select-all.sql'
