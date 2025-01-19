@@ -22,7 +22,8 @@ class MalaNezgodaService:
                     'disabled': row[4],
                     'naziv_restoran': row[5],
                     'naziv_zaposlenik': row[6],
-                    'ukupno': row[7]
+                    'ukupno': row[7],
+                    'broj_sastojaka': row[8]
                 } 
             for row in data]
             return male_nezgode
