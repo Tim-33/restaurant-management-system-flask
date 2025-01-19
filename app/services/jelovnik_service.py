@@ -115,3 +115,20 @@ class JelovnikService():
         except Exception as e:
             self.app.logger.error(f"Error in update_jelovnik_stavke: {e}")
             raise e
+        
+    @with_db_connection
+    def get_jelovnik_with_stavka_count(self):
+        try:
+            sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.SELECT_WITH_STAVKA_COUNT.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            jelovnici = [
+                {
+                    'naziv': row[0],
+                    'broj_stavki': row[1],
+                } 
+            for row in data]
+            return jelovnici
+        except Exception as e:
+            self.app.logger.error(f"Error in get_jelovnik_with_stavka_count: {e}")
+            raise e

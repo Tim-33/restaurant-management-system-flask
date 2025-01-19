@@ -1,0 +1,22 @@
+{% extends "index.html" %} {% import
+'components/nav-cards/jelovnik_nav_card.html' as nav_card %} {% block content %}
+{{ nav_card.jelovnik_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv jelovnika</th>
+        <th>Broj stavki</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv }}</td>
+        <td>{{ datapoint.broj_stavki }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

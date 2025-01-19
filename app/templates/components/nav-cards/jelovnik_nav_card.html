@@ -1,0 +1,8 @@
+{% macro jelovnik_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('jelovnik_routes.get_jelovnici') }}">Jelovnici</a>
+  <a href="{{ url_for('jelovnik_routes.get_jelovnik_with_stavke_count')}}"
+    >Jelovnici s brojem stavka</a
+  >
+</div>
+{% endmacro %}
