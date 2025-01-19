@@ -1,0 +1,8 @@
+{% macro trosak_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('trosak_routes.get_troskovi') }}">Troškovi</a>
+  <a href="{{ url_for('trosak_routes.get_troskovi_total')}}"
+    >Troškovi s izračunom</a
+  >
+</div>
+{% endmacro %}

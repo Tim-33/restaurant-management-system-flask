@@ -63,6 +63,7 @@ class TrosakSqlRoutesEnum(Enum):
     INSERT = 'sql/trosak/insert.sql'
     UPDATE = 'sql/trosak/update.sql'
     DELETE = 'sql/trosak/delete.sql'
+    SELECT_TOTAL = 'sql/trosak/select-total.sql'
     
 class StolSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/stol/select-all.sql'

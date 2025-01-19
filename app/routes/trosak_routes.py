@@ -27,6 +27,8 @@ class TrosakRoutes(IRoutes):
         self.trosak_routes_bp.route(TrosakRoutesEnum.TROSAK_UPDATED.value, methods=["POST"])(self.updated_trosak)
         self.app.logger.info(f"Registering route: {TrosakRoutesEnum.TROSAK_DELETE.value}")
         self.trosak_routes_bp.route(TrosakRoutesEnum.TROSAK_DELETE.value, methods=["POST"])(self.delete_trosak)
+        self.app.logger.info(f"Registering route: {TrosakRoutesEnum.TROSAK_TOTAL.value}")
+        self.trosak_routes_bp.route(TrosakRoutesEnum.TROSAK_TOTAL.value, methods=["GET"])(self.get_troskovi_total)
         self.app.register_blueprint(self.trosak_routes_bp)
         
     def get_troskovi(self):
@@ -98,4 +100,12 @@ class TrosakRoutes(IRoutes):
             return redirect(url_for('trosak_routes.get_troskovi'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_trosak: {e}")
+            return "Internal Server Error", 500
+        
+    def get_troskovi_total(self):
+        try:
+            data = self.trosak_service.get_troskovi_total()
+            return render_template(self.app.router.get_template(TrosakRoutesEnum.TROSAK_TOTAL.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_troskovi_total: {e}")
             return "Internal Server Error", 500

@@ -1,0 +1,25 @@
+{% extends "index.html" %} {% import 'components/nav-cards/trosak_nav_card.html'
+as nav_card %} {% block content %} {{ nav_card.trosak_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv restorana</th>
+        <th>Mjesečni trošak</th>
+        <th>Nemjesečni trošak</th>
+        <th>Ukupni trošak</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.naziv_restoran }}</td>
+        <td>{{ datapoint.mjesecni_trosak }}</td>
+        <td>{{ datapoint.nemjesecni_trosak }}</td>
+        <td>{{ datapoint.ukupni_trosak }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

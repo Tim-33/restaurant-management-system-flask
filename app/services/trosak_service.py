@@ -86,3 +86,20 @@ class TrosakService():
             self.app.logger.error(f"Error in delete_trosak: {e}")
             raise e
         
+    @with_db_connection
+    def get_troskovi_total(self):
+        try:
+            sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.SELECT_TOTAL.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            troskovi = [{
+                "naziv_restoran": row[0],
+                "mjesecni_trosak": row[1],
+                "nemjesecni_trosak": row[2],
+                "ukupni_trosak": row[3]
+            } for row in data]
+            return troskovi
+        except Exception as e:
+            self.app.logger.error(f"Error in get_troskovi_total: {e}")
+            raise e
+        
