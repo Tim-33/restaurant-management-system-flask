@@ -94,3 +94,4 @@ class MalaNezgodaService:
         except Exception as e:
             self.app.logger.error(f"Error in get_total: {e}")
             raise e
+        

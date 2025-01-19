@@ -133,6 +133,7 @@ class AppRouter:
         self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_CREATE.value, 'mala_nezgoda/mala_nezgoda_create.html')
         self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_ID.value, 'mala_nezgoda/mala_nezgoda.html')
         self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_UKUPNO.value, 'mala_nezgoda/mala_nezgoda_ukupno.html')
+        self.add_route(MalaNezgodaRoutesEnum.MALA_NEZGODA_SASTOJCI.value, 'mala_nezgoda/mala_nezgoda_sastojci.html')
         
         # Add routes for VelikaNezgoda
         self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA.value, 'velika_nezgoda/velike_nezgode.html')

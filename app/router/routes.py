@@ -163,6 +163,7 @@ class MalaNezgodaRoutesEnum(Enum):
     MALA_NEZGODA_CREATED = "/mala-nezgoda/created"
     MALA_NEZGODA_ID = "/mala-nezgoda/<int:id>"
     MALA_NEZGODA_UKUPNO = "/mala-nezgoda/ukupno"
+    MALA_NEZGODA_SASTOJCI = "/mala-nezgoda/sastojci"
     
 class VelikaNezgodaRoutesEnum(Enum):
     VELIKA_NEZGODA = "/velika-nezgoda"

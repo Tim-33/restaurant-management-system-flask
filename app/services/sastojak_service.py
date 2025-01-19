@@ -244,3 +244,21 @@ class SastojakService:
         except Exception as e:
             self.app.logger.error(f"Error in get_sastojci_most_common: {e}")
             raise e
+        
+    @with_db_connection    
+    def get_sastojci_by_mala_nezgoda_with_total(self):
+        try:
+            sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_MALA_NEZGODA_WITH_TOTAL.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            sastojci = [
+                {
+                    'sastojak_naziv': row[0],
+                    'ukupna_kolicina': row[1],
+                    'ukupni_trosak': row[2],
+                }
+            for row in data]
+            return sastojci
+        except Exception as e:
+            self.app.logger.error(f"Error in get_sastojci_by_mala_nezgoda_with_total: {e}")
+            raise e
