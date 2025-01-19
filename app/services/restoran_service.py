@@ -24,7 +24,8 @@ class RestoranService:
                     'naziv': row[5],
                     'adresa': row[6],
                     'broj_telefona': row[7],
-                    'slika': base64.b64encode(row[8]).decode('utf-8') if row[8] else None
+                    'slika': base64.b64encode(row[8]).decode('utf-8') if row[8] else None,
+                    'cijena_skladista': row[9]
                 } 
             for row in data]
             return restorani
