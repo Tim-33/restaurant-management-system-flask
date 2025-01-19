@@ -1,12 +1,13 @@
 from flask import Flask
 from app.router.sql_routes import SkladisteSqlRoutesEnum
 from app.utils.sql_utils import get_sql_script_from_file
+from app.utils.decorators import with_db_connection
 
 class SkladisteService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_skladista(self):
         try:
             sql_script = get_sql_script_from_file(SkladisteSqlRoutesEnum.SELECT_ALL.value)
@@ -28,6 +29,7 @@ class SkladisteService():
             self.app.logger.error(f"Error in get_skladista: {e}")
             raise e
         
+    @with_db_connection
     def get_skladiste(self, id):
         try:
             sql_script = get_sql_script_from_file(SkladisteSqlRoutesEnum.SELECT_ONE.value)
@@ -47,6 +49,7 @@ class SkladisteService():
             self.app.logger.error(f"Error in get_skladiste: {e}")
             raise e
         
+    @with_db_connection
     def insert_skladiste(self, skladiste):
         try:
             sql_script = get_sql_script_from_file(SkladisteSqlRoutesEnum.INSERT.value)
@@ -57,6 +60,7 @@ class SkladisteService():
             self.app.logger.error(f"Error in insert_skladiste: {e}")
             raise e
         
+    @with_db_connection
     def update_skladiste(self, skladiste, id):
         try:
             sql_script = get_sql_script_from_file(SkladisteSqlRoutesEnum.UPDATE.value)
@@ -67,6 +71,7 @@ class SkladisteService():
             self.app.logger.error(f"Error in update_skladiste: {e}")
             raise e
         
+    @with_db_connection
     def delete_skladiste(self, id):
         try:
             sql_script = get_sql_script_from_file(SkladisteSqlRoutesEnum.DELETE.value)

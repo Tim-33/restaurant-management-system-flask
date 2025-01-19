@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import RestoranRacunSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class RestoranRacunService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_restoran_racuni(self):
         try:
             sql_script = get_sql_script_from_file(RestoranRacunSqlRoutesEnum.SELECT_ALL.value)
@@ -29,6 +30,7 @@ class RestoranRacunService():
             self.app.logger.error(f"Error in get_restoran_racuni: {e}")
             raise e
         
+    @with_db_connection
     def get_restoran_racun(self, id):
         try:
             sql_script = get_sql_script_from_file(RestoranRacunSqlRoutesEnum.SELECT_ONE.value)
@@ -49,6 +51,7 @@ class RestoranRacunService():
             self.app.logger.error(f"Error in get_restoran_racun: {e}")
             raise e
         
+    @with_db_connection        
     def insert_restoran_racun(self, restoran_racun):
         try:
             sql_script = get_sql_script_from_file(RestoranRacunSqlRoutesEnum.INSERT.value)
@@ -59,6 +62,7 @@ class RestoranRacunService():
             self.app.logger.error(f"Error in insert_restoran_racun: {e}")
             raise e
         
+    @with_db_connection
     def update_restoran_racun(self, restoran_racun):
         try:
             sql_script = get_sql_script_from_file(RestoranRacunSqlRoutesEnum.UPDATE.value)
@@ -69,6 +73,7 @@ class RestoranRacunService():
             self.app.logger.error(f"Error in update_restoran_racun: {e}")
             raise e
         
+    @with_db_connection
     def delete_restoran_racun(self, id):
         try:
             sql_script = get_sql_script_from_file(RestoranRacunSqlRoutesEnum.DELETE.value)

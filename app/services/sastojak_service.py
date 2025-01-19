@@ -2,12 +2,13 @@ from flask import Flask
 from app.router.sql_routes import SastojakSqlRoutesEnum
 from app.utils.sql_utils import get_sql_script_from_file
 import base64
+from app.utils.decorators import with_db_connection
 
 class SastojakService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_sastojci(self):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_ALL.value)
@@ -35,6 +36,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojci: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak(self, id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_ONE.value)
@@ -60,6 +62,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojak: {e}")
             raise e
         
+    @with_db_connection
     def insert_sastojak(self, sastojak):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.INSERT.value)
@@ -79,6 +82,7 @@ class SastojakService:
             self.app.logger.error(f"Error in insert_sastojak: {e}")
             raise e
         
+    @with_db_connection
     def update_sastojak(self, sastojak, id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.UPDATE.value)
@@ -99,6 +103,7 @@ class SastojakService:
             self.app.logger.error(f"Error in update_sastojak: {e}")
             raise e
         
+    @with_db_connection
     def delete_sastojak(self, id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.DELETE.value)
@@ -109,6 +114,7 @@ class SastojakService:
             self.app.logger.error(f"Error in delete_sastojak: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak_by_recept(self, recept_id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_RECEPT.value)
@@ -128,6 +134,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojak_by_recept: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak_by_narudzba(self, narudzba_id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_NARUDZBA.value)
@@ -152,6 +159,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojak_by_narudzba: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak_by_skladiste(self, skladiste_id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_SKLADISTE.value)
@@ -177,6 +185,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojak_by_skladiste: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak_by_mala_nezgoda(self, mala_nezgoda_id):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_BY_MALA_NEZGODA.value)
@@ -201,6 +210,7 @@ class SastojakService:
             self.app.logger.error(f"Error in get_sastojak_by_mala_nezgoda: {e}")
             raise e
         
+    @with_db_connection
     def get_sastojak_ukupna_kolicina(self):
         try:
             sql_script = get_sql_script_from_file(SastojakSqlRoutesEnum.SELECT_UKUPNA_KOLICINA.value)

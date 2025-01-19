@@ -1,12 +1,13 @@
 from flask import Flask
 from app.router.sql_routes import TransakcijaZaposlenikSqlRoutesEnum
 from app.utils.sql_utils import get_sql_script_from_file
+from app.utils.decorators import with_db_connection
 
 class TransakcijaZaposlenikService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_transakcije_zaposlenika(self):
         try:
             sql_script = get_sql_script_from_file(TransakcijaZaposlenikSqlRoutesEnum.SELECT_ALL.value)
@@ -29,6 +30,7 @@ class TransakcijaZaposlenikService:
             self.app.logger.error(f"Error in get_transakcije_zaposlenika: {e}")
             raise e
         
+    @with_db_connection
     def get_transakcija_zaposlenika(self, id):
         try:
             sql_script = get_sql_script_from_file(TransakcijaZaposlenikSqlRoutesEnum.SELECT_ONE.value)

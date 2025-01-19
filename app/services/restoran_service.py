@@ -2,12 +2,13 @@ from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import RestoranSqlRoutesEnum
 import base64
+from app.utils.decorators import with_db_connection
 
 class RestoranService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_restorani(self):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_ALL.value)
@@ -31,6 +32,7 @@ class RestoranService:
             self.app.logger.error(f"Error in get_restorani: {e}")
             raise e
         
+    @with_db_connection
     def get_restoran(self, id):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_ONE.value)
@@ -51,7 +53,8 @@ class RestoranService:
         except Exception as e:
             self.app.logger.error(f"Error in get_restoran: {e}")
             raise e
-        
+
+    @with_db_connection
     def insert_restoran(self, restoran):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.INSERT.value)
@@ -62,6 +65,7 @@ class RestoranService:
             self.app.logger.error(f"Error in insert_restoran: {e}")
             raise e
         
+    @with_db_connection
     def update_restoran(self, restoran, id):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.UPDATE.value)
@@ -72,6 +76,7 @@ class RestoranService:
             self.app.logger.error(f"Error in update_restoran: {e}")
             raise e
         
+    @with_db_connection
     def delete_restoran(self, id):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.DELETE.value)
@@ -82,6 +87,7 @@ class RestoranService:
             self.app.logger.error(f"Error in delete_restoran: {e}")
             raise e
         
+    @with_db_connection
     def get_restoran_with_least_revenue(self):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_RESTORAN_WITH_LEAST_REVENUE.value)
@@ -97,6 +103,7 @@ class RestoranService:
             self.app.logger.error(f"Error in get_restoran_with_least_revenue: {e}")
             raise e
         
+    @with_db_connection
     def get_restoran_with_zaposlenik_pay_data(self):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value)
@@ -114,6 +121,7 @@ class RestoranService:
             self.app.logger.error(f"Error in get_restoran_with_zaposlenik_pay_data: {e}")
             raise e
         
+    @with_db_connection
     def get_restoran_average_employee_pay(self):
         try:
             sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_AVERAGE_EMPLOYEE_PAY.value)

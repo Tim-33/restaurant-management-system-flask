@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
-from app.router.sql_routes import JelovnikSqlRoutesEnum, StavkaSqlRoutesEnum
+from app.router.sql_routes import JelovnikSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class JelovnikService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_jelovnici(self):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.SELECT_ALL.value)
@@ -29,6 +30,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in get_jelovnici: {e}")
             raise e
         
+    @with_db_connection
     def get_jelovnik(self, id):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.SELECT_ONE.value)
@@ -49,6 +51,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in get_jelovnik: {e}")
             raise e
         
+    @with_db_connection
     def insert_jelovnik(self, jelovnik):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.INSERT.value)
@@ -59,6 +62,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in insert_jelovnik: {e}")
             raise e
         
+    @with_db_connection
     def update_jelovnik(self, jelovnik, id):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.UPDATE.value)
@@ -69,6 +73,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in update_jelovnik: {e}")
             raise e
         
+    @with_db_connection
     def delete_jelovnik(self, id):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.DELETE.value)
@@ -79,6 +84,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in delete_jelovnik: {e}")
             raise e
         
+    @with_db_connection
     def insert_jelovnik_stavke(self, jelovnik, stavke):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.INSERT.value)
@@ -93,6 +99,7 @@ class JelovnikService():
             self.app.logger.error(f"Error in insert_racun_stavke: {e}")
             raise e
         
+    @with_db_connection
     def update_jelovnik_stavke(self, id, jelovnik, jelovnik_stavke, jelovnik_stavke_updated):
         try:
             sql_script = get_sql_script_from_file(JelovnikSqlRoutesEnum.UPDATE.value)

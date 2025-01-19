@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import UserSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class UserService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_users(self):
         try:
             sql_script = get_sql_script_from_file(UserSqlRoutesEnum.SELECT_ALL.value)

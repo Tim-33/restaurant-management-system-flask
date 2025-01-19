@@ -2,13 +2,13 @@ from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import StavkaSqlRoutesEnum
 import base64
-
+from app.utils.decorators import with_db_connection
 
 class StavkaService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_stavke(self):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_ALL.value)
@@ -35,6 +35,7 @@ class StavkaService:
             self.app.logger.error(f"Error in get_stavke: {e}")
             raise e
         
+    @with_db_connection
     def get_stavka(self, id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_ONE.value)
@@ -59,6 +60,7 @@ class StavkaService:
             self.app.logger.error(f"Error in get_stavka: {e}")
             raise e
         
+    @with_db_connection
     def insert_stavka(self, stavka):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.INSERT.value)
@@ -68,7 +70,8 @@ class StavkaService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_stavka: {e}")
             raise e
-        
+
+    @with_db_connection        
     def update_stavka(self, stavka, id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.UPDATE.value)
@@ -78,7 +81,8 @@ class StavkaService:
         except Exception as e:
             self.app.logger.error(f"Error in update_stavka: {e}")
             raise e
-        
+    
+    @with_db_connection    
     def delete_stavka(self, id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.DELETE.value)
@@ -89,6 +93,7 @@ class StavkaService:
             self.app.logger.error(f"Error in delete_stavka: {e}")
             raise e
         
+    @with_db_connection
     def get_stavke_by_racun(self, recun_id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_BY_RACUN.value)
@@ -116,6 +121,7 @@ class StavkaService:
             self.app.logger.error(f"Error in get_stavke_by_racun: {e}")
             raise e
         
+    @with_db_connection
     def get_stavke_by_jelovnik(self, jelovnik_id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_BY_JELOVNIK.value)
@@ -142,6 +148,7 @@ class StavkaService:
             self.app.logger.error(f"Error in get_stavke_by_jelovnik: {e}")
             raise e
         
+    @with_db_connection
     def get_stavke_by_velika_nezgoda(self, velika_nezgoda_id):
         try:
             sql_script = get_sql_script_from_file(StavkaSqlRoutesEnum.SELECT_BY_VELIKA_NEZGODA.value)

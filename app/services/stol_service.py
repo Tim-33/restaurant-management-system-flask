@@ -1,12 +1,13 @@
 from flask import Flask
 from app.router.sql_routes import StolSqlRoutesEnum
 from app.utils.sql_utils import get_sql_script_from_file
+from app.utils.decorators import with_db_connection
 
 class StolService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_stolovi(self):
         try:
             sql_script = get_sql_script_from_file(StolSqlRoutesEnum.SELECT_ALL.value)
@@ -30,6 +31,7 @@ class StolService:
             self.app.logger.error(f"Error in get_stolovi: {e}")
             raise e
         
+    @with_db_connection
     def get_stol(self, id):
         try:
             sql_script = get_sql_script_from_file(StolSqlRoutesEnum.SELECT_ONE.value)
@@ -51,6 +53,7 @@ class StolService:
             self.app.logger.error(f"Error in get_stol: {e}")
             raise e
         
+    @with_db_connection
     def insert_stol(self, stol):
         try:
             sql_script = get_sql_script_from_file(StolSqlRoutesEnum.INSERT.value)
@@ -61,6 +64,7 @@ class StolService:
             self.app.logger.error(f"Error in insert_stol: {e}")
             raise e
         
+    @with_db_connection
     def update_stol(self, stol, id):
         try:
             sql_script = get_sql_script_from_file(StolSqlRoutesEnum.UPDATE.value)
@@ -70,7 +74,8 @@ class StolService:
         except Exception as e:
             self.app.logger.error(f"Error in update_stol: {e}")
             raise e
-        
+    
+    @with_db_connection
     def delete_stol(self, id):
         try:
             sql_script = get_sql_script_from_file(StolSqlRoutesEnum.DELETE.value)

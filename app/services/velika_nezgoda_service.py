@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import VelikaNezgodaSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class VelikaNezgodaService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_velike_nezgode(self):
         try:
             sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.SELECT_ALL.value)
@@ -29,6 +30,7 @@ class VelikaNezgodaService:
             self.app.logger.error(f"Error in get_velike_nezgode: {e}")
             raise e
         
+    @with_db_connection
     def get_velika_nezgoda(self, id):
         try:
             sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.SELECT_ONE.value)
@@ -49,6 +51,7 @@ class VelikaNezgodaService:
             self.app.logger.error(f"Error in get_velika_nezgoda: {e}")
             raise e
         
+    @with_db_connection
     def insert_velika_nezgoda(self, velika_nezgoda):
         try:
             sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.INSERT.value)
@@ -59,6 +62,7 @@ class VelikaNezgodaService:
             self.app.logger.error(f"Error in insert_velika_nezgoda: {e}")
             raise e
         
+    @with_db_connection
     def insert_velika_nezgoda_stavke(self, velika_nezgoda, stavke):
         try:
             sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.INSERT.value)

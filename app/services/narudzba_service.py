@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import NarudzbaSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class NarudzbaService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_narudzbe(self):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.SELECT_ALL.value)
@@ -30,6 +31,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in get_narudzbe: {e}")
             raise e
         
+    @with_db_connection
     def get_narudzba(self, id):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.SELECT_ONE.value)
@@ -51,6 +53,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in get_narudzba: {e}")
             raise e
         
+    @with_db_connection
     def insert_narudzba(self, narudzba):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.INSERT.value)
@@ -61,6 +64,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in insert_narudzba: {e}")
             raise e
         
+    @with_db_connection
     def update_narudzba(self, narudzba, id):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.UPDATE.value)
@@ -71,6 +75,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in update_narudzba: {e}")
             raise e
         
+    @with_db_connection
     def delete_narudzba(self, id):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.DELETE.value)
@@ -81,6 +86,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in delete_narudzba: {e}")
             raise e
         
+    @with_db_connection
     def insert_narudzbe_sastojci(self, narudzba, sastojci):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.INSERT.value)
@@ -95,6 +101,7 @@ class NarudzbaService:
             self.app.logger.error(f"Error in insert_narudzbe_sastojci: {e}")
             raise e
         
+    @with_db_connection
     def update_narudzbe_sastojci(self, id, narudzba, sastojci, sastojci_updated):
         try:
             sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.UPDATE.value)

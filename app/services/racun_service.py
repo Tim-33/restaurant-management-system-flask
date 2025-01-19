@@ -1,13 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import RacunSqlRoutesEnum
-import json
+from app.utils.decorators import with_db_connection
 
 class RacunService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_racuni(self):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_ALL.value)
@@ -34,6 +34,7 @@ class RacunService():
             self.app.logger.error(f"Error in get_racuni: {e}")
             raise e
         
+    @with_db_connection
     def get_racun(self, id):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_ONE.value)
@@ -57,6 +58,7 @@ class RacunService():
             self.app.logger.error(f"Error in get_racun: {e}")
             raise e
         
+    @with_db_connection
     def insert_racun_stavke(self, racun, stavke):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.INSERT.value)
@@ -71,6 +73,7 @@ class RacunService():
             self.app.logger.error(f"Error in insert_racun_stavke: {e}")
             raise e
         
+    @with_db_connection
     def get_racun_ukupna_vrijednost(self):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_RACUN_UKUPNA_VRIJEDNOST.value)
@@ -84,7 +87,8 @@ class RacunService():
         except Exception as e:
             self.app.logger.error(f"Error in get_racun_ukupna_vrijednost: {e}")
             raise e
-        
+      
+    @with_db_connection  
     def get_racun_by_zaposlenik(self, zaposlenik_id):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.SELECT_BY_ZAPOSLENIK.value)
@@ -108,6 +112,7 @@ class RacunService():
             self.app.logger.error(f"Error in get_racun_by_zaposlenik: {e}")
             raise e
         
+    @with_db_connection
     def insert_racun_by_transaction(self, transaction):
         try:
             sql_script = get_sql_script_from_file(RacunSqlRoutesEnum.INSERT_BY_TRANSACTION.value)

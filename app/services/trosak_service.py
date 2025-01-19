@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import TrosakSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class TrosakService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_troskovi(self):
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.SELECT_ALL.value)
@@ -30,6 +31,7 @@ class TrosakService():
             self.app.logger.error(f"Error in get_troskovi: {e}")
             raise e
         
+    @with_db_connection
     def get_trosak(self, id):
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.SELECT_ONE.value)
@@ -51,6 +53,7 @@ class TrosakService():
             self.app.logger.error(f"Error in get_trosak: {e}")
             raise e
         
+    @with_db_connection
     def insert_trosak(self, trosak):
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.INSERT.value)
@@ -60,7 +63,8 @@ class TrosakService():
         except Exception as e:
             self.app.logger.error(f"Error in insert_trosak: {e}")
             raise e
-        
+      
+    @with_db_connection  
     def update_trosak(self, trosak, id):
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.UPDATE.value)
@@ -71,6 +75,7 @@ class TrosakService():
             self.app.logger.error(f"Error in update_trosak: {e}")
             raise e
         
+    @with_db_connection
     def delete_trosak(self, id):
         try:
             sql_script = get_sql_script_from_file(TrosakSqlRoutesEnum.DELETE.value)

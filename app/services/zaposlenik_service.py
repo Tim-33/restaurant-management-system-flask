@@ -2,12 +2,13 @@ from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import ZaposlenikSqlRoutesEnum
 from flask import Flask
 import base64
+from app.utils.decorators import with_db_connection
 
 class ZaposlenikService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_zaposlenici(self):
         try:
             sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.SELECT_ALL.value)
@@ -36,6 +37,7 @@ class ZaposlenikService:
             self.app.logger.error(f"Error in get_zaposlenici: {e}")
             raise e
         
+    @with_db_connection
     def get_zaposlenik(self, id):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.SELECT_ONE.value)
         self.cursor.execute(sql_script, (id,))
@@ -57,6 +59,7 @@ class ZaposlenikService:
             } 
         return zaposlenik
     
+    @with_db_connection
     def insert_zaposlenik(self, zaposlenik):
         try:
             sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.INSERT.value)
@@ -77,6 +80,7 @@ class ZaposlenikService:
             self.app.logger.error(f"Error in insert_zaposlenik: {e}")
             raise e
     
+    @with_db_connection
     def update_zaposlenik(self, zaposlenik, id: int):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.UPDATE.value)
         values = (
@@ -94,12 +98,14 @@ class ZaposlenikService:
         self.app.mysql.commit()
         return self.cursor.rowcount
     
+    @with_db_connection
     def delete_zaposlenik(self, id: int):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.DELETE.value)
         self.cursor.execute(sql_script, (id, ))
         self.app.mysql.commit()
         return self.cursor.rowcount
     
+    @with_db_connection
     def get_zaposlenik_with_pay_for_january_and_june(self):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value)
         self.cursor.execute(sql_script)

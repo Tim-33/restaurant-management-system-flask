@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import MalaNezgodaSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class MalaNezgodaService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_male_nezgode(self):
         try:
             sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.SELECT_ALL.value)
@@ -29,6 +30,7 @@ class MalaNezgodaService:
             self.app.logger.error(f"Error in get_mala_nezgode: {e}")
             raise e
         
+    @with_db_connection
     def get_mala_nezgoda(self, id):
         try:
             sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.SELECT_ONE.value)
@@ -49,6 +51,7 @@ class MalaNezgodaService:
             self.app.logger.error(f"Error in get_mala_nezgoda: {e}")
             raise e
         
+    @with_db_connection
     def insert_mala_nezgoda(self, mala_nezgoda):
         try:
             sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.INSERT.value)
@@ -59,6 +62,7 @@ class MalaNezgodaService:
             self.app.logger.error(f"Error in insert_mala_nezgoda: {e}")
             raise e
         
+    @with_db_connection
     def insert_mala_negoda_sastojci(self, mala_nezgoda, sastojci):
         try:
             sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.INSERT.value)

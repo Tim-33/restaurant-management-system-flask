@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import RezervacijaSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class RezervacijaService():
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
         
+    @with_db_connection
     def get_rezervacije(self):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.SELECT_ALL.value)
@@ -32,6 +33,7 @@ class RezervacijaService():
             self.app.logger.error(f"Error in get_rezervacije: {e}")
             raise e
         
+    @with_db_connection
     def get_rezervacija(self, id):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.SELECT_ONE.value)
@@ -55,6 +57,7 @@ class RezervacijaService():
             self.app.logger.error(f"Error in get_rezervacija: {e}")
             raise e
         
+    @with_db_connection
     def insert_rezervacija(self, rezervacija):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.INSERT.value)
@@ -65,6 +68,7 @@ class RezervacijaService():
             self.app.logger.error(f"Error in insert_rezervacija: {e}")
             raise e
         
+    @with_db_connection
     def update_rezervacija(self, rezervacija, id):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.UPDATE.value)
@@ -75,6 +79,7 @@ class RezervacijaService():
             self.app.logger.error(f"Error in update_rezervacija: {e}")
             raise e
         
+    @with_db_connection
     def delete_rezervacija(self, id):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.DELETE.value)
@@ -85,6 +90,7 @@ class RezervacijaService():
             self.app.logger.error(f"Error in delete_rezervacija: {e}")
             raise e
         
+    @with_db_connection
     def get_rezervacija_by_location_with_count(self):
         try:
             sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.SELECT_BY_TYPE_WITH_LOCATION.value)
