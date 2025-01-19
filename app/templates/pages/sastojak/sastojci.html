@@ -18,6 +18,7 @@ as nav_card %} {% block content %} {{ nav_card.sastojak_nav_card() }}
         <th>Tip količine</th>
         <th>Trenutna količina</th>
         <th>Potrebna količina</th>
+        <th>Treba li naručiti</th>
         <th></th>
       </tr>
     </thead>
@@ -40,6 +41,7 @@ as nav_card %} {% block content %} {{ nav_card.sastojak_nav_card() }}
         <td>{{ datapoint.kolicina_tip }}</td>
         <td>{{ datapoint.trenutna_kolicina }}</td>
         <td>{{ datapoint.potrebna_kolicina }}</td>
+        <td>{{ datapoint.treba_li_naruciti }}</td>
         <td class="button-cell">
           <div class="button-group">
             {{

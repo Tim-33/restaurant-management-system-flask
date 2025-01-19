@@ -29,6 +29,7 @@ class SastojakService:
                     'slika': base64.b64encode(row[10]).decode('utf-8') if row[10] else None,
                     'potrebna_kolicina': row[11],
                     'trenutna_kolicina': row[12],
+                    'treba_li_naruciti': row[13],
                 } 
             for row in data]
             return sastojci
