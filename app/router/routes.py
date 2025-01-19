@@ -24,6 +24,7 @@ class ZaposlenikPlacaRoutesEnum(Enum):
     ZAPOSLENIK_PLACE_UPDATE = "/zaposlenik-place/<int:id>/update"
     ZAPOSLENIK_PLACE_UPDATED = "/zaposlenik-place/<int:id>/updated"
     ZAPOSLENIK_PLACE_DELETE = "/zaposlenik-place/<int:id>/delete"
+    ZAPOSLENIK_PLACA_ALL = "/zaposlenik-place/all"
     
 class RestoranRoutesEnum(Enum):
     RESTORAN = "/restorani"

@@ -29,6 +29,7 @@ class AppRouter:
         self.add_route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_CREATE.value, 'zaposlenik_placa/zaposlenik_placa_create.html')
         self.add_route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_ID.value, 'zaposlenik_placa/zaposlenik_placa.html')
         self.add_route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_UPDATE.value, 'zaposlenik_placa/zaposlenik_place_update.html')
+        self.add_route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACA_ALL.value, 'zaposlenik_placa/zaposlenik_placa_all.html')
         
         # Add routes for Restoran
         self.add_route(RestoranRoutesEnum.RESTORAN.value, 'restoran/restorani.html')

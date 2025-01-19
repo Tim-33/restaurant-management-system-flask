@@ -23,6 +23,8 @@ class ZaposlenikPlacaRoutes(IRoutes):
         self.zaposlenik_placa_routes_bp.route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_CREATE.value, methods=["GET"])(self.create_zaposlenik_place)
         self.app.logger.info(f"Registering route: {ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_CREATED.value}")
         self.zaposlenik_placa_routes_bp.route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE_CREATED.value, methods=["POST"])(self.created_zaposlenik_place)
+        self.app.logger.info(f"Registering route: {ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACA_ALL.value}")
+        self.zaposlenik_placa_routes_bp.route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACA_ALL.value, methods=["GET"])(self.get_zaposlenik_placa_all)
         self.app.register_blueprint(self.zaposlenik_placa_routes_bp)  
         
     def get_zaposlenik_place_months(self):
@@ -74,4 +76,12 @@ class ZaposlenikPlacaRoutes(IRoutes):
             return redirect(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE.value)
         except Exception as e:
             self.app.logger.error(f"Error in created_zaposlenik_place: {e}")
+            return "Internal Server Error", 500
+        
+    def get_zaposlenik_placa_all(self):
+        try:
+            data = self.zaposlenik_placa_service.get_zaposlenik_place_all()
+            return render_template(self.app.router.get_template(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACA_ALL.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_zaposlenik_placa_all: {e}")
             return "Internal Server Error", 500

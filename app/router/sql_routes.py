@@ -23,6 +23,7 @@ class ZaposlenikPlacaSqlRoutesEnum(Enum):
     DELETE = 'sql/zaposlenik_placa/delete.sql'
     SELECT_BY_MONTH = "sql/zaposlenik_placa/select-by-month.sql"
     SELECT_MONTHS = "sql/zaposlenik_placa/select-months.sql"
+    SELECT_ALL_WITH_ZAPOSLENIK = "sql/zaposlenik_placa/select-all-with-zaposlenik.sql"
     
 class RestoranSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/restoran/select-all.sql'

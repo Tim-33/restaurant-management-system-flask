@@ -68,3 +68,22 @@ class ZaposlenikPlacaService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_zaposlenik_placa: {e}")
             raise e
+        
+    def get_zaposlenik_place_all(self):
+        try:
+            sql_script = get_sql_script_from_file(ZaposlenikPlacaSqlRoutesEnum.SELECT_ALL_WITH_ZAPOSLENIK.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            zaposlenik_place = [
+                {
+                    'ime': row[0],
+                    'prezime': row[1],
+                    'placa': row[2],
+                    'mjesec': row[3],
+                    'restoran': row[4]
+                }
+            for row in data]
+            return zaposlenik_place
+        except Exception as e:
+            self.app.logger.error(f"Error in get_zaposlenik_place_all: {e}")
+            raise e
