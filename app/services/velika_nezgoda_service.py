@@ -76,3 +76,27 @@ class VelikaNezgodaService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_velika_nezgoda_stavke: {e}")
             raise e
+        
+    @with_db_connection
+    def get_velike_nezgode_with_details(self):
+        try:
+            sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.SELECT_WITH_DETAILS.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            velike_nezgode = [
+                {
+                    'velika_nezgoda_id': row[0],
+                    'restoran_id': row[1],
+                    'zapolsenik_id': row[2],
+                    'ukupna_steta': row[3],
+                    'stavka_id': row[4],
+                    'stavka_naziv': row[5],
+                    'kolicina': row[6],
+                    'cijena': row[7],
+                    'ukupna_cijena': row[8]
+                } 
+            for row in data]
+            return velike_nezgode
+        except Exception as e:
+            self.app.logger.error(f"Error in get_velike_nezgode_with_details: {e}")
+            raise e

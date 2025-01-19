@@ -171,6 +171,7 @@ class VelikaNezgodaRoutesEnum(Enum):
     VELIKA_NEZGODA_CREATE = "/velika-nezgoda/create"
     VELIKA_NEZGODA_CREATED = "/velika-nezgoda/created"
     VELIKA_NEZGODA_ID = "/velika-nezgoda/<int:id>"
+    VELIKA_NEZGODA_DETAILS = "/velika-nezgoda/details"
     
 class UserRoutesEnum(Enum):
     USER = "/users"

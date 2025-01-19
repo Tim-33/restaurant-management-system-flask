@@ -1,0 +1,34 @@
+{% extends "index.html" %} {% import
+'components/nav-cards/velika_nezgoda_nav_card.html' as nav_card %} {% block
+content %} {{ nav_card.velika_nezgoda_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Velika Nezgoda ID</th>
+        <th>Restoran ID</th>
+        <th>Zaposlenik ID</th>
+        <th>Ukupna šteta</th>
+        <th>Stavka Naziv</th>
+        <th>Količina</th>
+        <th>Cijena</th>
+        <th>Ukupna Cijena</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.velika_nezgoda_id }}</td>
+        <td>{{ datapoint.restoran_id }}</td>
+        <td>{{ datapoint.zaposlenik_id }}</td>
+        <td>{{ datapoint.ukupna_steta }}</td>
+        <td>{{ datapoint.stavka_naziv }}</td>
+        <td>{{ datapoint.kolicina }}</td>
+        <td>{{ datapoint.cijena }}</td>
+        <td>{{ datapoint.ukupna_cijena }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

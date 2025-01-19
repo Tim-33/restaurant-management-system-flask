@@ -1,0 +1,12 @@
+{% macro velika_nezgoda_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('velika_nezgoda_routes.get_velike_nezgode') }}"
+    >Velike nezgode
+  </a>
+  <a
+    href="{{ url_for('velika_nezgoda_routes.get_velike_nezgode_with_details')}}"
+  >
+    Velike nezgode s detaljima
+  </a>
+</div>
+{% endmacro %}

@@ -25,6 +25,8 @@ class VelikaNezgodaRoutes(IRoutes):
         self.velika_nezgoda_routes_bp.route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_CREATE.value, methods=["GET"])(self.create_velika_nezgoda)
         self.app.logger.info(f"Registering route: {VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_CREATED.value}")
         self.velika_nezgoda_routes_bp.route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_CREATED.value, methods=["POST"])(self.created_velika_nezgoda)
+        self.app.logger.info(f"Registering route: {VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_DETAILS.value}")
+        self.velika_nezgoda_routes_bp.route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_DETAILS.value, methods=["GET"])(self.get_velike_nezgode_with_details)
         self.app.register_blueprint(self.velika_nezgoda_routes_bp)
         
     def get_velike_nezgode(self):
@@ -73,4 +75,12 @@ class VelikaNezgodaRoutes(IRoutes):
             return redirect(url_for('velika_nezgoda_routes.get_velike_nezgode'))
         except Exception as e:
             self.app.logger.error(f"Error in created_velika_nezgoda: {e}")
+            return "Internal Server Error", 500
+        
+    def get_velike_nezgode_with_details(self):
+        try:
+            data = self.velika_nezgoda_service.get_velike_nezgode_with_details()
+            return render_template(self.app.router.get_template(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_DETAILS.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_velike_nezgode_with_details: {e}")
             return "Internal Server Error", 500

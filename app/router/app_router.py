@@ -140,6 +140,7 @@ class AppRouter:
         self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA.value, 'velika_nezgoda/velike_nezgode.html')
         self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_CREATE.value, 'velika_nezgoda/velika_nezgoda_create.html')
         self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_ID.value, 'velika_nezgoda/velika_nezgoda.html')
+        self.add_route(VelikaNezgodaRoutesEnum.VELIKA_NEZGODA_DETAILS.value, 'velika_nezgoda/velika_nezgoda_details.html')
         
         # Add routes for User
         self.add_route(UserRoutesEnum.USER.value, 'user/users.html')
