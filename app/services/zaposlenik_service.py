@@ -27,7 +27,8 @@ class ZaposlenikService:
                     'email': row[9],
                     'datum_rodenja': row[10],
                     'iznos_place': row[11],
-                    'slika': base64.b64encode(row[12]).decode('utf-8') if row[12] else None
+                    'slika': base64.b64encode(row[12]).decode('utf-8') if row[12] else None,
+                    'ukupna_zarada': row[13]
                 } 
             for row in data]
             return zaposlenici

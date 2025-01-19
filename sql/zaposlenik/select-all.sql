@@ -1,1 +1,1 @@
-SELECT * FROM zaposlenik WHERE disabled = false;
+SELECT *, UkupnaZarada(zaposlenik.id) FROM zaposlenik WHERE disabled = false;
