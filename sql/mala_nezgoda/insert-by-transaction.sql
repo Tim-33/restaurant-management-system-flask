@@ -1,0 +1,1 @@
+CALL unos_male_nezgode(%s, %s, %s);

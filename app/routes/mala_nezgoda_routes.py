@@ -5,6 +5,7 @@ from app.services.restoran_service import RestoranService
 from app.services.zaposlenik_service import ZaposlenikService
 from app.services.sastojak_service import SastojakService
 from app.interfaces.iroutes import IRoutes
+import json
 
 class MalaNezgodaRoutes(IRoutes):
     def __init__(self, app: Flask):
@@ -73,7 +74,9 @@ class MalaNezgodaRoutes(IRoutes):
                     kolicina = value
                     sastojci.append({'sastojak_id': sastojak_id, 'kolicina': kolicina})
                     
-            self.mala_nezgoda_service.insert_mala_negoda_sastojci(mala_nezgoda, sastojci)
+            mala_nezgoda["sastojci"] = json.dumps(sastojci)
+                    
+            self.mala_nezgoda_service.insert_mala_nezgoda_by_transaction(mala_nezgoda)
             return redirect(url_for('mala_nezgoda_routes.get_male_nezgode'))
         except Exception as e:
             self.app.logger.error(f"Error in created_mala_nezgoda: {e}")

@@ -111,3 +111,14 @@ class MalaNezgodaService:
         except Exception as e:
             self.app.logger.error(f"Error in get_mala_nezgoda_details: {e}")
             raise e
+        
+    @with_db_connection
+    def insert_mala_nezgoda_by_transaction(self, mala_nezgoda):
+        try:
+            sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.INSERT_BY_TRANSACTION.value)
+            self.cursor.execute(sql_script, (mala_nezgoda['restoran_id'], mala_nezgoda['zaposlenik_id'], mala_nezgoda['sastojci']))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_mala_nezgoda_by_transaction: {e}")
+            raise e
