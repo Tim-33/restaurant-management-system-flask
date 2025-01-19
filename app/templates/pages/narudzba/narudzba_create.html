@@ -39,9 +39,9 @@
       <input
         type="number"
         step="1"
-        value="0"
         name="sastojak_{{sastojak.id}}"
         id="sastojak_{{sastojak.id}}"
+        value="{{sastojak.potrebna_kolicina - sastojak.trenutna_kolicina}}"
         required
       />
       <span

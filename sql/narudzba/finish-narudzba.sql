@@ -1,0 +1,1 @@
+CALL zavrsi_narudzbu(%s);

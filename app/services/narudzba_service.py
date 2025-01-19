@@ -118,3 +118,14 @@ class NarudzbaService:
         except Exception as e:
             self.app.logger.error(f"Error in update_narudzbe_sastojci: {e}")
             raise e
+        
+    @with_db_connection
+    def finish_narudzba(self, id):
+        try:
+            sql_script = get_sql_script_from_file(NarudzbaSqlRoutesEnum.FINISH_NARUDZBA.value)
+            self.cursor.execute(sql_script, (id,))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in finish_narudzba: {e}")
+            raise e

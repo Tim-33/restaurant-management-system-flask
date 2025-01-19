@@ -54,9 +54,12 @@
         value="0"
         name="sastojak_{{sastojak.id}}"
         id="sastojak_{{sastojak.id}}"
+        max="{{sastojak.trenutna_kolicina}}"
         required
       />
-      <span> {{ sastojak.kolicina_tip }} </span>
+      <span>
+        / {{sastojak.trenutna_kolicina}} {{ sastojak.kolicina_tip }}
+      </span>
     </div>
     {% endfor %}
     <div class="form-input-group">

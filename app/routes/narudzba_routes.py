@@ -30,6 +30,8 @@ class NarudzbaRoutes(IRoutes):
         self.narudzba_routes_bp.route(NarudzbaRoutesEnum.NARUDZBA_UPDATED.value, methods=["POST"])(self.updated_narudzba)
         self.app.logger.info(f"Registering route: {NarudzbaRoutesEnum.NARUDZBA_DELETE.value}")
         self.narudzba_routes_bp.route(NarudzbaRoutesEnum.NARUDZBA_DELETE.value, methods=["POST"])(self.delete_narudzba)
+        self.app.logger.info(f"Registering route: {NarudzbaRoutesEnum.NARUDZBA_FINISH.value}")
+        self.narudzba_routes_bp.route(NarudzbaRoutesEnum.NARUDZBA_FINISH.value, methods=["POST"])(self.finish_narudzba)
         self.app.register_blueprint(self.narudzba_routes_bp)
         
     def get_narudzbe(self):
@@ -125,3 +127,10 @@ class NarudzbaRoutes(IRoutes):
             self.app.logger.error(f"Error in delete_narudzba: {e}")
             return "Internal Server Error", 500
         
+    def finish_narudzba(self, id):
+        try:
+            self.narudzba_service.finish_narudzba(id)
+            return redirect(url_for('narudzba_routes.get_narudzbe'))
+        except Exception as e:
+            self.app.logger.error(f"Error in finish_narudzba: {e}")
+            return "Internal Server Error", 500

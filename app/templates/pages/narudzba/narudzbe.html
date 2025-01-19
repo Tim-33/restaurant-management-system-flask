@@ -31,7 +31,14 @@ extends "index.html" %} {% block content %}
             datapoint.id, 'Pregledaj') }} {% if datapoint.status_narudzbe ==
             "NERIJESENO" %} {{
             delete_item_button.delete_item_button_form('narudzba_routes.delete_narudzba',
-            datapoint.id, 'Obriši narudžbu') }} {% endif %}
+            datapoint.id, 'Obriši narudžbu') }}
+            <form
+              action="{{url_for('narudzba_routes.finish_narudzba', id=datapoint.id)}}"
+              method="POST"
+            >
+              <input type="submit" value="Završi narudžbu" />
+            </form>
+            {% endif %}
           </div>
         </td>
       </tr>

@@ -158,6 +158,7 @@ class NarudzbaRoutesEnum(Enum):
     NARUDZBA_UPDATE = "/narudzbe/<int:id>/update"
     NARUDZBA_UPDATED = "/narudzbe/<int:id>/updated"
     NARUDZBA_DELETE = "/narudzbe/<int:id>/delete"
+    NARUDZBA_FINISH = "/narudzbe/<int:id>/finish"
     
 class MalaNezgodaRoutesEnum(Enum):
     MALA_NEZGODA = "/mala-nezgoda"
