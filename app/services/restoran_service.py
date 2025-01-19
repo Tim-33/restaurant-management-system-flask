@@ -139,3 +139,18 @@ class RestoranService:
         except Exception as e:
             self.app.logger.error(f"Error in get_restoran_average_employee_pay: {e}")
             raise e
+        
+    @with_db_connection
+    def get_restorani_nezgode_ukupno(self):
+        try:
+            sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_NEZGODE_UKUPNO.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            restorani = [{
+                'id': row[0],
+                'ukupna_steta': row[1]
+            } for row in data]
+            return restorani
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restoran_nezgode_ukupno: {e}")
+            raise e

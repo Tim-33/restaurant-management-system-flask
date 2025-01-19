@@ -31,6 +31,8 @@ class RestoranRoutes(IRoutes):
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value, methods=["GET"])(self.get_restoran_with_zaposlenik_pay_data)
         self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_AVERAGE_EMPLOYEE_PAY.value}")
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_AVERAGE_EMPLOYEE_PAY.value, methods=["GET"])(self.get_restoran_average_employee_pay)
+        self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_NEZGODE_UKUPNO.value}")
+        self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_NEZGODE_UKUPNO.value, methods=["GET"])(self.get_restorani_nezgode_ukupno)
         self.app.register_blueprint(self.restoran_routes_bp)
         
     def get_restorani(self):
@@ -130,3 +132,10 @@ class RestoranRoutes(IRoutes):
             self.app.logger.error(f"Error in get_restoran_average_employee_pay: {e}")
             return "Internal Server Error", 500
         
+    def get_restorani_nezgode_ukupno(self):
+        try:
+            data = self.restoran_service.get_restorani_nezgode_ukupno()
+            return render_template(self.app.router.get_template(RestoranRoutesEnum.RESTORAN_NEZGODE_UKUPNO.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restorani_nezgode_ukupno: {e}")
+            return "Internal Server Error", 500
