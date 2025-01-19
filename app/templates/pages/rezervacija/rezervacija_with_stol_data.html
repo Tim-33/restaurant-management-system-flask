@@ -1,0 +1,28 @@
+{% extends "index.html" %} {% import
+'components/nav-cards/rezervacija_nav_card.html' as nav_card %} {% block content
+%} {{ nav_card.rezervacija_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Rezervacija ID</th>
+        <th>Ime</th>
+        <th>Vrijeme</th>
+        <th>Broj stola</th>
+        <th>Lokacija stola</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.id }}</td>
+        <td>{{ datapoint.ime }}</td>
+        <td>{{ datapoint.vrijeme }}</td>
+        <td>{{ datapoint.broj_stola }}</td>
+        <td>{{ datapoint.lokacija_stola }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

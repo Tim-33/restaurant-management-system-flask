@@ -78,6 +78,7 @@ class AppRouter:
         self.add_route(RezervacijaRoutesEnum.REZERVACIJA_ID.value, 'rezervacija/rezervacija.html')
         self.add_route(RezervacijaRoutesEnum.REZERVACIJA_UPDATE.value, 'rezervacija/rezervacija_update.html')
         self.add_route(RezervacijaRoutesEnum.REZERVACIJA_BY_LOCATION_WITH_COUNT.value, 'rezervacija/rezervacija_by_location_with_count.html')
+        self.add_route(RezervacijaRoutesEnum.REZERVACIJA_WITH_STOL_DATA.value, 'rezervacija/rezervacija_with_stol_data.html')
 
         # Add routes for Racun
         self.add_route(RacunRoutesEnum.RACUN.value, 'racun/racuni.html')

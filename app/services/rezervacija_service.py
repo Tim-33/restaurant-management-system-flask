@@ -107,3 +107,23 @@ class RezervacijaService():
         except Exception as e:
             self.app.logger.error(f"Error in get_rezervacija_by_location_with_count: {e}")
             raise e
+        
+    @with_db_connection
+    def get_rezervacija_with_stol_data(self):
+        try:
+            sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.SELECT_WITH_STOL_DATA.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            rezervacije = [
+                {
+                    'id': row[0],
+                    'ime': row[1],
+                    'vrijeme': row[2],
+                    'broj_stola': row[3],
+                    'lokacija_stola': row[4],
+                }
+            for row in data]
+            return rezervacije
+        except Exception as e:
+            self.app.logger.error(f"Error in get_rezervacija_with_stol_data: {e}")
+            raise e

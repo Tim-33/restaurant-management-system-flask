@@ -31,6 +31,8 @@ class RezervacijaRoutes(IRoutes):
         self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_DELETE.value, methods=["POST"])(self.delete_rezervacija)
         self.app.logger.info(f"Registering route: {RezervacijaRoutesEnum.REZERVACIJA_BY_LOCATION_WITH_COUNT.value}")
         self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_BY_LOCATION_WITH_COUNT.value, methods=["GET"])(self.get_rezervacija_by_location_with_count)
+        self.app.logger.info(f"Registering route: {RezervacijaRoutesEnum.REZERVACIJA_WITH_STOL_DATA.value}")
+        self.rezervacija_routes_bp.route(RezervacijaRoutesEnum.REZERVACIJA_WITH_STOL_DATA.value, methods=["GET"])(self.get_rezervacija_with_stol_data)
         self.app.register_blueprint(self.rezervacija_routes_bp)
         
     def get_rezervacije(self):
@@ -114,4 +116,12 @@ class RezervacijaRoutes(IRoutes):
             return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_BY_LOCATION_WITH_COUNT.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_rezervacija_by_location_with_count: {e}")
+            return "Internal Server Error", 500
+        
+    def get_rezervacija_with_stol_data(self):
+        try:
+            data = self.rezervacija_service.get_rezervacija_with_stol_data()
+            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_WITH_STOL_DATA.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_rezervacija_with_stol_data: {e}")
             return "Internal Server Error", 500
