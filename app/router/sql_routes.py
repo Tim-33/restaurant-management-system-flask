@@ -71,6 +71,7 @@ class StolSqlRoutesEnum(Enum):
     UPDATE = 'sql/stol/update.sql'
     DELETE = 'sql/stol/delete.sql'
     CHECK_STOL_IS_AVAILABLE = 'sql/stol/check-stol-is-available.sql'
+    SELECT_APPROPRIATE_STOL = 'sql/stol/select-appropriate-stol.sql'
     
 class RezervacijaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/rezervacija/select-all.sql'

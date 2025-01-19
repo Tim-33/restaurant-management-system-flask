@@ -60,7 +60,16 @@ class RezervacijaRoutes(IRoutes):
             message = request.args.get('message') 
             restorani = self.restoran_service.get_restorani()
             stolovi = self.stol_service.get_stolovi()
-            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_CREATE.value), restorani=restorani, stolovi=stolovi, message=message)
+            
+            restoran_id = request.args.get('restoran_id')
+            broj_mjesta = request.args.get('broj_mjesta')
+            lokacija = request.args.get('lokacija')
+            
+            appropritate_stol_id = None
+            if restoran_id and broj_mjesta and lokacija:
+                appropritate_stol_id = self.stol_service.get_appropriate_stol(restoran_id, broj_mjesta, lokacija)
+            
+            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_CREATE.value), restorani=restorani, stolovi=stolovi, message=message, appropritate_stol_id=appropritate_stol_id)
         except Exception as e:
             self.app.logger.error(f"Error in create_rezervacija: {e}")
             return "Internal Server Error", 500

@@ -31,12 +31,17 @@
     </div>
     <div class="form-input-group">
       <label for="stol_id">Stol:</label>
-      <select name="stol_id" id="stol_id" required {% if stolovi|length>
-        0 %} value="{{stolovi[0].id}}" {% endif %} > {% for stol in stolovi %}
-        <option value="{{stol.id}}">
-          stol {{stol.broj}}: {{stol.broj_mjesta}} mjesta
+      <select name="stol_id" id="stol_id" required>
+      {% if appropriate_stol_id is not none %}
+        <option value="{{appropriate_stol_id}}" selected>
+        stol {{appropriate_stol_id}} (pre-selected)
         </option>
-        {% endfor %}
+      {% endif %}
+      {% for stol in stolovi %}
+        <option value="{{stol.id}}" {% if appropriate_stol_id == stol.id %}selected{% endif %}>
+        stol {{stol.broj}}: {{stol.broj_mjesta}} mjesta
+        </option>
+      {% endfor %}
       </select>
     </div>
     <div class="form-input-group">
@@ -61,6 +66,37 @@
     <div class="form-input-group">
       <span></span>
       <input type="submit" value="Dodaj rezervaciju" />
+    </div>
+  </form>
+</div>
+<div class="card">
+  <form
+    class="create-form"
+    action="{{url_for('rezervacija_routes.create_rezervacija')}}"
+    method="GET"
+  >
+    <div class="form-input-group">
+      <label for="restoran_id">Restoran:</label>
+      <select name="restoran_id" id="restoran_id" required>
+        {% for restoran in restorani %}
+        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-input-group">
+      <label for="broj_mjesta">Broj Mjesta:</label>
+      <input type="number" name="broj_mjesta" id="broj_mjesta" required>
+    </div>
+    <div class="form-input-group">
+      <label for="lokacija">Lokacija:</label>
+      <select name="lokacija" id="lokacija" required>
+        <option value="unutra">Unutra</option>
+        <option value="vani">Vani</option>
+        <option value="vip">VIP</option>
+      </select>
+    </div>
+    <div class="form-input-group">
+      <button type="submit">Generiraj Stol</button>
     </div>
   </form>
 </div>

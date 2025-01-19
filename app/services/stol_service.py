@@ -96,3 +96,14 @@ class StolService:
         except Exception as e:
             self.app.logger.error(f"Error in check_stol_is_avilable: {e}")
             raise e
+        
+    @with_db_connection
+    def get_appropriate_stol(self, restoran_id, broj_mjesta, lokacija_preference):
+        try:
+            sql_script = get_sql_script_from_file(StolSqlRoutesEnum.SELECT_APPROPRIATE_STOL.value)
+            self.cursor.execute(sql_script, (restoran_id, broj_mjesta, lokacija_preference))
+            data = self.cursor.fetchone()
+            return data[0]
+        except Exception as e:
+            self.app.logger.error(f"Error in get_appropriate_stol: {e}")
+            raise e

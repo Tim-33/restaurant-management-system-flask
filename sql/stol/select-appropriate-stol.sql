@@ -1,0 +1,1 @@
+SELECT pronadi_prikladan_stol(%s, %s, %s) AS stol;
