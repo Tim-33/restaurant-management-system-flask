@@ -14,6 +14,7 @@ class ZaposlenikSqlRoutesEnum(Enum):
     UPDATE = 'sql/zaposlenik/update.sql'
     DELETE = 'sql/zaposlenik/delete.sql'
     SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE = 'sql/zaposlenik/select-with-pay-for-january-and-june.sql'
+    SELECT_NEZGODE = "sql/zaposlenik/select-nezgode.sql"
     
 class ZaposlenikPlacaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/zaposlenik_placa/select-all.sql'

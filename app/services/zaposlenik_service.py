@@ -119,3 +119,24 @@ class ZaposlenikService:
             } 
         for row in data]
         return zaposlenici
+    
+    @with_db_connection
+    def get_zaposlenici_nezgode(self):
+        try:
+            sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.SELECT_NEZGODE.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            zaposlenici = [
+                {
+                    'id': row[0],
+                    'ime': row[1],
+                    'prezime': row[2],
+                    'ukupno_mala_nezgoda': row[3],
+                    'ukupno_velika_nezgoda': row[4],
+                    'ukupno_trosak': row[5]
+                } 
+            for row in data]
+            return zaposlenici
+        except Exception as e:
+            self.app.logger.error(f"Error in get_zaposlenici_nezgode: {e}")
+            raise e

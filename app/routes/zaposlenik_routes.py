@@ -32,6 +32,8 @@ class ZaposlenikRoutes(IRoutes):
         self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_DELETE.value, methods=["POST"])(self.delete_zaposlenik)
         self.app.logger.info(f"Registering route: {ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value}")
         self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value, methods=["GET"])(self.get_zaposlenik_with_pay_for_january_and_june)
+        self.app.logger.info(f"Registering route: {ZaposlenikRoutesEnum.ZAPOSLENIK_NEZGODE.value}")
+        self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_NEZGODE.value, methods=["GET"])(self.get_zaposlenici_nezgode)
         self.app.register_blueprint(self.zaposlenik_routes_bp)
         
     def get_zaposlenici(self):
@@ -141,4 +143,12 @@ class ZaposlenikRoutes(IRoutes):
             return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_zaposlenik_with_pay_for_january_and_june: {e}")
+            return "Internal Server Error", 500
+        
+    def get_zaposlenici_nezgode(self):
+        try:
+            data = self.zaposlenik_service.get_zaposlenici_nezgode()
+            return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_NEZGODE.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_zaposlenik_nezgode: {e}")
             return "Internal Server Error", 500

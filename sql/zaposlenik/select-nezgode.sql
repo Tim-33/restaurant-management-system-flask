@@ -1,0 +1,1 @@
+SELECT * FROM pregled_nezgoda_po_zaposleniku;
