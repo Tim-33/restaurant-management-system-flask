@@ -96,3 +96,20 @@ class RestoranService:
         except Exception as e:
             self.app.logger.error(f"Error in get_restoran_with_least_revenue: {e}")
             raise e
+        
+    def get_restoran_with_zaposlenik_pay_data(self):
+        try:
+            sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            restorani = [
+                {
+                    'restoran': row[0],
+                    'broj_zaposlenika': row[1],
+                    'ukupne_place': row[2]
+                }
+            for row in data]
+            return restorani
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restoran_with_zaposlenik_pay_data: {e}")
+            raise e

@@ -1,0 +1,24 @@
+{% extends "index.html" %}{% import
+'components/nav-cards/restoran_nav_card.html' as nav_card %} {% block content %}
+{{ nav_card.restoran_nav_card() }}
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Naziv</th>
+        <th>Broj zaposlenika</th>
+        <th>Ukupne plaće</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for datapoint in data %}
+      <tr>
+        <td>{{ datapoint.restoran }}</td>
+        <td>{{ datapoint.broj_zaposlenika }}</td>
+        <td>{{ datapoint.ukupne_place }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
