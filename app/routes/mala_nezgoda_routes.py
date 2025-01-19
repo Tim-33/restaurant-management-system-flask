@@ -41,9 +41,10 @@ class MalaNezgodaRoutes(IRoutes):
         
     def get_mala_nezgoda(self, id):
         try:
+            details = request.args.get('details', 'false')
             data = self.mala_nezgoda_service.get_mala_nezgoda(id)
             sastojci = self.sastojak_service.get_sastojak_by_mala_nezgoda(id)
-            return render_template(self.app.router.get_template(MalaNezgodaRoutesEnum.MALA_NEZGODA_ID.value), data=data, sastojci=sastojci)
+            return render_template(self.app.router.get_template(MalaNezgodaRoutesEnum.MALA_NEZGODA_ID.value), data=data, sastojci=sastojci, details=details)
         except Exception as e:
             self.app.logger.error(f"Error in get_mala_nezgoda: {e}")
             return "Internal Server Error", 500

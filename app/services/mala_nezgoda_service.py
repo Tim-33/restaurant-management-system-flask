@@ -95,3 +95,19 @@ class MalaNezgodaService:
             self.app.logger.error(f"Error in get_total: {e}")
             raise e
         
+    @with_db_connection
+    def get_mala_nezgoda_details(self, id):
+        try:
+            sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.SELECT_DETAILS.value)
+            self.cursor.execute(sql_script, (id,))
+            data = self.cursor.fetchall()
+            sastojci = [
+                {
+                    'sastojak': row[0],
+                    'kolicina': row[1]
+                }
+            for row in data]
+            return sastojci
+        except Exception as e:
+            self.app.logger.error(f"Error in get_mala_nezgoda_details: {e}")
+            raise e

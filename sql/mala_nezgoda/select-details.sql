@@ -1,0 +1,1 @@
+CALL detalji_male_nezgode(%s);
