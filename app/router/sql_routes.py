@@ -79,6 +79,7 @@ class RezervacijaSqlRoutesEnum(Enum):
     DELETE = 'sql/rezervacija/delete.sql'
     SELECT_BY_TYPE_WITH_LOCATION = 'sql/rezervacija/select-by-type-with-location.sql'
     SELECT_WITH_STOL_DATA = 'sql/rezervacija/select-with-stol-data.sql'
+    SELECT_COUNT_BY_STOL_LOCATION = 'sql/rezervacija/select-count-by-stol-location.sql'
     
 class RacunSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/racun/select-all.sql'

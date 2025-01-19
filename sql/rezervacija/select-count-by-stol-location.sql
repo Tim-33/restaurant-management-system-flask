@@ -1,0 +1,1 @@
+SELECT * FROM pogled_rezervacije_po_lokaciji;
