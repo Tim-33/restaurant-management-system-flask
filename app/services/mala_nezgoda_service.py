@@ -76,3 +76,21 @@ class MalaNezgodaService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_mala_nezgoda_sastojci: {e}")
             raise e
+        
+    @with_db_connection
+    def get_total(self):
+        try:
+            sql_script = get_sql_script_from_file(MalaNezgodaSqlRoutesEnum.SELECT_TOTAL.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            male_nezgode = [
+                {
+                    'id': row[0],
+                    'naziv_restoran': row[1],
+                    'ukupno': row[2]
+                } 
+            for row in data]
+            return male_nezgode
+        except Exception as e:
+            self.app.logger.error(f"Error in get_total: {e}")
+            raise e

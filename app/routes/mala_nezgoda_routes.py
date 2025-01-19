@@ -25,6 +25,8 @@ class MalaNezgodaRoutes(IRoutes):
         self.mala_nezgoda_routes_bp.route(MalaNezgodaRoutesEnum.MALA_NEZGODA_CREATE.value, methods=["GET"])(self.create_mala_nezgoda)
         self.app.logger.info(f"Registering route: {MalaNezgodaRoutesEnum.MALA_NEZGODA_CREATED.value}")
         self.mala_nezgoda_routes_bp.route(MalaNezgodaRoutesEnum.MALA_NEZGODA_CREATED.value, methods=["POST"])(self.created_mala_nezgoda)
+        self.app.logger.info(f"Registering route: {MalaNezgodaRoutesEnum.MALA_NEZGODA_UKUPNO.value}")
+        self.mala_nezgoda_routes_bp.route(MalaNezgodaRoutesEnum.MALA_NEZGODA_UKUPNO.value, methods=["GET"])(self.get_mala_nezgoda_total)
         self.app.register_blueprint(self.mala_nezgoda_routes_bp)
         
     def get_male_nezgode(self):
@@ -72,4 +74,12 @@ class MalaNezgodaRoutes(IRoutes):
             return redirect(url_for('mala_nezgoda_routes.get_male_nezgode'))
         except Exception as e:
             self.app.logger.error(f"Error in created_mala_nezgoda: {e}")
+            return "Internal Server Error", 500
+        
+    def get_mala_nezgoda_total(self):
+        try:
+            data = self.mala_nezgoda_service.get_total()
+            return render_template(self.app.router.get_template(MalaNezgodaRoutesEnum.MALA_NEZGODA_UKUPNO.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_mala_nezgoda_total: {e}")
             return "Internal Server Error", 500

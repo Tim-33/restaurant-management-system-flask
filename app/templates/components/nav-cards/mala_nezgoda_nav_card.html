@@ -1,0 +1,10 @@
+{% macro mala_nezgoda_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('mala_nezgoda_routes.get_male_nezgode') }}"
+    >Male nezgode</a
+  >
+  <a href="{{ url_for('mala_nezgoda_routes.get_mala_nezgoda_total')}}">
+    Ukupni iznos malih nezgoda po restoranu
+  </a>
+</div>
+{% endmacro %}

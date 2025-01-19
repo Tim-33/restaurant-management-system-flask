@@ -156,6 +156,7 @@ class MalaNezgodaSqlRoutesEnum(Enum):
     SELECT_ONE = 'sql/mala_nezgoda/select-one.sql'
     INSERT = 'sql/mala_nezgoda/insert.sql'
     INSERT_SASTOJCI = 'sql/mala_nezgoda/insert-sastojci.sql'
+    SELECT_TOTAL = 'sql/mala_nezgoda/select-total.sql'
     
 class VelikaNezgodaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/velika_nezgoda/select-all.sql'
