@@ -23,7 +23,8 @@ class NarudzbaService:
                     'naziv_restoran': row[5],
                     'skladiste_id': row[6],
                     'naziv': row[7],
-                    'status_narudzbe': row[8]
+                    'status_narudzbe': row[8],
+                    'ukupna_cijena': row[9]
                 } 
             for row in data]
             return narudzbe

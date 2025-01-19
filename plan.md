@@ -43,7 +43,7 @@ Funkcija za računanje ukupne cijene narudžbe
 
 #### Procedura
 
-Procedura za procesiranje narudžbe
+Procedura za ažuriranje stanja narudžbe
 
 #### Okidač
 
@@ -51,7 +51,7 @@ Okidači za automatsko kreiranje transakcija
 
 #### Transakcija
 
-Transakcija za plaćanje plača zaposlenicima
+Transakcija za procesiranje narudžbe
 
 ## Patricia
 

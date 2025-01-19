@@ -13,6 +13,7 @@ extends "index.html" %} {% block content %}
         <th>Skladište</th>
         <th>Naziv</th>
         <th>Status</th>
+        <th>Ukupna cijena</th>
         <th></th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@ extends "index.html" %} {% block content %}
         <td>{{ datapoint.naziv_restoran }}: {{ datapoint.skladiste_id }}</td>
         <td>{{ datapoint.naziv }}</td>
         <td>{{ datapoint.status_narudzbe }}</td>
+        <td>{{ datapoint.ukupna_cijena }}</td>
         <td class="button-cell">
           <div class="button-group">
             {{

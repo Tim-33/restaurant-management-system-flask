@@ -153,6 +153,7 @@ class NarudzbaSqlRoutesEnum(Enum):
     DELETE = 'sql/narudzba/delete.sql'
     INSERT_SASTOJCI = 'sql/narudzba/insert-sastojci.sql'
     DELETE_SASTOJCI = 'sql/narudzba/delete-sastojci.sql'
+    FINISH_NARUDZBA = 'sql/narudzba/finish-narudzba.sql'
     
 class MalaNezgodaSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/mala_nezgoda/select-all.sql'
