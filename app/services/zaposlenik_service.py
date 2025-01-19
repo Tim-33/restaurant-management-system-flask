@@ -58,20 +58,24 @@ class ZaposlenikService:
         return zaposlenik
     
     def insert_zaposlenik(self, zaposlenik):
-        sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.INSERT.value)
-        values = (
-            zaposlenik["restoran_id"],
-            zaposlenik["zaposlenik_tip"],
-            zaposlenik["ime"],
-            zaposlenik["prezime"],
-            zaposlenik["email"],
-            zaposlenik["datum_rodenja"],
-            zaposlenik["iznos_place"],
-            base64.b64decode(zaposlenik["slika"]) if zaposlenik["slika"] else None
-        )
-        self.cursor.execute(sql_script, values)
-        self.app.mysql.commit()
-        return self.cursor.lastrowid
+        try:
+            sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.INSERT.value)
+            values = (
+                zaposlenik["restoran_id"],
+                zaposlenik["zaposlenik_tip"],
+                zaposlenik["ime"],
+                zaposlenik["prezime"],
+                zaposlenik["email"],
+                zaposlenik["datum_rodenja"],
+                zaposlenik["iznos_place"],
+                base64.b64decode(zaposlenik["slika"]) if zaposlenik["slika"] else None
+            )
+            self.cursor.execute(sql_script, values)
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_zaposlenik: {e}")
+            raise e
     
     def update_zaposlenik(self, zaposlenik, id: int):
         sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.UPDATE.value)
