@@ -81,3 +81,18 @@ class RestoranService:
         except Exception as e:
             self.app.logger.error(f"Error in delete_restoran: {e}")
             raise e
+        
+    def get_restoran_with_least_revenue(self):
+        try:
+            sql_script = get_sql_script_from_file(RestoranSqlRoutesEnum.SELECT_RESTORAN_WITH_LEAST_REVENUE.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchone()
+            restoran = {
+                'restoran': data[0],
+                'iznos_na_racunu': data[1],
+                'valuta': data[2]
+            }
+            return restoran
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restoran_with_least_revenue: {e}")
+            raise e

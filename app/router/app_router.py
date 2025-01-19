@@ -35,6 +35,7 @@ class AppRouter:
         self.add_route(RestoranRoutesEnum.RESTORAN_CREATE.value, 'restoran/restoran_create.html')
         self.add_route(RestoranRoutesEnum.RESTORAN_ID.value, 'restoran/restoran.html')
         self.add_route(RestoranRoutesEnum.RESTORAN_UPDATE.value, 'restoran/restoran_update.html')
+        self.add_route(RestoranRoutesEnum.RESTORAN_WITH_LEAST_REVENUE.value, 'restoran/restoran_with_least_revenue.html')
         
         # Add routes for Skladiste
         self.add_route(SkladisteRoutesEnum.SKLADISTE.value, 'skladiste/skladista.html')

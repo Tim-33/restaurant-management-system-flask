@@ -1,0 +1,8 @@
+{% macro restoran_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('restoran_routes.get_restorani') }}">Restorani</a>
+  <a href="{{ url_for('restoran_routes.get_restoran_with_least_revenue') }}"
+    >Restoran koji ima najmanje na računu
+  </a>
+</div>
+{% endmacro %}

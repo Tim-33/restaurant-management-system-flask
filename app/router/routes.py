@@ -33,6 +33,7 @@ class RestoranRoutesEnum(Enum):
     RESTORAN_UPDATE = "/restorani/<int:id>/update"
     RESTORAN_UPDATED = "/restorani/<int:id>/updated"
     RESTORAN_DELETE = "/restorani/<int:id>/delete"
+    RESTORAN_WITH_LEAST_REVENUE = "/restorani/with-least-revenue"
     
 class SkladisteRoutesEnum(Enum):
     SKLADISTE = "/skladista"

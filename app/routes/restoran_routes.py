@@ -25,6 +25,8 @@ class RestoranRoutes(IRoutes):
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_UPDATED.value, methods=["POST"])(self.updated_restoran)
         self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_DELETE.value}")
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_DELETE.value, methods=["POST"])(self.delete_restoran)
+        self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_WITH_LEAST_REVENUE.value}")
+        self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_WITH_LEAST_REVENUE.value, methods=["GET"])(self.get_restoran_with_least_revenue)
         self.app.register_blueprint(self.restoran_routes_bp)
         
     def get_restorani(self):
@@ -98,4 +100,12 @@ class RestoranRoutes(IRoutes):
             return redirect(url_for('restoran_routes.get_restorani'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_restoran: {e}")
+            return "Internal Server Error", 500
+        
+    def get_restoran_with_least_revenue(self):
+        try:
+            data = self.restoran_service.get_restoran_with_least_revenue()
+            return render_template(self.app.router.get_template(RestoranRoutesEnum.RESTORAN_WITH_LEAST_REVENUE.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restoran_with_least_revenue: {e}")
             return "Internal Server Error", 500
