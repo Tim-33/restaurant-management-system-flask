@@ -1,0 +1,9 @@
+{% macro rezervacija_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('rezervacija_routes.get_rezervacije') }}">Rezervacije</a>
+  <a
+    href="{{ url_for('rezervacija_routes.get_rezervacija_by_location_with_count') }}"
+    >Rezervacije po lokaciji s brojem</a
+  >
+</div>
+{% endmacro %}

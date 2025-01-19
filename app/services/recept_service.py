@@ -1,12 +1,13 @@
 from flask import Flask
 from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import ReceptSqlRoutesEnum
+from app.utils.decorators import with_db_connection
 
 class ReceptService:
     def __init__(self, app: Flask):
         self.app = app
-        self.cursor = self.app.mysql.cursor()
-        
+
+    @with_db_connection
     def get_recepti(self):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_ALL.value)
@@ -28,7 +29,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recepti: {e}")
             raise e
-        
+
+    @with_db_connection
     def get_recept(self, id):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_ONE.value)
@@ -48,7 +50,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recept: {e}")
             raise e
-        
+
+    @with_db_connection
     def insert_recept(self, recept):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT.value)
@@ -58,7 +61,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_recept: {e}")
             raise e
-        
+
+    @with_db_connection
     def update_recept(self, recept, id):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.UPDATE.value)
@@ -68,7 +72,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in update_recept: {e}")
             raise e
-        
+
+    @with_db_connection
     def delete_recept(self, id):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.DELETE.value)
@@ -78,7 +83,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in delete_recept: {e}")
             raise e
-        
+
+    @with_db_connection
     def insert_recept_sastojci(self, recept, sastojci):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.INSERT.value)
@@ -92,7 +98,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in insert_recept_sastojci: {e}")
             raise e
-        
+
+    @with_db_connection
     def update_recept_sastojci(self, id, recept, sastojci, sastojci_updated):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.UPDATE.value)
@@ -108,7 +115,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in update_recept_sastojci: {e}")
             raise e
-    
+
+    @with_db_connection
     def get_recept_ukupni_prihod(self):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_UKUPNI_PRIHOD.value)
@@ -124,7 +132,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recept_ukupni_prihod: {e}")
             raise e
-        
+
+    @with_db_connection
     def get_recept_prihod_prvog_racuna(self):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_RECEPT_PRIHOD_PRVOG_RACUNA.value)
@@ -140,7 +149,8 @@ class ReceptService:
         except Exception as e:
             self.app.logger.error(f"Error in get_recept_prihod_prvog_racuna: {e}")
             raise e
-        
+
+    @with_db_connection
     def get_recept_sastojci_po_receptu(self):
         try:
             sql_script = get_sql_script_from_file(ReceptSqlRoutesEnum.SELECT_SASTOJCI_PO_RECEPTU.value)

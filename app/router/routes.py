@@ -90,6 +90,7 @@ class RezervacijaRoutesEnum(Enum):
     REZERVACIJA_UPDATE = "/rezervacije/<int:id>/update"
     REZERVACIJA_UPDATED = "/rezervacije/<int:id>/updated"
     REZERVACIJA_DELETE = "/rezervacije/<int:id>/delete"
+    REZERVACIJA_BY_LOCATION_WITH_COUNT = "/rezervacije/by-location-with-count"
     
 class RacunRoutesEnum(Enum):
     RACUN = "/racuni"

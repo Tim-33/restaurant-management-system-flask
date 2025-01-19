@@ -77,6 +77,7 @@ class RezervacijaSqlRoutesEnum(Enum):
     INSERT = 'sql/rezervacija/insert.sql'
     UPDATE = 'sql/rezervacija/update.sql'
     DELETE = 'sql/rezervacija/delete.sql'
+    SELECT_BY_TYPE_WITH_LOCATION = 'sql/rezervacija/select-by-type-with-location.sql'
     
 class RacunSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/racun/select-all.sql'

@@ -129,3 +129,4 @@ class RestoranRoutes(IRoutes):
         except Exception as e:
             self.app.logger.error(f"Error in get_restoran_average_employee_pay: {e}")
             return "Internal Server Error", 500
+        

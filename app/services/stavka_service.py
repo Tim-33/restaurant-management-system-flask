@@ -3,6 +3,7 @@ from app.utils.sql_utils import get_sql_script_from_file
 from app.router.sql_routes import StavkaSqlRoutesEnum
 import base64
 
+
 class StavkaService:
     def __init__(self, app: Flask):
         self.app = app

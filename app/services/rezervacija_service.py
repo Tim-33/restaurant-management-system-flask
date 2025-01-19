@@ -84,3 +84,20 @@ class RezervacijaService():
         except Exception as e:
             self.app.logger.error(f"Error in delete_rezervacija: {e}")
             raise e
+        
+    def get_rezervacija_by_location_with_count(self):
+        try:
+            sql_script = get_sql_script_from_file(RezervacijaSqlRoutesEnum.SELECT_BY_TYPE_WITH_LOCATION.value)
+            self.cursor.execute(sql_script)
+            data = self.cursor.fetchall()
+            rezervacije = [
+                {
+                    'restoran_id': row[0],
+                    'lokacija': row[1],
+                    'broj_rezervacija': row[2],
+                }
+            for row in data]
+            return rezervacije
+        except Exception as e:
+            self.app.logger.error(f"Error in get_rezervacija_by_location_with_count: {e}")
+            raise e
