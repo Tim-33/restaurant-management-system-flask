@@ -57,9 +57,10 @@ class RezervacijaRoutes(IRoutes):
         
     def create_rezervacija(self):
         try:
+            message = request.args.get('message') 
             restorani = self.restoran_service.get_restorani()
             stolovi = self.stol_service.get_stolovi()
-            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_CREATE.value), restorani=restorani, stolovi=stolovi)
+            return render_template(self.app.router.get_template(RezervacijaRoutesEnum.REZERVACIJA_CREATE.value), restorani=restorani, stolovi=stolovi, message=message)
         except Exception as e:
             self.app.logger.error(f"Error in create_rezervacija: {e}")
             return "Internal Server Error", 500
@@ -74,6 +75,12 @@ class RezervacijaRoutes(IRoutes):
                 "vrijeme": form['vrijeme'],
                 "broj_osoba": form['broj_osoba'],
             }
+            
+            is_avilable = self.stol_service.check_stol_is_avilable(rezervacija['stol_id'], rezervacija['vrijeme'])
+            
+            if is_avilable == 0:
+                return redirect(url_for('rezervacija_routes.create_rezervacija', message="Stol is not avilable"))
+            
             self.rezervacija_service.insert_rezervacija(rezervacija)
             return redirect(url_for('rezervacija_routes.get_rezervacije'))
         except Exception as e:

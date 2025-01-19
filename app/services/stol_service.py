@@ -85,3 +85,14 @@ class StolService:
         except Exception as e:
             self.app.logger.error(f"Error in delete_stol: {e}")
             raise e
+
+    @with_db_connection
+    def check_stol_is_avilable(self, stol_id, vrijeme):
+        try:
+            sql_script = get_sql_script_from_file(StolSqlRoutesEnum.CHECK_STOL_IS_AVAILABLE.value)
+            self.cursor.execute(sql_script, (stol_id, vrijeme))
+            data = self.cursor.fetchone()
+            return data[0]
+        except Exception as e:
+            self.app.logger.error(f"Error in check_stol_is_avilable: {e}")
+            raise e

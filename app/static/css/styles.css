@@ -191,3 +191,7 @@ table tr:hover {
 .form-input-group input[type="submit"]:hover {
   color: var(--gray);
 }
+
+.error {
+  color: red;
+}

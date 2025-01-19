@@ -1,0 +1,1 @@
+SELECT provjeri_dostupnost_stola(%s, %s) AS dostupno;
