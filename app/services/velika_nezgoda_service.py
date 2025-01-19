@@ -100,3 +100,14 @@ class VelikaNezgodaService:
         except Exception as e:
             self.app.logger.error(f"Error in get_velike_nezgode_with_details: {e}")
             raise e
+        
+    @with_db_connection
+    def insert_by_transaction(self, velika_nezgoda):
+        try:
+            sql_script = get_sql_script_from_file(VelikaNezgodaSqlRoutesEnum.INSERT_BY_TRANSACTION.value)
+            self.cursor.execute(sql_script, (velika_nezgoda['restoran_id'], velika_nezgoda['zaposlenik_id'], velika_nezgoda['stavke']))
+            self.app.mysql.commit()
+            return True
+        except Exception as e:
+            self.app.logger.error(f"Error in insert_by_transaction: {e}")
+            raise e

@@ -1,0 +1,1 @@
+CALL unos_velike_nezgode(%s, %s, %s);
