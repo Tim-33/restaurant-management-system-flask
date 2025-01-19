@@ -30,6 +30,8 @@ class ZaposlenikRoutes(IRoutes):
         self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_UPDATED.value, methods=["POST"])(self.updated_zaposlenik)
         self.app.logger.info(f"Registering route: {ZaposlenikRoutesEnum.ZAPOSLENIK_DELETE.value}")
         self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_DELETE.value, methods=["POST"])(self.delete_zaposlenik)
+        self.app.logger.info(f"Registering route: {ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value}")
+        self.zaposlenik_routes_bp.route(ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value, methods=["GET"])(self.get_zaposlenik_with_pay_for_january_and_june)
         self.app.register_blueprint(self.zaposlenik_routes_bp)
         
     def get_zaposlenici(self):
@@ -131,4 +133,12 @@ class ZaposlenikRoutes(IRoutes):
             return redirect(url_for('zaposlenik_routes.get_zaposlenici'))
         except Exception as e:
             self.app.logger.error(f"Error in delete_zaposlenik: {e}")
+            return "Internal Server Error", 500
+        
+    def get_zaposlenik_with_pay_for_january_and_june(self):
+        try:
+            data = self.zaposlenik_service.get_zaposlenik_with_pay_for_january_and_june()
+            return render_template(self.app.router.get_template(ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_zaposlenik_with_pay_for_january_and_june: {e}")
             return "Internal Server Error", 500

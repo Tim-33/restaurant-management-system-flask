@@ -21,6 +21,7 @@ class AppRouter:
         self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_CREATE.value, 'zaposlenik/zaposlenik_create.html')
         self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_ID.value, 'zaposlenik/zaposlenik.html')
         self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_UPDATE.value, 'zaposlenik/zaposlenik_update.html')
+        self.add_route(ZaposlenikRoutesEnum.ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value, 'zaposlenik/zaposlenik_select_with_pay_for_january_and_june.html')
         
         # Add routes for ZaposlenikPlaca
         self.add_route(ZaposlenikPlacaRoutesEnum.ZAPOSLENIK_PLACE.value, 'zaposlenik_placa/zaposlenik_place.html')

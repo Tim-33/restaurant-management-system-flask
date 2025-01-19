@@ -1,0 +1,10 @@
+{% macro zaposlenik_nav_card() %}
+<div class="card nav-card">
+  <a href="{{ url_for('zaposlenik_routes.get_zaposlenici') }}">Zaposlenici</a>
+  <a
+    href="{{ url_for('zaposlenik_routes.get_zaposlenik_with_pay_for_january_and_june') }}"
+    >Prikaz svih zaposlenika s iznosom njihovih mjesečnih plaća u 1. i 6.
+    mjesecu</a
+  >
+</div>
+{% endmacro %}

@@ -13,6 +13,7 @@ class ZaposlenikRoutesEnum(Enum):
     ZAPOSLENIK_UPDATE = "/zaposlenici/<int:id>/update"
     ZAPOSLENIK_UPDATED = "/zaposlenici/<int:id>/updated"
     ZAPOSLENIK_DELETE = "/zaposlenici/<int:id>/delete"
+    ZAPOSLENIK_SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE = "/zaposlenici/select-with-pay-for-january-and-june"
     
 class ZaposlenikPlacaRoutesEnum(Enum):
     ZAPOSLENIK_PLACE = "/zaposlenik-place"

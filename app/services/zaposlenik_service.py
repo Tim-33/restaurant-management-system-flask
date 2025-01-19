@@ -94,3 +94,17 @@ class ZaposlenikService:
         self.cursor.execute(sql_script, (id, ))
         self.app.mysql.commit()
         return self.cursor.rowcount
+    
+    def get_zaposlenik_with_pay_for_january_and_june(self):
+        sql_script = get_sql_script_from_file(ZaposlenikSqlRoutesEnum.SELECT_WITH_PAY_FOR_JANUARY_AND_JUNE.value)
+        self.cursor.execute(sql_script)
+        data = self.cursor.fetchall()
+        zaposlenici = [
+            {
+                'ime': row[0],
+                'prezime': row[1],
+                'mjesecna_placa': row[2],
+                'mjesec': row[3],
+            } 
+        for row in data]
+        return zaposlenici
