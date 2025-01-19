@@ -32,6 +32,7 @@ class RestoranSqlRoutesEnum(Enum):
     DELETE = 'sql/restoran/delete.sql'
     SELECT_RESTORAN_WITH_LEAST_REVENUE = 'sql/restoran/select-restoran-with-least-revenue.sql'
     SELECT_RESTORAN_WITH_ZAPOSLENIK_PAY_DATA = 'sql/restoran/select-restoran-with-zaposlenik-pay-data.sql'
+    SELECT_AVERAGE_EMPLOYEE_PAY = 'sql/restoran/select-average-employee-pay.sql'
     
 class SkladisteSqlRoutesEnum(Enum):
     SELECT_ALL = 'sql/skladiste/select-all.sql'

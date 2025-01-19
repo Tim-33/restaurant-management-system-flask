@@ -35,6 +35,7 @@ class RestoranRoutesEnum(Enum):
     RESTORAN_DELETE = "/restorani/<int:id>/delete"
     RESTORAN_WITH_LEAST_REVENUE = "/restorani/with-least-revenue"
     RESTORAN_WITH_ZAPOSLENIK_PAY_DATA = "/restorani/with-zaposlenik-pay-data"
+    RESTORAN_AVERAGE_EMPLOYEE_PAY = "/restorani/average-employee-pay"
     
 class SkladisteRoutesEnum(Enum):
     SKLADISTE = "/skladista"

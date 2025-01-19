@@ -29,6 +29,8 @@ class RestoranRoutes(IRoutes):
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_WITH_LEAST_REVENUE.value, methods=["GET"])(self.get_restoran_with_least_revenue)
         self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value}")
         self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value, methods=["GET"])(self.get_restoran_with_zaposlenik_pay_data)
+        self.app.logger.info(f"Registering route: {RestoranRoutesEnum.RESTORAN_AVERAGE_EMPLOYEE_PAY.value}")
+        self.restoran_routes_bp.route(RestoranRoutesEnum.RESTORAN_AVERAGE_EMPLOYEE_PAY.value, methods=["GET"])(self.get_restoran_average_employee_pay)
         self.app.register_blueprint(self.restoran_routes_bp)
         
     def get_restorani(self):
@@ -118,4 +120,12 @@ class RestoranRoutes(IRoutes):
             return render_template(self.app.router.get_template(RestoranRoutesEnum.RESTORAN_WITH_ZAPOSLENIK_PAY_DATA.value), data=data)
         except Exception as e:
             self.app.logger.error(f"Error in get_restoran_with_zaposlenik_pay_data: {e}")
+            return "Internal Server Error", 500
+        
+    def get_restoran_average_employee_pay(self):
+        try:
+            data = self.restoran_service.get_restoran_average_employee_pay()
+            return render_template(self.app.router.get_template(RestoranRoutesEnum.RESTORAN_AVERAGE_EMPLOYEE_PAY.value), data=data)
+        except Exception as e:
+            self.app.logger.error(f"Error in get_restoran_average_employee_pay: {e}")
             return "Internal Server Error", 500
