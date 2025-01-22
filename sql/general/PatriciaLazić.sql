@@ -1,3 +1,67 @@
+-- tablice
+
+CREATE TABLE mala_nezgoda (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+		
+	restoran_id INT NOT NULL,
+	zaposlenik_id INT NOT NULL,
+    ukupno DECIMAL (10, 2) NOT NULL DEFAULT 0,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id),
+    FOREIGN KEY (zaposlenik_id) REFERENCES zaposlenik (id)
+);
+
+CREATE TABLE mala_nezgoda_sastojak (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+		
+	mala_nezgoda_id INT NOT NULL,
+    sastojak_id INT NOT NULL,
+    kolicina INT UNSIGNED NOT NULL,
+    
+    
+    FOREIGN KEY (mala_nezgoda_id) REFERENCES mala_nezgoda (id),
+    FOREIGN KEY (sastojak_id) REFERENCES sastojak (id)
+);
+
+CREATE TABLE velika_nezgoda (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+		
+	restoran_id INT NOT NULL,
+	zaposlenik_id INT NOT NULL,
+    ukupno DECIMAL (10, 2) NOT NULL DEFAULT 0,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id),
+    FOREIGN KEY (zaposlenik_id) REFERENCES zaposlenik (id)
+);
+
+CREATE TABLE velika_nezgoda_stavka (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+		
+	velika_nezgoda_id INT NOT NULL,
+    stavka_id INT NOT NULL,
+    kolicina INT UNSIGNED NOT NULL,
+    
+    
+    FOREIGN KEY (velika_nezgoda_id) REFERENCES velika_nezgoda (id),
+    FOREIGN KEY (stavka_id) REFERENCES stavka (id)
+);
+
 -- 1. UPIT: Prikaz ukupnog iznosa malih nezgoda po restoranu
 SELECT 
     mn.restoran_id,
@@ -9,6 +73,8 @@ JOIN
     restoran r ON mn.restoran_id = r.id
 GROUP BY 
     mn.restoran_id, r.naziv;
+    
+# male nezgode > Ukupni iznos malih nezgoda po restoranu
     
 -- 2. UPIT: Popis sastojaka korištenih u "malim nezgodama" s ukupnim količinama
 
@@ -28,6 +94,8 @@ GROUP BY
 	s.id, s.naziv 
 ORDER BY 
 	ukupna_kolicina DESC, ukupni_trosak DESC; 
+    
+# male nezgoode > Sastojci malih nezgoda
         
 -- 3. UPIT: Prikaz ukupne štete po restoranu za sve nezgode (male i velike)
 
@@ -41,6 +109,8 @@ FROM (
 ) AS sve_nezgode
 GROUP BY restoran_id
 ORDER BY ukupna_steta DESC;
+
+# Restorani > Restorani s ukupnom štetom od nezgoda
 
 -- 4. UPIT: Prikaz svih velikih nezgoda s detaljima o stavkama, uključujući količine i cijene stavki detaljno
 
@@ -62,6 +132,8 @@ JOIN
     stavka vs ON vns.stavka_id = vs.id
 ORDER BY 
     velika_nezgoda_id, stavka_id;
+    
+# Velika nezgoda > Velike nezgode s detaljima
 
 -- 5. POGLED: Pregled svih nezgoda po zaposleniku s ukupnim troškovima
 DROP VIEW IF EXISTS pregled_nezgoda_po_zaposleniku;
@@ -85,6 +157,8 @@ GROUP BY
     
 SELECT * FROM pregled_nezgoda_po_zaposleniku;
 
+# Zaposlenici > Zaposlenici s podacima o nezgodama
+
 -- 6. Procedura za dohvaćanje detalja male nezgode 
 DROP PROCEDURE IF EXISTS detalji_male_nezgode;
 
@@ -103,6 +177,8 @@ BEGIN
 END//
 
 DELIMITER ;
+
+# mala nezgoda > pregledaj > pregledaj / sakrij detalje
 
 -- 7. Procedura za unos nove male nezgode
 DROP PROCEDURE IF EXISTS unos_male_nezgode;
@@ -142,6 +218,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+# Male nezgode > Dodaj malu nezgodu
 
 -- 8. Procedura za unos nove velike nezgode
 DROP PROCEDURE IF EXISTS unos_velike_nezgode;
@@ -192,6 +270,8 @@ END //
 
 DELIMITER ;
 
+# Velika nezgoda > Dodaj veliku nezgodu
+
 -- 9. Funkcija za dohvaćanje broja sastojaka vezanih za malu nezgodu
 DROP FUNCTION IF EXISTS broj_sastojaka_male_nezgode;
 
@@ -212,6 +292,8 @@ BEGIN
 END//
 
 DELIMITER ;
+
+# Male nezgode > Tablica stupac Broj sastojaka
 
 -- 10. okidač za automatsko ažuriranje ukupnog iznosa u tablici mala_nezgoda kada se dodaje novi sastojak
 DROP TRIGGER IF EXISTS update_iznos_mala_nezgoda;

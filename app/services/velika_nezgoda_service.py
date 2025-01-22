@@ -87,7 +87,7 @@ class VelikaNezgodaService:
                 {
                     'velika_nezgoda_id': row[0],
                     'restoran_id': row[1],
-                    'zapolsenik_id': row[2],
+                    'zaposlenik_id': row[2],
                     'ukupna_steta': row[3],
                     'stavka_id': row[4],
                     'stavka_naziv': row[5],

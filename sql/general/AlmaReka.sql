@@ -1,3 +1,69 @@
+-- tablice
+
+CREATE TABLE racun (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+
+	stol_id INT NOT NULL,
+    restoran_id INT NOT NULL,
+    zaposlenik_id INT NOT NULL,
+    broj_racuna VARCHAR (31),
+    napojnica DECIMAL (10, 2) DEFAULT 0 NOT NULL,
+    iznos DECIMAL (10, 2) DEFAULT 0 NOT NULL,
+    
+    FOREIGN KEY (stol_id) REFERENCES stol (id),
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id),
+    FOREIGN KEY (zaposlenik_id) REFERENCES zaposlenik (id)
+);
+
+CREATE TABLE recept (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    naziv VARCHAR (256) NOT NULL,
+    upute TEXT NOT NULL,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id)
+);
+
+CREATE TABLE stavka_racun (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    stavka_id INT NOT NULL,
+    racun_id INT NOT NULL,
+    kolicina TINYINT UNSIGNED DEFAULT 1 NOT NULL,
+    
+    FOREIGN KEY (stavka_id) REFERENCES stavka (id),
+    FOREIGN KEY (racun_id) REFERENCES racun (id)
+);
+
+CREATE TABLE recept_sastojak (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    recept_id INT NOT NULL,
+    sastojak_id INT NOT NULL,
+    kolicina DECIMAL (10, 2) NOT NULL DEFAULT 1,
+    
+    FOREIGN KEY (recept_id) REFERENCES recept (id),
+    FOREIGN KEY (sastojak_id) REFERENCES sastojak (id)
+);
+
+
 -- 1 upit
 SELECT
     r.naziv AS Recept,
@@ -13,8 +79,7 @@ JOIN
 GROUP BY
     r.naziv;
     
-    
-    
+-- Recepti > Ukupni prihodi recepta    
     
 -- 2 upit
 SELECT
@@ -28,7 +93,8 @@ GROUP BY
     s.naziv
 ORDER BY
     UkupnaKolicina DESC;
-
+    
+-- Sastojak > Ukupna kolicina sastojaka
 
 -- 3 upit
 SELECT
@@ -46,15 +112,20 @@ WHERE
     sr.racun_id = 1
 GROUP BY
     r.naziv;
-
+    
+-- Recepit > Recept prihod prvog računa
+    
 -- 1 kompl view
 DROP VIEW IF EXISTS RacunUkupnaVrijednost;
+
 CREATE VIEW RacunUkupnaVrijednost AS
 SELECT
     r.id AS RacunID,
     r.iznos + r.napojnica AS UkupnaVrijednost
 FROM
     racun r;
+    
+-- Računi > Ukupne vrijednost računa
 
 -- 2 komp view
 DROP VIEW IF EXISTS SastojciPoReceptu;
@@ -70,8 +141,12 @@ JOIN
 JOIN
     sastojak ON rs.sastojak_id = sastojak.id;
 
+-- Recepti > Sastojci po receptu
+
 -- 1 indeks
 CREATE INDEX idx_racun_zaposlenik ON racun(zaposlenik_id);
+
+-- Zaposlenici > Pregledaj zaposlenika
 
 -- korisnik glavni kuhar koji ima pravo na uvid u stavke, recepte, jelovnike, sastojke. moze mijenjati jelovnike i recepte
 DROP USER IF EXISTS 'glavni_kuhar'@'localhost';
@@ -96,6 +171,8 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- Racuni > Tablica stupac Ukupna vrijednost
+
 -- procedura za ispisivanje svih sastojaka potrebnih za recept ukljucujuci i njihove sastojke 
 DROP PROCEDURE IF EXISTS SastojciZaRecept;
 
@@ -117,6 +194,8 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- Recepti > Pregledaj recept
+
 -- okidac za validaciju racuna 
 
 DROP TRIGGER IF EXISTS ValidacijaRacun;
@@ -131,6 +210,8 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+-- Računi - dodaj račun
  
 DROP PROCEDURE IF EXISTS NovaRacunTransakcija;
 
@@ -185,3 +266,5 @@ BEGIN
     COMMIT;
 END$$
 DELIMITER ;
+
+-- stvori novi račun

@@ -1,3 +1,63 @@
+-- Tablice
+
+CREATE TABLE narudzba (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    skladiste_id INT NOT NULL,
+    naziv VARCHAR (31) NOT NULL,
+    status_narudzbe ENUM ('ZAVRSENO', 'PONISTENO', 'NERIJESENO') DEFAULT 'NERIJESENO' NOT NULL,
+    
+    FOREIGN KEY (skladiste_id) REFERENCES skladiste (id)
+);
+
+CREATE TABLE sastojak_narudzba (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+	
+    sastojak_id INT NOT NULL,
+    narudzba_id INT NOT NULL,
+    kolicina INT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (sastojak_id) REFERENCES sastojak (id),
+    FOREIGN KEY (narudzba_id) REFERENCES narudzba (id)
+);
+
+CREATE TABLE transakcija_restoran (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_racun_id INT NOT NULL,
+    iznos DECIMAL (10, 2) DEFAULT 0 NOT NULL,
+    naziv VARCHAR (256) DEFAULT 'Transakcija restoran' NOT NULL,
+    
+    FOREIGN KEY (restoran_racun_id) REFERENCES restoran_racun (id)
+);
+
+CREATE TABLE transakcija_zaposlenik (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    zaposlenik_id INT NOT NULL,
+    iznos DECIMAL (10, 2) DEFAULT 0 NOT NULL,
+    naziv VARCHAR (256) DEFAULT 'Transakcija restoran' NOT NULL,
+    
+    FOREIGN KEY (zaposlenik_id) REFERENCES zaposlenik (id)
+);
+
+
 -- Indeksi
 
 CREATE INDEX idx_transakcija_zaposlenik ON transakcija_zaposlenik(zaposlenik_id);

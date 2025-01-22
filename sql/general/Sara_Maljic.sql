@@ -1,3 +1,62 @@
+-- TABLICE
+
+CREATE TABLE rezervacija (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    stol_id INT NOT NULL,
+    ime VARCHAR (31) NOT NULL,
+    vrijeme DATETIME NOT NULL,
+    broj_osoba TINYINT UNSIGNED NOT NULL		
+);
+
+CREATE TABLE stol (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    broj TINYINT UNSIGNED NOT NULL,
+    lokacija ENUM ('unutra', 'vani', 'vip') NOT NULL,
+    broj_mjesta TINYINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id)
+);
+
+CREATE TABLE jelovnik (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    naziv VARCHAR (31) NOT NULL,
+    jelovnik_tip ENUM ('pica', 'jela', 'desert') NOT NULL,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id)
+);
+
+CREATE TABLE jelovnik_stavka (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    jelovnik_id INT NOT NULL,
+    stavka_id INT NOT NULL,
+    
+    FOREIGN KEY (jelovnik_id) REFERENCES jelovnik (id),
+    FOREIGN KEY (stavka_id) REFERENCES stavka (id)
+);
+
 -- UPITI
 
 -- Dohvaćanje broja rezervacija po vrsti lokacije stola za svaki restoran
@@ -7,6 +66,7 @@ JOIN stol s ON r.stol_id = s.id
 GROUP BY s.restoran_id, s.lokacija
 ORDER BY s.restoran_id, s.lokacija;
 
+# Rezervacije > Rezervacije po lokaciji s brojem
 
 -- Prikazivanje naziva svih jelovnika i broj stavki na svakom od njih
 SELECT j.naziv AS naziv_jelovnika, COUNT(js.stavka_id) AS broj_stavki
@@ -15,6 +75,7 @@ LEFT JOIN jelovnik_stavka js ON j.id = js.jelovnik_id
 GROUP BY j.id
 ORDER BY broj_stavki DESC;
 
+# Jelovnici > Jelovnici s brojem stavka
 
 -- Dohvaćanje svih stavki koje su dodane na jelovnik i koje pripadaju kategoriji "jela"
 SELECT st.naziv AS naziv_stavke, st.cijena AS cijena, j.naziv AS naziv_jelovnika
@@ -24,6 +85,7 @@ JOIN jelovnik j ON js.jelovnik_id = j.id
 WHERE j.jelovnik_tip = 'jela'
 ORDER BY st.cijena DESC;
 
+# Jelovnici > Stavke s jelovnika po tipu jela
 
 -- POGLEDI
 
@@ -34,6 +96,8 @@ CREATE VIEW pogled_rezervacije_stol AS
 SELECT r.id AS rezervacija_id, r.ime AS ime_gosta, r.vrijeme AS vrijeme_rezervacije, s.broj AS broj_stola, s.lokacija AS lokacija_stola
 FROM rezervacija r
 JOIN stol s ON r.stol_id = s.id;
+
+# Rezervacije > Rezervacije s podacima o stolu > Sve
 
 -- Broj rezervacija po lokaciji stola
 DROP VIEW IF EXISTS pogled_rezervacije_po_lokaciji;
@@ -46,6 +110,7 @@ GROUP BY s.lokacija;
 
 SELECT * FROM pogled_rezervacije_po_lokaciji;
 
+# Rezervacije > Broj rezervacija po lokaciji stola
 
 -- Prikaz svih aktivnih rezervacija s informacijama o stolu
 DROP VIEW IF EXISTS aktivne_rezervacije;
@@ -57,6 +122,8 @@ JOIN stol s ON r.stol_id = s.id
 WHERE r.deleted_at IS NULL AND r.disabled = FALSE;
 
 SELECT * FROM aktivne_rezervacije;
+
+# Rezervacije > Rezervacije s podacima o stolu
 
 -- INDEXI
 
@@ -103,6 +170,8 @@ END;
 //
 DELIMITER ;
 
+# Kreiraj dvije rezervacije - jedna s itim vremenom - druga s različitim vremenom
+
 -- Pronalazak prikladnog stola prema broju mjesta
 DROP FUNCTION IF EXISTS pronadi_prikladan_stol;
 
@@ -122,6 +191,8 @@ END;
 //
 DELIMITER ;
 
+SELECT pronadi_prikladan_stol(1, 1, 'unutra') as stol;
+
 -- OKIDAČI
 
 -- Validacija dodjele stola i rezervacije
@@ -138,3 +209,5 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+# Kreiraj dvije rezervacije - jedna s itim vremenom - druga s različitim vremenom

@@ -1,3 +1,71 @@
+-- tablice
+
+CREATE TABLE sastojak (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    skladiste_id INT NOT NULL,
+    naziv VARCHAR (31) NOT NULL,
+    cijena DOUBLE (10, 2) NOT NULL,
+	kolicina_tip ENUM ('g', 'mg', 'kg', 'l', 'ml', 'kol', 'tsp', 'tbsp') NOT NULL,
+    slika BLOB,
+    
+    potrebna_kolicina INT DEFAULT 0 NOT NULL,
+    trenutna_kolicina INT DEFAULT 0 NOT NULL,
+    
+    FOREIGN KEY (skladiste_id) REFERENCES skladiste (id)
+);
+
+CREATE TABLE stavka (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    recept_id INT NOT NULL,
+    naziv VARCHAR (31) NOT NULL,
+    stavka_tip ENUM ('riba', 'salata', 'meso', 'alkohol', 'gazirano', 'kava', 'prilog', 'juha') NOT NULL,
+    cijena DECIMAL (10, 2) NOT NULL,
+    opis TEXT NOT NULL,
+    slika BLOB,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id),
+    FOREIGN KEY (recept_id) REFERENCES recept (id)
+);
+
+CREATE TABLE trosak (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+	restoran_id INT NOT NULL,
+    naziv VARCHAR (64) NOT NULL,
+    iznos DECIMAL (10, 2) NOT NULL,
+    mjesecno BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id)
+);
+
+CREATE TABLE skladiste (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    deleted_at DATETIME,
+    disabled BOOLEAN DEFAULT FALSE NOT NULL,
+    
+    restoran_id INT NOT NULL,
+    stanje ENUM('puno', 'prazno', 'kritično', 'normalno') DEFAULT 'prazno' NOT NULL,
+    
+    FOREIGN KEY (restoran_id) REFERENCES restoran (id)
+);
+
 #1 Upit koji računa trošak svakoga restorana na mjesečnoj bazi i nemjesečnoj bazi te računa ukupan trošak i slaže ih po veličini počevši od restorana koji je naviše potrošio. 
 SELECT restoran.naziv,
 	   SUM(CASE WHEN mjesecno = TRUE THEN iznos ELSE 0 END) AS mjesecni_trosak,
@@ -6,6 +74,7 @@ SELECT restoran.naziv,
 FROM trosak join restoran on restoran_id=restoran.id
 	GROUP BY restoran.naziv
 		ORDER BY ukupni_trosak DESC;
+# Troškovi > Troškovi s računom
 
 #2 Upit koji pronalazi najskuplju stavku u svakom restoranu i zatim sortira te stavke prema cijeni u opadajućem rasporedu.
 SELECT restoran.naziv AS naziv_restorana,
@@ -19,12 +88,14 @@ WHERE (stavka.restoran_id, stavka.cijena) IN (
     GROUP BY restoran_id
 )
 ORDER BY najvisa_cijena DESC;
+# Stavke > Najskuplje stavke
 
 #3 Prikaz najčešće koriščenih sastojaka u svim skladištima. ¸
 SELECT naziv, SUM(trenutna_kolicina) AS ukupna_kolicina
 	FROM sastojak
 		GROUP BY naziv
 			ORDER BY ukupna_kolicina DESC;
+# Sastojci > Najčešći sastojci
 
 #4 Pogled koji prikazuje koliko broj stavki po tipu i restoranu.
 DROP VIEW IF EXISTS broj_stavki_po_restoranu;
@@ -36,6 +107,7 @@ FROM stavka
 JOIN restoran ON stavka.restoran_id = restoran.id
 	GROUP BY restoran.naziv, stavka.stavka_tip
 		ORDER BY restoran.naziv, broj_stavki DESC;
+# Stavke >  Broj stavki po tipu i restoranu
 
 #5 "Kuhar" - ima samo pravo vidjeti podatke o jelovniku, receptima, sastojcima i stavkama.  
 DROP ROLE IF EXISTS kuhar;
@@ -48,6 +120,7 @@ GRANT SELECT ON sustav_za_upravljanje_restoranom.stavka TO kuhar;
 CREATE USER 'Dinko_nad'@'localhost' IDENTIFIED BY 'bravo';
 GRANT kuhar TO 'Dinko_nad'@'localhost';
 SET DEFAULT ROLE kuhar TO 'Dinko_nad'@'localhost';
+# Users
 
 #6 Izračunava ukupnu vrijednost svih namjernica koje se trenutno nalaze u skladištu za odabrani restoran 
 DROP FUNCTION IF EXISTS cijena_skladista_restorana;
@@ -65,6 +138,8 @@ BEGIN
     RETURN ukupno;
 END //
 DELIMITER ;
+
+# Restorani > Stupac Cijena Skladišta
 
 #7 Funkcija provjerava razliku između potrebne i trenutne količine sastojaka te vraća "TREBA NARUČITI" ili "NE TREBA NARUČITI" za svaki sastojak.
 DROP FUNCTION IF EXISTS treba_naruciti;
@@ -88,6 +163,8 @@ BEGIN
 END //
 DELIMITER ;
 
+# Sastojci > Tablica
+
 #8 Procedura za dodavanje troška u tablicu trošak.
 DROP PROCEDURE IF EXISTS dodaj_trosak;
 
@@ -108,6 +185,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+# Trošak > Dodaj trošak
 
 #9 Procedura za ažuriranje količinu sastojaka.
 DROP PROCEDURE IF EXISTS azuriraj_kolicinu_sastojka;
@@ -180,6 +259,8 @@ BEGIN
 END //
 DELIMITER ;
 
+# Završiš narudžbu
+
 #UPDATE TRIGGER
 #11 AŽURIRA SE NAKON OBAVLJANJA UPDATE NA TABLICI SASTOJCI 
 DROP TRIGGER IF EXISTS after_update_sastojak;
@@ -221,3 +302,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+# Dodaj sastojak
