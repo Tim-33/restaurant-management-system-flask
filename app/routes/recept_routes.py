@@ -110,7 +110,7 @@ class ReceptRoutes(IRoutes):
             
             sastojci = []
             for key, value in form.items():
-                if key.startswith('sastojak_') and int(value) > 0:
+                if key.startswith('sastojak_') and float(value) > 0:
                     sastojak_id = key.split('_')[1]
                     kolicina = value
                     sastojci.append({
