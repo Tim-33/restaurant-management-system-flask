@@ -104,7 +104,6 @@ class SastojakRoutes(IRoutes):
                 'kolicina_tip': form['kolicina_tip'],
                 'slika': encoded_file,
                 'potrebna_kolicina': form['potrebna_kolicina'],
-                'trenutna_kolicina': form['trenutna_kolicina'],
                 'skladiste_id': form['skladiste_id'],
             }
             self.sastojak_service.update_sastojak(sastojak, id)

@@ -94,7 +94,6 @@ class SastojakService:
                 sastojak["kolicina_tip"],
                 sastojak["slika"],
                 sastojak["potrebna_kolicina"],
-                sastojak["trenutna_kolicina"],
                 id
             )
             self.cursor.execute(sql_script, values)
