@@ -1,5 +1,6 @@
 -- tablice
 
+/*
 CREATE TABLE sastojak (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -65,6 +66,7 @@ CREATE TABLE skladiste (
     
     FOREIGN KEY (restoran_id) REFERENCES restoran (id)
 );
+*/
 
 #1 Upit koji računa trošak svakoga restorana na mjesečnoj bazi i nemjesečnoj bazi te računa ukupan trošak i slaže ih po veličini počevši od restorana koji je naviše potrošio. 
 SELECT restoran.naziv,

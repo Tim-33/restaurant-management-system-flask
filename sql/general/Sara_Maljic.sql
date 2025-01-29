@@ -1,5 +1,6 @@
 -- TABLICE
 
+/*
 CREATE TABLE rezervacija (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -56,6 +57,7 @@ CREATE TABLE jelovnik_stavka (
     FOREIGN KEY (jelovnik_id) REFERENCES jelovnik (id),
     FOREIGN KEY (stavka_id) REFERENCES stavka (id)
 );
+*/
 
 -- UPITI
 

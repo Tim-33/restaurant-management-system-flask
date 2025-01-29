@@ -1,5 +1,6 @@
 -- Tablice
 
+/*
 CREATE TABLE narudzba (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -56,6 +57,7 @@ CREATE TABLE transakcija_zaposlenik (
     
     FOREIGN KEY (zaposlenik_id) REFERENCES zaposlenik (id)
 );
+*/
 
 
 -- Indeksi

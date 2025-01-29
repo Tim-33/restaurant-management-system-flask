@@ -1,5 +1,6 @@
 -- tablice
 
+/*
 CREATE TABLE racun (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -62,6 +63,7 @@ CREATE TABLE recept_sastojak (
     FOREIGN KEY (recept_id) REFERENCES recept (id),
     FOREIGN KEY (sastojak_id) REFERENCES sastojak (id)
 );
+*/
 
 
 -- 1 upit

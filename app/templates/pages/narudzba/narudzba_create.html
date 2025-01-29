@@ -41,7 +41,7 @@
         step="1"
         name="sastojak_{{sastojak.id}}"
         id="sastojak_{{sastojak.id}}"
-        value="{{sastojak.potrebna_kolicina - sastojak.trenutna_kolicina}}"
+        value="{{sastojak.potrebna_kolicina - sastojak.trenutna_kolicina if sastojak.potrebna_kolicina - sastojak.trenutna_kolicina > 0 else 0}}"
         required
       />
       <span

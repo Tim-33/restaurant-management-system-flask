@@ -1,5 +1,6 @@
 -- tablice
 
+/*
 CREATE TABLE mala_nezgoda (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -61,6 +62,7 @@ CREATE TABLE velika_nezgoda_stavka (
     FOREIGN KEY (velika_nezgoda_id) REFERENCES velika_nezgoda (id),
     FOREIGN KEY (stavka_id) REFERENCES stavka (id)
 );
+*/
 
 -- 1. UPIT: Prikaz ukupnog iznosa malih nezgoda po restoranu
 SELECT 

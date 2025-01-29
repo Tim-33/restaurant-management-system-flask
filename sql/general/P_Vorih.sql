@@ -1,5 +1,6 @@
 -- Tablice
 
+/*
 CREATE TABLE zaposlenik(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -59,6 +60,7 @@ CREATE TABLE restoran_racun (
     
     FOREIGN KEY (restoran_id) REFERENCES restoran (id)
 );
+*/
 
 -- Upiti
 -- 1. Prikaz svih zaposlenika s iznosom njihovih mjesečnih plaća u 1. i 6. mjesecu
@@ -131,8 +133,8 @@ SELECT * FROM SvePlace;
 -- Indeksi
 -- Dodavanje smislenih indeksa za poboljšanje performansi upita
 
-DROP INDEX indx_restoran_naziv ON restoran;
-DROP INDEX indx_zaposlenik_placa_mjesec ON zaposlenik_placa;
+-- DROP INDEX indx_restoran_naziv ON restoran;
+-- DROP INDEX indx_zaposlenik_placa_mjesec ON zaposlenik_placa;
 
 CREATE INDEX indx_restoran_naziv ON restoran(naziv);
 CREATE INDEX indx_zaposlenik_placa_iznos ON zaposlenik_placa(iznos);
