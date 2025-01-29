@@ -18,11 +18,9 @@ as view_item_button %} {% block content %}
         name="restoran_id"
         id="restoran_id"
         required
-        value="{{
-        data.restoran_id}}"
       >
         {% for restoran in restorani %}
-        <option value="{{restoran.id}}">{{restoran.naziv}}</option>
+        <option value="{{restoran.id}}" {% if restoran.naziv == data.naziv_restoran %} selected {% endif %} >{{restoran.naziv}}</option>
         {% endfor %}
       </select>
     </div>
